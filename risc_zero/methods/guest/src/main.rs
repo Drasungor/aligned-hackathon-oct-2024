@@ -15,6 +15,14 @@ enum BlockedTile {
     BottomRight,
 }
 
+
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
+struct Position {
+    horizontal: usize,
+    vertical: usize,
+}
+
+
 struct Map {
     // line_length: usize,
     lines: Vec<Vec<bool>>,
@@ -47,27 +55,33 @@ impl Map {
 
         Map { lines }
     }
+
+    pub fn block_tile(position: Position) {
+        
+    }
 }
 
 
 struct Bug<'a> {
     map_ref: &'a Map,
-    horizontal: usize,
-    vertical: usize,
+    // horizontal: usize,
+    // vertical: usize,
+    current_position: Position,
 }
 
 impl<'a> Bug<'a> {
 
-    pub fn new(map_ref: &'a Map, horizontal: usize, vertical: usize) -> Bug<'a> {
-        Bug { map_ref, horizontal, vertical }
+    pub fn new(map_ref: &'a Map, initial_position: Position) -> Bug<'a> {
+        Bug { map_ref, current_position: initial_position }
     }
 
     pub fn move_tile() {
 
     }
 
-    pub fn is_position(&self, horizontal: usize, vertical: usize) -> bool {
-        horizontal == self.horizontal && vertical == self.vertical
+    pub fn is_at_position(&self, position: &Position) -> bool {
+        // horizontal == self.horizontal && vertical == self.vertical
+        self.current_position == *position
     }
 
 }
@@ -77,14 +91,15 @@ fn main() {
     // TODO: Implement your guest code here
 
     // read the input
-    let input: Vec<BlockedTile> = env::read();
-
+    // let input: Vec<BlockedTile> = env::read();
+    let input: Vec<Position> = env::read();
+    
     let map = Map::new();
 
-    let mut bug = Bug::new(&map, 5, 5);
+    let mut bug = Bug::new(&map, Position { horizontal: 5,  vertical: 5 });
 
     for blocked_tile in &input {
-
+        assert!(!bug.is_at_position(blocked_tile), "Cannot block the bug's tile");
     }
 
     // write public output to the journal
