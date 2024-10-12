@@ -129,7 +129,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking_down",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -158,7 +158,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking_sideways",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -187,15 +187,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking_up",
-"speed": 10.0
+"speed": 5.0
 }]
 
 [node name="Bug" type="Node2D"]
+position = Vector2(660, 330)
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_b76nm")
-animation = &"walking_up"
-frame = 7
-frame_progress = 0.15583
+animation = &"walking_down"
+frame = 3
+frame_progress = 0.0197378
+speed_scale = 2.0
