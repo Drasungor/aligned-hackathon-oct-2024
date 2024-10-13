@@ -76,7 +76,6 @@ func move(direction: MovingDirection) -> void:
 func calculate_next_tile(direction: Vector2) -> void:
 	var current_tile: Vector2 = map.local_to_map(position);
 	var next_tile: Vector2 = current_tile + direction;
-	#position = map.map_to_local(next_tile);
 	next_position = map.map_to_local(next_tile);
 
 
