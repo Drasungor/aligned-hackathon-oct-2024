@@ -102,7 +102,16 @@ impl Map {
         }
 
         let line_offset = (position.vertical % 2) - 1;
-        
+
+        for i in vertical_min..(vertical_max + 1) {
+            for j in 0..2 {
+                let current_horizontal: usize;
+                if i == position.vertical {
+
+                }
+            }
+        }
+
     }
 
 }
