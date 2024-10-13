@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	timer += delta;
 	if (timer > 1):
 		timer = 0;
-		bug.move(MovingDirection.TopLeft)
+		bug.move(MovingDirection.BottomLeft)
 
 
 func set_bug_initial_pos(pos: Vector2) -> void:
