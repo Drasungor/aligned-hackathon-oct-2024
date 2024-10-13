@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmoe2shydyafg"]
+
+[ext_resource type="Script" path="res://scripts/bug/bug_movement.gd" id="1_idn2y"]
+
+[node name="Bug" type="Node2D"]
+script = ExtResource("1_idn2y")
