@@ -8,7 +8,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	bug_movement.set_map(map);
-	set_bug_initial_pos(Vector2(1, 0));
+	set_bug_initial_pos(Vector2(1, 1));
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
