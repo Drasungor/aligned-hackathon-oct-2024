@@ -11,15 +11,15 @@ const MovingDirection = MovingDirectionScript.MovingDirection
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	bug.set_map(map);
-	set_bug_initial_pos(Vector2(1, 1));
+	set_bug_initial_pos(Vector2(3, 3));
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	timer += delta;
-	if (timer > 3):
+	if (timer > 1):
 		timer = 0;
-		bug.move(MovingDirection.Right)
+		bug.move(MovingDirection.TopLeft)
 
 
 func set_bug_initial_pos(pos: Vector2) -> void:

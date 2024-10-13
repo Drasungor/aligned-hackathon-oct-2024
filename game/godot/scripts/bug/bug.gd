@@ -19,32 +19,41 @@ func _process(delta: float) -> void:
 
 func move(direction: MovingDirection) -> void:
 	var direction_vector: Vector2;
+	var current_tile: Vector2 = map.local_to_map(position);
+
 	match direction:
 		MovingDirection.TopLeft:
-			print("topleft");
+			if int(current_tile.y) % 2 == 0:
+				direction_vector = Vector2(-1, -1);
+			else:
+				direction_vector = Vector2(0, -1);
 		MovingDirection.TopRight:
-			print("topright");
+			if int(current_tile.y) % 2 == 0:
+				direction_vector = Vector2(0, -1);
+			else:
+				direction_vector = Vector2(1, -1);
 		MovingDirection.Left:
 			direction_vector = Vector2(-1, 0);
-			calculate_next_tile(direction_vector)
-			print("left");
 		MovingDirection.Right:
 			direction_vector = Vector2(1, 0);
-			calculate_next_tile(direction_vector)
-			print("right");
 		MovingDirection.BottomLeft:
-			print("bottomleft");
+			if int(current_tile.y) % 2 == 0:
+				direction_vector = Vector2(-1, 1);
+			else:
+				direction_vector = Vector2(0, 1);
 		MovingDirection.BottomRight:
-			print("bottomright");
+			if int(current_tile.y) % 2 == 0:
+				direction_vector = Vector2(0, 1);
+			else:
+				direction_vector = Vector2(1, 1);
+	calculate_next_tile(direction_vector);
 
 
 func calculate_next_tile(direction: Vector2) -> void:
 	var current_tile: Vector2 = map.local_to_map(position);
-	print("ct ",current_tile)
 	var next_tile: Vector2 = current_tile + direction;
-	print("nt ",next_tile)
 	position = map.map_to_local(next_tile);
-	return;
+
 
 func set_map(_map: TileMapLayer) -> void:
 	map = _map;
