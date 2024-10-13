@@ -7,17 +7,31 @@ const MovingDirection = MovingDirectionScript.MovingDirection
 
 var map: TileMapLayer;
 
+var is_moving := false;
+var next_position: Vector2;
+var velocity := 200;
+
+const DISTANCE_TOLERANCE := 0.1;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	if !is_moving:
+		return;
+	
+	position = position.move_toward(next_position, delta * velocity);
+	if position.distance_to(next_position) < DISTANCE_TOLERANCE:
+		position = next_position;
+		is_moving = false;
 
 
 func move(direction: MovingDirection) -> void:
+	if is_moving:
+		return;
+	
 	var direction_vector: Vector2;
 	var current_tile: Vector2 = map.local_to_map(position);
 
@@ -47,12 +61,14 @@ func move(direction: MovingDirection) -> void:
 			else:
 				direction_vector = Vector2(1, 1);
 	calculate_next_tile(direction_vector);
+	is_moving = true;
 
 
 func calculate_next_tile(direction: Vector2) -> void:
 	var current_tile: Vector2 = map.local_to_map(position);
 	var next_tile: Vector2 = current_tile + direction;
-	position = map.map_to_local(next_tile);
+	#position = map.map_to_local(next_tile);
+	next_position = map.map_to_local(next_tile);
 
 
 func set_map(_map: TileMapLayer) -> void:
