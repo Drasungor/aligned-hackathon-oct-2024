@@ -1,18 +1,25 @@
 extends Node2D
 
-@onready var bug: Node2D = $Bug;
-@onready var bug_movement: BugMovement = $Bug/BugMovement;
+@onready var bug: BugCharacter = $Bug;
 @onready var map: TileMapLayer = $Map;
 
+var timer: float = 0;
+
+const MovingDirectionScript = preload("res://scripts/moving_direction.gd")
+const MovingDirection = MovingDirectionScript.MovingDirection
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	bug_movement.set_map(map);
+	bug.set_map(map);
 	set_bug_initial_pos(Vector2(1, 1));
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	timer += delta;
+	if (timer > 3):
+		timer = 0;
+		bug.move(MovingDirection.Right)
 
 
 func set_bug_initial_pos(pos: Vector2) -> void:

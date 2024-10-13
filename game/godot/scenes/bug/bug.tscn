@@ -1,12 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcmrkoki6csq5"]
+[gd_scene load_steps=3 format=3 uid="uid://bcmrkoki6csq5"]
 
 [ext_resource type="Script" path="res://scripts/bug/bug.gd" id="1_hcnc0"]
 [ext_resource type="PackedScene" uid="uid://dlwow8nlcyjuq" path="res://scenes/bug/bug_sprite.tscn" id="2_rrcko"]
-[ext_resource type="PackedScene" uid="uid://cmoe2shydyafg" path="res://scenes/bug/bug_movement.tscn" id="3_xcnrv"]
 
 [node name="Bug" type="Node2D"]
 script = ExtResource("1_hcnc0")
 
 [node name="BugSprite" parent="." instance=ExtResource("2_rrcko")]
-
-[node name="BugMovement" parent="." instance=ExtResource("3_xcnrv")]
