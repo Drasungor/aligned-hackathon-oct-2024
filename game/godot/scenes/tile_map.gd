@@ -32,11 +32,11 @@ func _set_tile_alternative(tile_pos: Vector2i) -> void:
 		set_alternative_cell(tile_pos, Vector2i(5, 0))
 
 func _reset_tile(tile_pos: Vector2i) -> void:
-    # Reset the opacity back to normal
+	# Reset the opacity back to normal
 	set_alternative_cell(tile_pos, last_hover_tile_type)
 
 func set_alternative_cell(tile_pos: Vector2i, atlas_coord: Vector2i) -> void:
-    # Set modulate property for a specific cell/tile
+	# Set modulate property for a specific cell/tile
 	var tile := get_cell_tile_data(tile_pos)
 	if tile:
 		last_hover_tile_type = get_cell_atlas_coords(tile_pos)
