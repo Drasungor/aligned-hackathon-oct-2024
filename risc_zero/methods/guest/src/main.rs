@@ -5,7 +5,10 @@ use serde::{Deserialize, Serialize};
 // use serde_json::to_string;
 
 use std::cell::{Ref, RefCell};
+use std::collections::HashMap;
 use std::rc::Rc;
+use std::collections::BinaryHeap;
+use std::cmp::Ordering;
 
 #[derive(Serialize, Deserialize, Debug)]
 enum MovingDirection {
@@ -18,7 +21,7 @@ enum MovingDirection {
 }
 
 
-#[derive(Serialize, Deserialize, PartialEq, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Eq, Hash, Clone, Debug)]
 struct Position {
     horizontal: usize,
     vertical: usize,
@@ -77,8 +80,33 @@ impl Map {
         self.lines.borrow()
     }
 
+    pub fn is_limit(&self, position: &Position) -> bool {
+        (position.vertical == 0) || (position.vertical == (self.lines.borrow().len() - 1)) ||
+        (position.horizontal == 0) || (position.horizontal == (self.line_length - 1))
+    }
+
 }
 
+
+#[derive(PartialEq, Eq, Clone, Debug)]
+struct PositionDistance {
+    position: Position,
+    distance: usize,
+}
+
+
+impl Ord for PositionDistance {
+    fn cmp(&self, other: &Self) -> Ordering {
+        // Reverse the comparison for a min-heap
+        other.distance.cmp(&self.distance)
+    }
+}
+
+impl PartialOrd for PositionDistance {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
 
 // struct Bug<'a> {
 struct Bug {
@@ -95,10 +123,17 @@ impl Bug {
         Bug { map_ref, current_position: initial_position }
     }
 
+
     pub fn move_tile(&mut self) {
         // self.map_ref.borrow()
         let map_ref = self.map_ref.borrow();
         let current_map_state = map_ref.get_current_map_state();
+
+        let mut distance: HashMap<Position, usize> = HashMap::new();
+        let mut previous: HashMap<Position, Position> = HashMap::new();
+
+        distance.insert(self.current_position.clone(), 0);
+
     }
 
     pub fn is_at_position(&self, position: &Position) -> bool {
