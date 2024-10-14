@@ -85,6 +85,35 @@ impl Map {
         (position.horizontal == 0) || (position.horizontal == (self.line_length - 1))
     }
 
+    pub fn get_neighbors(&self, position: Position) -> Vec<Position> {
+        let vertical_min: usize;
+        let vertical_max: usize;
+
+        if position.vertical == 0 {
+            vertical_min = 0;
+        } else {
+            vertical_min = position.vertical - 1;
+        }
+
+        if position.vertical == (self.lines.borrow().len() - 1) {
+            vertical_max = self.lines.borrow().len() - 1;
+        } else {
+            vertical_max = position.vertical + 1;
+        }
+
+        let line_offset = (position.vertical % 2) - 1;
+
+        for i in vertical_min..(vertical_max + 1) {
+            for j in 0..2 {
+                let current_horizontal: usize;
+                if i == position.vertical {
+
+                }
+            }
+        }
+
+    }
+
 }
 
 
@@ -133,6 +162,17 @@ impl Bug {
         let mut previous: HashMap<Position, Position> = HashMap::new();
 
         distance.insert(self.current_position.clone(), 0);
+
+        let mut min_heap = BinaryHeap::<PositionDistance>::new();
+
+        min_heap.push(PositionDistance {
+            position: self.current_position.clone(),
+            distance: 0,
+        });
+
+        while let Some(poped_value) = min_heap.pop() {
+            let current_position = poped_value.position;
+        }
 
     }
 
