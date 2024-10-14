@@ -1,4 +1,4 @@
-[gd_scene load_steps=153 format=4 uid="uid://ce4a12nt8awwy"]
+[gd_scene load_steps=164 format=4 uid="uid://ce4a12nt8awwy"]
 
 [ext_resource type="Texture2D" uid="uid://c4ycvg5lqkjka" path="res://assets/backgrounds/field/frame0000.png" id="1_a12tp"]
 [ext_resource type="TileSet" uid="uid://c0h5upn78pqat" path="res://tilesets/grass_tiles.tres" id="1_rmwv6"]
@@ -146,10 +146,12 @@
 [ext_resource type="Texture2D" uid="uid://cy40gl57eotbu" path="res://assets/backgrounds/field/frame0133.png" id="148_nvfgf"]
 [ext_resource type="Texture2D" uid="uid://w44n67knfwmh" path="res://assets/backgrounds/field/frame0053.png" id="149_bvlmu"]
 [ext_resource type="Texture2D" uid="uid://c5yilpb54oaju" path="res://assets/backgrounds/field/frame0131.png" id="150_hujkp"]
+[ext_resource type="Texture2D" uid="uid://o3wge8ue5x8h" path="res://assets/bug/bug_walking_down_px.png" id="150_hxpd5"]
 [ext_resource type="AudioStream" uid="uid://efyammfc2sfm" path="res://sound/music/Elysium Lost [8 Bit Universe Original Music for Sleep and Study] - 8 Bit Universe.ogg" id="150_wcnld"]
 [ext_resource type="Script" path="res://scenes/level_1/background.gd" id="151_3b4ei"]
 [ext_resource type="Script" path="res://scenes/level_1/audio_stream_player.gd" id="151_7cf6v"]
 [ext_resource type="Texture2D" uid="uid://b6gne7pcvidjc" path="res://assets/backgrounds/field/frame0015.png" id="151_ix4ar"]
+[ext_resource type="Script" path="res://scenes/level_1/animated_sprite_2d.gd" id="151_xvshr"]
 [ext_resource type="Texture2D" uid="uid://bfxdlplwwyafv" path="res://assets/backgrounds/field/frame0017.png" id="152_fvmkv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i4fhy"]
@@ -604,6 +606,70 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjk7t"]
+atlas = ExtResource("150_hxpd5")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k78bb"]
+atlas = ExtResource("150_hxpd5")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c71if"]
+atlas = ExtResource("150_hxpd5")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sooqu"]
+atlas = ExtResource("150_hxpd5")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r6f5"]
+atlas = ExtResource("150_hxpd5")
+region = Rect2(2048, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dctbq"]
+atlas = ExtResource("150_hxpd5")
+region = Rect2(2560, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc0pd"]
+atlas = ExtResource("150_hxpd5")
+region = Rect2(3072, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5jbh"]
+atlas = ExtResource("150_hxpd5")
+region = Rect2(3584, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7tlsj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjk7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k78bb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c71if")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sooqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1r6f5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dctbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc0pd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5jbh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Level1" type="Node2D"]
 
 [node name="Background" type="AnimatedSprite2D" parent="."]
@@ -620,6 +686,13 @@ position = Vector2(72, 24)
 tile_map_data = PackedByteArray("AAD+/wAAAQAAAAAAAAD+/wEAAQAAAAAAAAD+/wIAAQAAAAAAAAD+/wMAAQAAAAAAAAD+/wQAAQAAAAAAAAD+/wUAAQAAAAAAAAD+/wYAAQABAAAAAAD+/wcAAQAAAAAAAAD+/wgAAQAAAAAAAAD+/woAAQAAAAAAAAD+/wkAAQAAAAAAAAD//woAAQABAAAAAAD//wkAAQAAAAAAAAD//wgAAQAAAAAAAAD//wcAAQAAAAAAAAD//wYAAQAAAAAAAAD//wUAAQAAAAAAAAD//wQAAQAAAAAAAAD//wMAAQABAAAAAAD//wIAAQAAAAAAAAD//wEAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAoAAQAAAAAAAAAAAAkAAQAAAAAAAAAAAAgAAQAAAAAAAAAAAAcAAQABAAAAAAAAAAYAAQAAAAAAAAAAAAUAAQABAAAAAAAAAAQAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAIAAQACAAAAAAAAAAEAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAoAAQAAAAAAAAABAAkAAQACAAAAAAABAAgAAQAAAAAAAAABAAcAAQAAAAAAAAABAAYAAQAAAAAAAAABAAUAAQAAAAAAAAABAAQAAQAAAAAAAAABAAMAAQAAAAAAAAABAAIAAQAAAAAAAAABAAEAAQAAAAAAAAABAAAAAQAAAAAAAAACAAoAAQAAAAAAAAACAAkAAQAAAAAAAAACAAgAAQAAAAAAAAACAAcAAQAAAAAAAAACAAYAAQAAAAAAAAACAAUAAQAAAAAAAAACAAQAAQAAAAAAAAACAAMAAQAAAAAAAAACAAIAAQADAAAAAAACAAEAAQAAAAAAAAACAAAAAQAAAAAAAAADAAoAAQADAAAAAAADAAkAAQAAAAAAAAADAAgAAQACAAAAAAADAAcAAQADAAAAAAADAAYAAQAAAAAAAAADAAUAAQAAAAAAAAADAAQAAQABAAAAAAADAAMAAQAAAAAAAAADAAIAAQAAAAAAAAADAAEAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAoAAQAAAAAAAAAEAAkAAQAAAAAAAAAEAAgAAQAAAAAAAAAEAAcAAQAAAAAAAAAEAAYAAQAAAAAAAAAEAAUAAQAAAAAAAAAEAAQAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAAAAQADAAAAAAAFAAoAAQAAAAAAAAAFAAkAAQAAAAAAAAAFAAgAAQACAAAAAAAFAAcAAQAAAAAAAAAFAAYAAQAAAAAAAAAFAAUAAQAAAAAAAAAFAAQAAQAAAAAAAAAFAAMAAQAAAAAAAAAFAAIAAQAAAAAAAAAFAAEAAQACAAAAAAAFAAAAAQAAAAAAAAAGAAoAAQAAAAAAAAAGAAkAAQACAAAAAAAGAAgAAQAAAAAAAAAGAAcAAQAAAAAAAAAGAAYAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAEAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAoAAQAAAAAAAAAIAAkAAQAAAAAAAAAHAAkAAQAAAAAAAAAHAAgAAQADAAAAAAAHAAcAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAUAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAEAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAoAAQAAAAAAAAAIAAgAAQAAAAAAAAAIAAcAAQAAAAAAAAAIAAYAAQAAAAAAAAAIAAUAAQAAAAAAAAAIAAQAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAIAAQABAAAAAAAIAAEAAQAAAAAAAAAIAAAAAQAAAAAAAAA=")
 tile_set = ExtResource("1_rmwv6")
 script = ExtResource("2_gxfq7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(164, 176)
+scale = Vector2(0.0488281, 0.0444336)
+sprite_frames = SubResource("SpriteFrames_7tlsj")
+frame_progress = 0.891141
+script = ExtResource("151_xvshr")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(161, 164)
