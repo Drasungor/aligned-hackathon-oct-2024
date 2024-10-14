@@ -107,8 +107,12 @@ impl Map {
             for j in 0..2 {
                 let current_horizontal: usize;
                 if i == position.vertical {
-
+                    current_horizontal = j == 0 ? position.horizontal - 1 : position.horizontal + 1;
+                } else {
+                    current_horizontal = position.horizontal + line_offset + j;
                 }
+
+                if ()
             }
         }
 
