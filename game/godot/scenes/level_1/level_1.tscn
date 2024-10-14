@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=4 uid="uid://ce4a12nt8awwy"]
+[gd_scene load_steps=153 format=4 uid="uid://ce4a12nt8awwy"]
 
 [ext_resource type="Texture2D" uid="uid://c4ycvg5lqkjka" path="res://assets/backgrounds/field/frame0000.png" id="1_a12tp"]
 [ext_resource type="TileSet" uid="uid://c0h5upn78pqat" path="res://tilesets/grass_tiles.tres" id="1_rmwv6"]
@@ -146,7 +146,9 @@
 [ext_resource type="Texture2D" uid="uid://cy40gl57eotbu" path="res://assets/backgrounds/field/frame0133.png" id="148_nvfgf"]
 [ext_resource type="Texture2D" uid="uid://w44n67knfwmh" path="res://assets/backgrounds/field/frame0053.png" id="149_bvlmu"]
 [ext_resource type="Texture2D" uid="uid://c5yilpb54oaju" path="res://assets/backgrounds/field/frame0131.png" id="150_hujkp"]
+[ext_resource type="AudioStream" uid="uid://efyammfc2sfm" path="res://sound/music/Elysium Lost [8 Bit Universe Original Music for Sleep and Study] - 8 Bit Universe.ogg" id="150_wcnld"]
 [ext_resource type="Script" path="res://scenes/level_1/background.gd" id="151_3b4ei"]
+[ext_resource type="Script" path="res://scenes/level_1/audio_stream_player.gd" id="151_7cf6v"]
 [ext_resource type="Texture2D" uid="uid://b6gne7pcvidjc" path="res://assets/backgrounds/field/frame0015.png" id="151_ix4ar"]
 [ext_resource type="Texture2D" uid="uid://bfxdlplwwyafv" path="res://assets/backgrounds/field/frame0017.png" id="152_fvmkv"]
 
@@ -622,3 +624,9 @@ script = ExtResource("2_gxfq7")
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(161, 164)
 zoom = Vector2(2.5, 2.5)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("150_wcnld")
+volume_db = -20.0
+pitch_scale = 0.9
+script = ExtResource("151_7cf6v")
