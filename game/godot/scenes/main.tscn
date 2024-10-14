@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://5j3cjtwudd8y"]
-
-[ext_resource type="Texture2D" uid="uid://cnlcvdyhm50p2" path="res://icon.svg" id="1_dct34"]
-
-[node name="Main" type="Node2D"]
-
-[node name="BugSprite" type="Bug" parent="."]
-position = Vector2(576, 320)
-texture = ExtResource("1_dct34")
