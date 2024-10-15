@@ -10,16 +10,6 @@ use std::rc::Rc;
 use std::collections::BinaryHeap;
 use std::cmp::Ordering;
 
-// #[derive(Serialize, Deserialize, Debug)]
-// enum MovingDirection {
-//     TopLeft,
-//     TopRight,
-//     Left,
-//     Right,
-//     BottomLeft,
-//     BottomRight,
-// }
-
 #[derive(Serialize, Deserialize, Debug)]
 enum MovementResult {
     GameEnded(bool), // Returned if the game ends, stores true if the bug was trapped and false if he escaped
