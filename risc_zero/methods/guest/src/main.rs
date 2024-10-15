@@ -88,6 +88,9 @@ impl Map {
     pub fn get_neighbors(&self, position: Position) -> Vec<Position> {
         let vertical_min: usize;
         let vertical_max: usize;
+        let lines_ref = self.lines.borrow();
+
+        let mut neighbors: Vec<Position> = vec![];
 
         if position.vertical == 0 {
             vertical_min = 0;
@@ -95,8 +98,8 @@ impl Map {
             vertical_min = position.vertical - 1;
         }
 
-        if position.vertical == (self.lines.borrow().len() - 1) {
-            vertical_max = self.lines.borrow().len() - 1;
+        if position.vertical == (lines_ref.len() - 1) {
+            vertical_max = lines_ref.len() - 1;
         } else {
             vertical_max = position.vertical + 1;
         }
@@ -105,17 +108,22 @@ impl Map {
 
         for i in vertical_min..(vertical_max + 1) {
             for j in 0..2 {
-                let current_horizontal: usize;
+                let current_horizontal: isize;
                 if i == position.vertical {
-                    current_horizontal = j == 0 ? position.horizontal - 1 : position.horizontal + 1;
+                    current_horizontal = if j == 0 {position.horizontal as isize - 1} else {position.horizontal as isize + 1};
                 } else {
-                    current_horizontal = position.horizontal + line_offset + j;
+                    current_horizontal = position.horizontal as isize + line_offset as isize + j;
                 }
 
-                if ()
+                if (current_horizontal >= 0) && (current_horizontal < self.line_length.try_into().unwrap()) {
+                    let cast_current_horizontal: usize = current_horizontal.try_into().unwrap();
+                    if !lines_ref[i][cast_current_horizontal] {
+                        neighbors.push(Position { horizontal: cast_current_horizontal, vertical: i });
+                    }
+                }
             }
         }
-
+        neighbors
     }
 
 }
