@@ -1,15 +1,17 @@
-use std::cell::{Ref, RefCell};
+use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
 use std::collections::BinaryHeap;
 use std::cmp::Ordering;
 
+use crate::map::Map;
+use crate::position::Position;
+
 #[derive(PartialEq, Eq, Clone, Debug)]
-struct PositionDistance {
+pub struct PositionDistance {
     position: Position,
     distance: usize,
 }
-
 
 impl Ord for PositionDistance {
     fn cmp(&self, other: &Self) -> Ordering {
@@ -24,13 +26,12 @@ impl PartialOrd for PositionDistance {
     }
 }
 
-struct Bug {
+pub struct Bug {
     map_ref: Rc<RefCell<Map>>,
     current_position: Position,
 }
 
 impl Bug {
-
     pub fn new(map_ref: Rc<RefCell<Map>>, initial_position: Position) -> Bug {
         Bug { map_ref, current_position: initial_position }
     }
@@ -113,6 +114,4 @@ impl Bug {
         let map_ref = self.map_ref.borrow();
         map_ref.is_limit(&self.current_position)
     }
-
-
 }

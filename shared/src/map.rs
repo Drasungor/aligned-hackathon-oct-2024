@@ -1,7 +1,9 @@
 use std::cell::{Ref, RefCell};
 use std::rc::Rc;
 
-struct Map {
+use crate::position::Position;
+
+pub struct Map {
     line_length: usize,
     lines: Rc<RefCell<Vec<Vec<bool>>>>,
 }
