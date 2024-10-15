@@ -10,14 +10,20 @@ use std::rc::Rc;
 use std::collections::BinaryHeap;
 use std::cmp::Ordering;
 
+// #[derive(Serialize, Deserialize, Debug)]
+// enum MovingDirection {
+//     TopLeft,
+//     TopRight,
+//     Left,
+//     Right,
+//     BottomLeft,
+//     BottomRight,
+// }
+
 #[derive(Serialize, Deserialize, Debug)]
-enum MovingDirection {
-    TopLeft,
-    TopRight,
-    Left,
-    Right,
-    BottomLeft,
-    BottomRight,
+enum MovementResult {
+    GameEnded(bool), // Returned if the game ends, stores true if the bug was trapped and false if he escaped
+    NewPosition(Position), // NewPosition
 }
 
 
@@ -30,7 +36,6 @@ struct Position {
 
 struct Map {
     line_length: usize,
-    // lines: Vec<Vec<bool>>,
     lines: Rc<RefCell<Vec<Vec<bool>>>>,
 }
 
@@ -60,16 +65,11 @@ impl Map {
         lines.push(Map::build_tiles_line(line_length, vec![3, 8, 9]));
         lines.push(Map::build_tiles_line(line_length, vec![1, 9]));
 
-        // Map { line_length, lines }
         Map { line_length, lines: Rc::new(RefCell::new(lines)) }
     }
 
     pub fn block_tile(&mut self, position: &Position) {
         let mut lines_ref = self.lines.borrow_mut();
-        // assert!((position.horizontal < self.line_length) && (position.vertical < self.lines.len()), "Out of bounds position");
-        // assert!((!self.lines[position.vertical][position.horizontal]), "Position already blocked");
-        // self.lines[position.vertical][position.horizontal] = true;
-
         assert!((position.horizontal < self.line_length) && (position.vertical < lines_ref.len()), "Out of bounds position");
         assert!((!lines_ref[position.vertical][position.horizontal]), "Position already blocked");
         lines_ref[position.vertical][position.horizontal] = true;
@@ -149,24 +149,19 @@ impl PartialOrd for PositionDistance {
     }
 }
 
-// struct Bug<'a> {
 struct Bug {
-    // map_ref: &'a mut Map,
     map_ref: Rc<RefCell<Map>>,
     current_position: Position,
 }
 
-// impl<'a> Bug<'a> {
 impl Bug {
 
-    // pub fn new(map_ref: &'a mut Map, initial_position: Position) -> Bug<'a> {
     pub fn new(map_ref: Rc<RefCell<Map>>, initial_position: Position) -> Bug {
         Bug { map_ref, current_position: initial_position }
     }
 
 
     pub fn move_tile(&mut self) -> Position {
-
         // Dijkstra's start
         let map_ref = self.map_ref.borrow();
         let mut distance: HashMap<Position, usize> = HashMap::new();
@@ -185,7 +180,6 @@ impl Bug {
             let current_position = popped_value.position;
 
             if map_ref.is_limit(&current_position) {
-                // limit_was_found = true; 
                 reached_limit = Some(current_position);
             } else {
                 let current_position_neighbors = map_ref.get_neighbors(&current_position);
@@ -222,7 +216,7 @@ impl Bug {
             }
             self.current_position = current_tile;
         } else {
-            //If there is no path to the map's limit, then it goes to the first neighbor returned by the map
+            // If there is no path to the map's limit, then it goes to the first neighbor returned by the map
             // If the tile has no neighbors then the game should have ended and the move_tile function should never
             // have been called
             self.current_position = map_ref.get_neighbors(&self.current_position)[0].clone();
@@ -231,8 +225,18 @@ impl Bug {
     }
 
     pub fn is_at_position(&self, position: &Position) -> bool {
-        // horizontal == self.horizontal && vertical == self.vertical
         self.current_position == *position
+    }
+
+    // Returns true if all it's neighbor tiles are occupied and it's current position is not a limit
+    pub fn is_encased(&self) -> bool {
+        let map_ref = self.map_ref.borrow();
+        !map_ref.is_limit(&self.current_position) && map_ref.get_neighbors(&self.current_position).is_empty()
+    }
+
+    pub fn is_at_limit(&self) -> bool {
+        let map_ref = self.map_ref.borrow();
+        map_ref.is_limit(&self.current_position)
     }
 
 
@@ -240,21 +244,35 @@ impl Bug {
 
 
 fn main() {
-    // TODO: Implement your guest code here
-
     // read the input
-    // let input: Vec<BlockedTile> = env::read();
     let input: Vec<Position> = env::read();
     
-    let mut map = Rc::new(RefCell::new(Map::new()));
+    let map = Rc::new(RefCell::new(Map::new()));
 
     let mut bug = Bug::new(map.clone(), Position { horizontal: 5,  vertical: 5 });
 
+    let mut bug_was_encased: Option<bool> = None; // True if was encased, false if he escaped
+
     for blocked_tile in &input {
+        assert!(bug_was_encased.is_none(), "More movements than necessary to resolve the game were provided");
         assert!(!bug.is_at_position(blocked_tile), "Cannot block the bug's tile");
         map.borrow_mut().block_tile(blocked_tile);
+        if bug.is_encased() {
+            bug_was_encased = Some(true)
+        } else if bug.is_at_limit() {
+            bug_was_encased = Some(false)
+        } else {
+            bug.move_tile();
+        }
+    }
+    if let Some(game_result) = bug_was_encased {
+        assert!(game_result, "The bug was not encased after completing all movements");
+    } else {
+        panic!("The game did not come to a resolution after all movements were applied");
     }
 
+    let steps_amount: u32 = input.len().try_into().expect("Error in conversion for steps array length from usize to u32");
+
     // write public output to the journal
-    env::commit(&input);
+    env::commit(&steps_amount.to_be_bytes());
 }
