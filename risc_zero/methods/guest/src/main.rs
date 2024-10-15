@@ -166,33 +166,18 @@ impl Bug {
 
 
     pub fn move_tile(&mut self) {
-        // self.map_ref.borrow()
         let map_ref = self.map_ref.borrow();
-        // let current_map_state = map_ref.get_current_map_state();
-
         let mut distance: HashMap<Position, usize> = HashMap::new();
         let mut previous: HashMap<Position, Position> = HashMap::new();
-
-        distance.insert(self.current_position.clone(), 0);
-
         let mut min_heap = BinaryHeap::<PositionDistance>::new();
-
+        distance.insert(self.current_position.clone(), 0);
         min_heap.push(PositionDistance {
             position: self.current_position.clone(),
             distance: 0,
         });
 
-        // let mut found_limit = false;
-
-        // found_limit
-
         let mut popped_value_option = min_heap.pop();
-
-        // let mut heap_was_empty = popped_value_option.is_none();
-
         let mut limit_was_found = false;
-
-        // while let Some(popped_value) = min_heap.pop() {
         while !popped_value_option.is_none() && !limit_was_found {
             let popped_value = popped_value_option.unwrap();
             let current_position = popped_value.position;
