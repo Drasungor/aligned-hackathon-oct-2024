@@ -85,7 +85,7 @@ impl Map {
         (position.horizontal == 0) || (position.horizontal == (self.line_length - 1))
     }
 
-    pub fn get_neighbors(&self, position: Position) -> Vec<Position> {
+    pub fn get_neighbors(&self, position: &Position) -> Vec<Position> {
         let vertical_min: usize;
         let vertical_max: usize;
         let lines_ref = self.lines.borrow();
@@ -184,6 +184,25 @@ impl Bug {
 
         while let Some(poped_value) = min_heap.pop() {
             let current_position = poped_value.position;
+            let current_position_neighbors = map_ref.get_neighbors(&current_position);
+            for neighbor in current_position_neighbors {
+                let current_position_distance = distance.get(&current_position).expect("The popped value should have a distance");
+                let neighbor_new_distance = *current_position_distance + 1;
+                let should_update_distance;
+                if let Some(neighbor_old_distance) = distance.get(&neighbor) {
+                    should_update_distance = *neighbor_old_distance > neighbor_new_distance;
+                } else {
+                    should_update_distance = true;
+                }
+                if should_update_distance {
+                    distance.insert(neighbor.clone(), neighbor_new_distance);
+                    previous.insert(neighbor.clone(), current_position.clone());
+                    min_heap.push(PositionDistance {
+                        position: neighbor,
+                        distance: neighbor_new_distance,
+                    });
+                }
+            }
         }
 
     }
