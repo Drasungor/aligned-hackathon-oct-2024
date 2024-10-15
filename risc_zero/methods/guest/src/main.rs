@@ -168,7 +168,7 @@ impl Bug {
     pub fn move_tile(&mut self) {
         // self.map_ref.borrow()
         let map_ref = self.map_ref.borrow();
-        let current_map_state = map_ref.get_current_map_state();
+        // let current_map_state = map_ref.get_current_map_state();
 
         let mut distance: HashMap<Position, usize> = HashMap::new();
         let mut previous: HashMap<Position, Position> = HashMap::new();
@@ -182,27 +182,45 @@ impl Bug {
             distance: 0,
         });
 
-        while let Some(poped_value) = min_heap.pop() {
-            let current_position = poped_value.position;
-            let current_position_neighbors = map_ref.get_neighbors(&current_position);
-            for neighbor in current_position_neighbors {
-                let current_position_distance = distance.get(&current_position).expect("The popped value should have a distance");
-                let neighbor_new_distance = *current_position_distance + 1;
-                let should_update_distance;
-                if let Some(neighbor_old_distance) = distance.get(&neighbor) {
-                    should_update_distance = *neighbor_old_distance > neighbor_new_distance;
-                } else {
-                    should_update_distance = true;
-                }
-                if should_update_distance {
-                    distance.insert(neighbor.clone(), neighbor_new_distance);
-                    previous.insert(neighbor.clone(), current_position.clone());
-                    min_heap.push(PositionDistance {
-                        position: neighbor,
-                        distance: neighbor_new_distance,
-                    });
+        // let mut found_limit = false;
+
+        // found_limit
+
+        let mut popped_value_option = min_heap.pop();
+
+        // let mut heap_was_empty = popped_value_option.is_none();
+
+        let mut limit_was_found = false;
+
+        // while let Some(popped_value) = min_heap.pop() {
+        while !popped_value_option.is_none() && !limit_was_found {
+            let popped_value = popped_value_option.unwrap();
+            let current_position = popped_value.position;
+
+            if map_ref.is_limit(&current_position) {
+                limit_was_found = true; 
+            } else {
+                let current_position_neighbors = map_ref.get_neighbors(&current_position);
+                for neighbor in current_position_neighbors {
+                    let current_position_distance = distance.get(&current_position).expect("The popped value should have a distance");
+                    let neighbor_new_distance = *current_position_distance + 1;
+                    let should_update_distance;
+                    if let Some(neighbor_old_distance) = distance.get(&neighbor) {
+                        should_update_distance = *neighbor_old_distance > neighbor_new_distance;
+                    } else {
+                        should_update_distance = true;
+                    }
+                    if should_update_distance {
+                        distance.insert(neighbor.clone(), neighbor_new_distance);
+                        previous.insert(neighbor.clone(), current_position.clone());
+                        min_heap.push(PositionDistance {
+                            position: neighbor,
+                            distance: neighbor_new_distance,
+                        });
+                    }
                 }
             }
+            popped_value_option = min_heap.pop();
         }
 
     }
