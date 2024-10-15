@@ -165,7 +165,7 @@ impl Bug {
     }
 
 
-    pub fn move_tile(&mut self) {
+    pub fn move_tile(&mut self) -> Position {
         let map_ref = self.map_ref.borrow();
         let mut distance: HashMap<Position, usize> = HashMap::new();
         let mut previous: HashMap<Position, Position> = HashMap::new();
@@ -177,13 +177,16 @@ impl Bug {
         });
 
         let mut popped_value_option = min_heap.pop();
-        let mut limit_was_found = false;
-        while !popped_value_option.is_none() && !limit_was_found {
+        // let mut limit_was_found = false;
+        let mut reached_limit: Option<Position> = None;
+        // while !popped_value_option.is_none() && !limit_was_found {
+        while !popped_value_option.is_none() && reached_limit.is_none() {
             let popped_value = popped_value_option.unwrap();
             let current_position = popped_value.position;
 
             if map_ref.is_limit(&current_position) {
-                limit_was_found = true; 
+                // limit_was_found = true; 
+                reached_limit = Some(current_position);
             } else {
                 let current_position_neighbors = map_ref.get_neighbors(&current_position);
                 for neighbor in current_position_neighbors {
@@ -208,6 +211,21 @@ impl Bug {
             popped_value_option = min_heap.pop();
         }
 
+        if let Some(limit) = reached_limit {
+            let mut current_tile = limit;
+            let mut predecesor = previous.get(&current_tile).expect("The bug's path to exit was broken");
+            // let bugs_position = self.current_position.clone();
+            while *predecesor != self.current_position {
+                current_tile = predecesor.clone();
+                predecesor = previous.get(&current_tile).expect("The bug's path to exit was broken");
+            }
+            self.current_position = current_tile;
+        } else {
+            // If the tile has no neighbors then the game should have ended and the move_tile function should never
+            // have been called
+            self.current_position = map_ref.get_neighbors(&self.current_position)[0].clone();
+        }
+        self.current_position.clone()
     }
 
     pub fn is_at_position(&self, position: &Position) -> bool {
