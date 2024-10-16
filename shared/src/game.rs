@@ -1,4 +1,4 @@
-use std::cell::RefCell;
+use std::cell::{Ref, RefCell};
 use std::rc::Rc;
 
 use crate::bug::Bug;
@@ -21,6 +21,10 @@ impl Game {
         let bug = Bug::new(map.clone(), Position { horizontal: 5,  vertical: 5 });
     
         Game { map, bug }
+    }
+
+    pub fn get_map(&self) -> Ref<Map> {
+        self.map.borrow()
     }
 
     pub fn change_state(&mut self, blocked_tile: Position) -> MovementResult { // TODO marcos: define custome errors
