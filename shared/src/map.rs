@@ -32,6 +32,7 @@ impl Map {
         lines.push(Map::build_tiles_line(line_length, vec![8]));
         lines.push(Map::build_tiles_line(line_length, vec![8]));
         lines.push(Map::build_tiles_line(line_length, vec![3, 8, 9]));
+        lines.push(Map::build_tiles_line(line_length, vec![9]));
         lines.push(Map::build_tiles_line(line_length, vec![1, 9]));
 
         Map { line_length, lines: Rc::new(RefCell::new(lines)) }
@@ -42,7 +43,6 @@ impl Map {
         assert!((position.horizontal < self.line_length) && (position.vertical < lines_ref.len()), "Out of bounds position");
         assert!((!lines_ref[position.vertical][position.horizontal]), "Position already blocked");
         lines_ref[position.vertical][position.horizontal] = true;
-
     }
 
     pub fn get_current_map_state(&self) -> Ref<'_, Vec<Vec<bool>>> {
@@ -73,7 +73,7 @@ impl Map {
             vertical_max = position.vertical + 1;
         }
 
-        let line_offset = (position.vertical % 2) - 1;
+        let line_offset = ((position.vertical % 2) as isize) - 1;
 
         for i in vertical_min..(vertical_max + 1) {
             for j in 0..2 {

@@ -8,14 +8,10 @@ const MovingDirection = MovingDirectionScript.MovingDirection
 @onready var bug_sprite: BugSprite = $BugSprite;
 
 var is_moving := false;
-var next_position: Vector2
+var next_position := Vector2(-1, -1);
 
 const VELOCITY := 200;
 const DISTANCE_TOLERANCE := 0.1;
-
-func _ready() -> void:
-	position = Vector2(1344, 437);
-	next_position = position;
 
 func _physics_process(delta: float) -> void:
 	if !is_moving:
@@ -69,6 +65,11 @@ func move(direction: MovingDirection) -> void:
 	is_moving = true;
 
 func _on_bug_position(bug_position: Vector2) -> void:
+	# Initialization
+	if next_position == Vector2(-1, -1):
+		position = bug_position
+		next_position = bug_position
+
 	next_position = bug_position;
 	if next_position != position:
 		is_moving = true

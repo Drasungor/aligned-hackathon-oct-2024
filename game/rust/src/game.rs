@@ -1,5 +1,5 @@
 use godot::prelude::*;
-use shared::game::Game;
+use shared::{game::{Game, MovementResult}, position::Position};
 
 #[derive(GodotClass)]
 #[class(base=Object)]
@@ -21,18 +21,25 @@ impl IObject for GameContainer {
 #[godot_api]
 impl GameContainer {
     #[func]
-    fn print_map(&self) {
-        for row in self.game.get_map().get_current_map_state().iter() {
-            for cell in row.iter() {
-                godot_print!("{} ", cell);
-            }
-            godot_print!("\n");
-        }
-    }
-
-    #[func]
     fn get_bug_position(&self) -> Vector2i {
         let bug_position = self.game.get_bug_position();
         Vector2i::new(bug_position.horizontal as i32, bug_position.vertical as i32)
+    }
+
+    // #[func]
+    // fn get_blocked_tiles(&self) -> Vec<Vector2i> {
+        
+    // } TODO
+
+    #[func]
+    pub fn change_state(&mut self, blocked_tile: Vector2i) -> Vector2i {
+        match self.game.change_state(Position {
+            horizontal: blocked_tile.x as usize,
+            vertical: blocked_tile.y as usize,
+        }) {
+            MovementResult::GameEnded(ended) => panic!("Game ended: {}", ended),
+            MovementResult::NewPosition(Position { horizontal, vertical }) 
+                => Vector2i::new(horizontal as i32, vertical as i32),
+        }
     }
 }
