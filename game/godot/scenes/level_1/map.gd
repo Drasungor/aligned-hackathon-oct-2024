@@ -25,11 +25,11 @@ func _input(event: InputEvent) -> void:
 
 func _set_tile_hover(tile_pos: Vector2i) -> void:
 	if get_cell_tile_data(tile_pos) != null:
-		hover_tile_type = Vector2i(randi() % 4, 0)
-		_set_tile_type(tile_pos, 2, hover_tile_type)
+		hover_tile_type = Vector2i(4, 0)
+		_set_tile_type(tile_pos, 0, hover_tile_type)
 
 func _reset_tile_hover(tile_pos: Vector2i) -> void:
-	_set_tile_type(tile_pos, 1, hover_tile_type_bk)
+	_set_tile_type(tile_pos, 0, hover_tile_type_bk)
 
 func _set_tile_type(tile_pos: Vector2i, tile_set_id: int, atlas_coord: Vector2i) -> void:
 	var tile := get_cell_tile_data(tile_pos)
