@@ -7,36 +7,33 @@ const MovingDirection = MovingDirectionScript.MovingDirection
 
 @onready var bug_sprite: BugSprite = $BugSprite;
 
-var map: TileMapLayer;
-
 var is_moving := false;
-var next_position: Vector2;
-var velocity := 200;
+var next_position: Vector2
 
+const VELOCITY := 200;
 const DISTANCE_TOLERANCE := 0.1;
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	bug_sprite.play_bottom_left_animation();
-
+	position = Vector2(1344, 437);
+	next_position = position;
 
 func _physics_process(delta: float) -> void:
 	if !is_moving:
 		return;
-	
-	position = position.move_toward(next_position, delta * velocity);
+
+	position = position.move_toward(next_position, delta * VELOCITY);
 	if position.distance_to(next_position) < DISTANCE_TOLERANCE:
 		position = next_position;
 		bug_sprite.stop_animation();
 		is_moving = false;
 
-
+# TODO marcos: check this function
 func move(direction: MovingDirection) -> void:
 	if is_moving:
 		return;
 	
 	var direction_vector: Vector2;
-	var current_tile: Vector2 = map.local_to_map(position);
+	var current_tile := GameContainer.get_bug_position();
 
 	match direction:
 		MovingDirection.TopLeft:
@@ -69,15 +66,9 @@ func move(direction: MovingDirection) -> void:
 			else:
 				direction_vector = Vector2(1, 1);
 			bug_sprite.play_bottom_right_animation();
-	calculate_next_tile(direction_vector);
 	is_moving = true;
 
-
-func calculate_next_tile(direction: Vector2) -> void:
-	var current_tile: Vector2 = map.local_to_map(position);
-	var next_tile: Vector2 = current_tile + direction;
-	next_position = map.map_to_local(next_tile);
-
-
-func set_map(_map: TileMapLayer) -> void:
-	map = _map;
+func _on_bug_position(bug_position: Vector2) -> void:
+	next_position = bug_position;
+	if next_position != position:
+		is_moving = true

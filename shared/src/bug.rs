@@ -100,6 +100,10 @@ impl Bug {
         self.current_position.clone()
     }
 
+    pub fn get_position(&self) -> &Position {
+        &self.current_position
+    }
+
     pub fn is_at_position(&self, position: &Position) -> bool {
         self.current_position == *position
     }

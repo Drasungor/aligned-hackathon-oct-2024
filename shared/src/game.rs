@@ -27,6 +27,10 @@ impl Game {
         self.map.borrow()
     }
 
+    pub fn get_bug_position(&self) -> &Position {
+        self.bug.get_position()
+    }
+
     pub fn change_state(&mut self, blocked_tile: Position) -> MovementResult { // TODO marcos: define custome errors
         assert!(!self.bug.is_at_position(&blocked_tile), "Cannot block the bug's tile");
         self.map.borrow_mut().block_tile(&blocked_tile);

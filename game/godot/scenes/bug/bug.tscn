@@ -7,3 +7,4 @@
 script = ExtResource("1_hcnc0")
 
 [node name="BugSprite" parent="." instance=ExtResource("2_rrcko")]
+position = Vector2(0, -112)

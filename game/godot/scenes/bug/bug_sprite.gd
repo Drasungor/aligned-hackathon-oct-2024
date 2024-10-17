@@ -8,7 +8,7 @@ const WALKING_DOWN: String = "walking_down";
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	play_bottom_right_animation();
 
 
 func stop_animation() -> void:

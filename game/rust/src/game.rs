@@ -29,4 +29,10 @@ impl GameContainer {
             godot_print!("\n");
         }
     }
+
+    #[func]
+    fn get_bug_position(&self) -> Vector2i {
+        let bug_position = self.game.get_bug_position();
+        Vector2i::new(bug_position.horizontal as i32, bug_position.vertical as i32)
+    }
 }

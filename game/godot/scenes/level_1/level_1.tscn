@@ -9,11 +9,13 @@
 [node name="Level1" type="Node2D"]
 
 [node name="Background" parent="." instance=ExtResource("1_j5f3n")]
+position = Vector2(2880, 1624)
 
 [node name="Map" parent="." instance=ExtResource("2_giefr")]
-position = Vector2(-1592, -1312)
+position = Vector2(1200, 272)
 
 [node name="Camera" type="Camera2D" parent="."]
+position = Vector2(2872, 1616)
 zoom = Vector2(0.223, 0.223)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -23,4 +25,6 @@ pitch_scale = 0.9
 script = ExtResource("151_7cf6v")
 
 [node name="Bug" parent="." instance=ExtResource("5_sht0e")]
-position = Vector2(-696, -792)
+position = Vector2(1344, 436)
+
+[connection signal="bug_position" from="Map" to="Bug" method="_on_bug_position"]
