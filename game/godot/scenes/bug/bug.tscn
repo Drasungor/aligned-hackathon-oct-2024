@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcmrkoki6csq5"]
 
-[ext_resource type="Script" path="res://scripts/bug/bug.gd" id="1_hcnc0"]
+[ext_resource type="Script" path="res://scenes/bug/bug.gd" id="1_hcnc0"]
 [ext_resource type="PackedScene" uid="uid://dlwow8nlcyjuq" path="res://scenes/bug/bug_sprite.tscn" id="2_rrcko"]
 
 [node name="Bug" type="Node2D"]
