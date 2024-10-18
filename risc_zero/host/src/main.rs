@@ -66,6 +66,9 @@ fn main() {
     // For example:
     let _output: u32 = receipt.journal.decode().expect("Error while decoding program execution output");
 
+    println!("Program output: {}", _output);
+
+
     // The receipt was verified at the end of proving, but the below code is an
     // example of how someone else could verify this receipt.
     receipt
