@@ -11,4 +11,4 @@ risc0-zkvm = { git = "https://github.com/risc0/risc0", tag = "v1.0.1", default-f
 serde = { version = "1.0.210", default-features = false }
 serde_json = "1.0.128"
 serde_derive = "1.0.210"
-shared = { path = "../../../shared" }
+# shared = { path = "../../../shared" }
