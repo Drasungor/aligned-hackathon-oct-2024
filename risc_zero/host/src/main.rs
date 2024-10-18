@@ -37,12 +37,12 @@ fn main() {
     // For example:
     // let input: u32 = 15 * u32::pow(2, 27) + 1;
     let mut input: Vec<Position> = Vec::new();
-    input.push(Position{ horizontal: 1, vertical: 0 });
-    input.push(Position{ horizontal: 2, vertical: 0 });
-    input.push(Position{ horizontal: 3, vertical: 0 });
-    input.push(Position{ horizontal: 4, vertical: 0 });
-    input.push(Position{ horizontal: 5, vertical: 0 });
-    input.push(Position{ horizontal: 6, vertical: 0 });
+    input.push(Position{ horizontal: 0, vertical: 10 });
+    input.push(Position{ horizontal: 2, vertical: 10 });
+    input.push(Position{ horizontal: 3, vertical: 10 });
+    input.push(Position{ horizontal: 4, vertical: 10 });
+    input.push(Position{ horizontal: 5, vertical: 10 });
+    input.push(Position{ horizontal: 6, vertical: 10 });
     let env = ExecutorEnv::builder()
         .write(&input)
         .expect("Error while writing program input")
