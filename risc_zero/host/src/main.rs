@@ -35,7 +35,7 @@ const RPC_URL: &str = "https://ethereum-holesky-rpc.publicnode.com";
 const BATCHER_URL: &str = "wss://batcher.alignedlayer.com";
 // const NETWORK: Network = "holesky" as Network;
 const NETWORK: Network = Network::Holesky;
-
+const CONTRACT_ADDRESS: &str = "0xBD2388F7b7c99D3947e8e7e2EC89B96731E2b3a0";
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -234,4 +234,59 @@ pub fn convert(data: &[u32; 8]) -> [u8; 32] {
         res[4 * i..4 * (i + 1)].copy_from_slice(&data[i].to_le_bytes());
     }
     res
+}
+
+async fn claim_nft_with_verified_proof(
+    aligned_verification_data: &AlignedVerificationData,
+    signer: SignerMiddleware<Provider<Http>, LocalWallet>,
+    verifier_contract_addr: &Address,
+) -> anyhow::Result<()> {
+    let verifier_contract = VerifierContract::new(*verifier_contract_addr, signer.into());
+
+    let index_in_batch = U256::from(aligned_verification_data.index_in_batch);
+    let merkle_path = Bytes::from(
+        aligned_verification_data
+            .batch_inclusion_proof
+            .merkle_path
+            .as_slice()
+            .flatten()
+            .to_vec(),
+    );
+
+    let receipt = verifier_contract
+        .verify_batch_inclusion(
+            aligned_verification_data
+                .verification_data_commitment
+                .proof_commitment,
+            aligned_verification_data
+                .verification_data_commitment
+                .pub_input_commitment,
+            aligned_verification_data
+                .verification_data_commitment
+                .proving_system_aux_data_commitment,
+            aligned_verification_data
+                .verification_data_commitment
+                .proof_generator_addr,
+            aligned_verification_data.batch_merkle_root,
+            merkle_path,
+            index_in_batch,
+        )
+        .send()
+        .await
+        .map_err(|e| anyhow::anyhow!("Failed to send tx {}", e))?
+        .await
+        .map_err(|e| anyhow::anyhow!("Failed to submit tx {}", e))?;
+
+    match receipt {
+        Some(receipt) => {
+            println!(
+                "Prize claimed successfully. Transaction hash: {:x}",
+                receipt.transaction_hash
+            );
+            Ok(())
+        }
+        None => {
+            anyhow::bail!("Failed to claim prize: no receipt");
+        }
+    }
 }
