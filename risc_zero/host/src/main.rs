@@ -36,6 +36,9 @@ const BATCHER_URL: &str = "wss://batcher.alignedlayer.com";
 // const NETWORK: Network = "holesky" as Network;
 const NETWORK: Network = Network::Holesky;
 const CONTRACT_ADDRESS: &str = "0xBD2388F7b7c99D3947e8e7e2EC89B96731E2b3a0";
+
+abigen!(BugVerificationContract, "bug_verification.json",);
+
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -241,7 +244,7 @@ async fn claim_nft_with_verified_proof(
     signer: SignerMiddleware<Provider<Http>, LocalWallet>,
     verifier_contract_addr: &Address,
 ) -> anyhow::Result<()> {
-    let verifier_contract = VerifierContract::new(*verifier_contract_addr, signer.into());
+    let verifier_contract = BugVerificationContract::new(*verifier_contract_addr, signer.into());
 
     let index_in_batch = U256::from(aligned_verification_data.index_in_batch);
     let merkle_path = Bytes::from(
@@ -249,8 +252,10 @@ async fn claim_nft_with_verified_proof(
             .batch_inclusion_proof
             .merkle_path
             .as_slice()
-            .flatten()
-            .to_vec(),
+            .into_iter().flatten()
+            // .flatten()
+            // .to_vec(),
+            .collect(),
     );
 
     let receipt = verifier_contract
@@ -269,7 +274,7 @@ async fn claim_nft_with_verified_proof(
                 .proof_generator_addr,
             aligned_verification_data.batch_merkle_root,
             merkle_path,
-            index_in_batch,
+            index_in_batch
         )
         .send()
         .await
@@ -280,13 +285,13 @@ async fn claim_nft_with_verified_proof(
     match receipt {
         Some(receipt) => {
             println!(
-                "Prize claimed successfully. Transaction hash: {:x}",
+                "Steps amount uploaded successfully. Transaction hash: {:x}",
                 receipt.transaction_hash
             );
             Ok(())
         }
         None => {
-            anyhow::bail!("Failed to claim prize: no receipt");
+            anyhow::bail!("Failed to upload steps amount: no receipt");
         }
     }
 }
