@@ -174,7 +174,9 @@ async fn main() {
         .await
         .expect("Failed to get next nonce");
 
-        println!("Submitting your proof...");
+    println!("Submitting your proof...");
+
+    println!("Wallet address: {}", wallet.address());
 
     let aligned_verification_data = submit_and_wait_verification(
         BATCHER_URL,
