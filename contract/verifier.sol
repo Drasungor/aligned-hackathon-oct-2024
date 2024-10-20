@@ -15,7 +15,7 @@ contract TrapTheBugValidator {
 
     // Update program commitment
     bytes32 public trapTheBugProgramIdCommitment =
-        0x069ed9f3972550a2901523723f4beb5e240749dcafa30e1623d0778e17d69d70;
+        0x745e39c4866b503b4f5dc41ae3a15d4038497f6c80a87644f5789e2bd3e1a8ab;
 
     // event FibonacciNumbers(uint32 fibN, uint32 fibNPlusOne);
     event NewRecordHolder(address indexed holder, uint32 newRecord);
