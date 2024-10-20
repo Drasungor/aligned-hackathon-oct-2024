@@ -53,6 +53,33 @@ async fn main() {
 
     let args = Args::parse();
 
+
+    let keystore_password = rpassword::prompt_password("Enter keystore password: ")
+    .expect("Failed to read keystore password");
+
+    let provider = Provider::<Http>::try_from(RPC_URL).expect("Failed to connect to provider");
+
+    let chain_id = provider
+        .get_chainid()
+        .await
+        .expect("Failed to get chain_id");
+
+    let wallet = LocalWallet::decrypt_keystore(args.keystore_path, &keystore_password)
+        .expect("Failed to decrypt keystore")
+        .with_chain_id(chain_id.as_u64());
+
+
+    let signer = SignerMiddleware::new(provider.clone(), wallet.clone());
+
+    if Confirm::with_theme(&dialoguer::theme::ColorfulTheme::default())
+        .with_prompt("Do you want to deposit 0.004eth in Aligned ?\nIf you already deposited Ethereum to Aligned before, this is not needed")
+        .interact()
+        .expect("Failed to read user input") {   
+
+        deposit_to_aligned(U256::from(4000000000000000u128), signer.clone(), NETWORK).await
+        .expect("Failed to pay for proof submission");
+    }
+
     // Initialize tracing. In order to view logs, run `RUST_LOG=info cargo run`
     tracing_subscriber::fmt()
         .with_env_filter(tracing_subscriber::filter::EnvFilter::from_default_env())
@@ -106,8 +133,6 @@ async fn main() {
     // extract the receipt.
     let receipt = prove_info.receipt;
 
-    // TODO: Implement code for retrieving receipt journal here.
-
     // For example:
     let _output: u32 = receipt.journal.decode().expect("Error while decoding program execution output");
 
@@ -120,78 +145,53 @@ async fn main() {
         .verify(GAME_REPLAY_ID)
         .expect("Error while verifying proof");
 
-    let keystore_password = rpassword::prompt_password("Enter keystore password: ")
-    .expect("Failed to read keystore password");
 
-    let provider = Provider::<Http>::try_from(RPC_URL).expect("Failed to connect to provider");
+    // Serialize proof into bincode (format used by sp1)
+    // let proof = bincode::serialize(&proof).expect("Failed to serialize proof");
 
-    let chain_id = provider
-        .get_chainid()
+    let verification_data = VerificationData {
+        proving_system: ProvingSystemId::Risc0,
+        proof: bincode::serialize(&receipt.inner).expect("Error in inner proof serialization"),
+        proof_generator_addr: wallet.address(),
+        vm_program_code: Some(convert(&GAME_REPLAY_ID).to_vec()),
+        verification_key: None,
+        pub_input: Some(receipt.journal.bytes.clone()),
+    };
+
+    let max_fee = estimate_fee(RPC_URL, PriceEstimate::Instant)
         .await
-        .expect("Failed to get chain_id");
+        .expect("failed to fetch gas price from the blockchain");
 
-    let wallet = LocalWallet::decrypt_keystore(args.keystore_path, &keystore_password)
-        .expect("Failed to decrypt keystore")
-        .with_chain_id(chain_id.as_u64());
+    let max_fee_string = ethers::utils::format_units(max_fee, 18).unwrap();
 
-
-    let signer = SignerMiddleware::new(provider.clone(), wallet.clone());
-
-    if Confirm::with_theme(&dialoguer::theme::ColorfulTheme::default())
-        .with_prompt("Do you want to deposit 0.004eth in Aligned ?\nIf you already deposited Ethereum to Aligned before, this is not needed")
+    if !Confirm::with_theme(&dialoguer::theme::ColorfulTheme::default())
+        .with_prompt(format!("Aligned will use at most {max_fee_string} eth to verify your proof. Do you want to continue?"))
         .interact()
-        .expect("Failed to read user input") {   
+        .expect("Failed to read user input")
+    {   return; }
 
-        deposit_to_aligned(U256::from(4000000000000000u128), signer.clone(), NETWORK).await
-        .expect("Failed to pay for proof submission");
-    }
-
-        // Serialize proof into bincode (format used by sp1)
-        // let proof = bincode::serialize(&proof).expect("Failed to serialize proof");
-
-        let verification_data = VerificationData {
-            proving_system: ProvingSystemId::SP1,
-            proof: bincode::serialize(&receipt.inner).expect("Error in inner proof serialization"),
-            proof_generator_addr: wallet.address(),
-            vm_program_code: Some(convert(&GAME_REPLAY_ID).to_vec()),
-            verification_key: None,
-            pub_input: Some(receipt.journal.bytes.clone()),
-        };
-    
-        let max_fee = estimate_fee(RPC_URL, PriceEstimate::Instant)
-            .await
-            .expect("failed to fetch gas price from the blockchain");
-    
-        let max_fee_string = ethers::utils::format_units(max_fee, 18).unwrap();
-    
-        if !Confirm::with_theme(&dialoguer::theme::ColorfulTheme::default())
-            .with_prompt(format!("Aligned will use at most {max_fee_string} eth to verify your proof. Do you want to continue?"))
-            .interact()
-            .expect("Failed to read user input")
-        {   return; }
-    
-        let nonce = get_next_nonce(RPC_URL, wallet.address(), NETWORK)
-            .await
-            .expect("Failed to get next nonce");
-    
-            println!("Submitting your proof...");
-    
-        let aligned_verification_data = submit_and_wait_verification(
-            BATCHER_URL,
-            RPC_URL,
-            NETWORK,
-            &verification_data,
-            max_fee,
-            wallet.clone(),
-            nonce,
-        )
+    let nonce = get_next_nonce(RPC_URL, wallet.address(), NETWORK)
         .await
-        .unwrap();
-    
-        println!(
-            "Proof submitted and verified successfully on batch {}",
-            hex::encode(aligned_verification_data.batch_merkle_root)
-        );
+        .expect("Failed to get next nonce");
+
+        println!("Submitting your proof...");
+
+    let aligned_verification_data = submit_and_wait_verification(
+        BATCHER_URL,
+        RPC_URL,
+        NETWORK,
+        &verification_data,
+        max_fee,
+        wallet.clone(),
+        nonce,
+    )
+    .await
+    .unwrap();
+
+    println!(
+        "Proof submitted and verified successfully on batch {}",
+        hex::encode(aligned_verification_data.batch_merkle_root)
+    );
 
 }
 
