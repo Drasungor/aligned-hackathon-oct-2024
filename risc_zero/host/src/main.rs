@@ -9,11 +9,18 @@ use methods::{
 use risc0_zkvm::{default_prover, ExecutorEnv};
 
 
+// use aligned_sdk::core::types::{
+//     AlignedVerificationData, Network, PriceEstimate, ProvingSystemId, VerificationData,
+// };
+// use aligned_sdk::sdk::{deposit_to_aligned, estimate_fee};
+// use aligned_sdk::sdk::{get_next_nonce, submit_and_wait_verification};
+
 use aligned_sdk::core::types::{
     AlignedVerificationData, Network, PriceEstimate, ProvingSystemId, VerificationData,
 };
-use aligned_sdk::sdk::{deposit_to_aligned, estimate_fee};
+use aligned_sdk::sdk::{estimate_fee, deposit_to_aligned, get_payment_service_address};
 use aligned_sdk::sdk::{get_next_nonce, submit_and_wait_verification};
+
 use clap::Parser;
 use dialoguer::Confirm;
 use ethers::prelude::*;
@@ -178,7 +185,24 @@ async fn main() {
 
     println!("Wallet address: {}", wallet.address());
 
-    let aligned_verification_data = submit_and_wait_verification(
+    // let aligned_verification_data = submit_and_wait_verification(
+    //     BATCHER_URL,
+    //     RPC_URL,
+    //     NETWORK,
+    //     &verification_data,
+    //     max_fee,
+    //     wallet.clone(),
+    //     nonce,
+    // )
+    // .await
+    // .unwrap();
+
+    // println!(
+    //     "Proof submitted and verified successfully on batch {}",
+    //     hex::encode(aligned_verification_data.batch_merkle_root)
+    // );
+
+    let aligned_verification_data_result = submit_and_wait_verification(
         BATCHER_URL,
         RPC_URL,
         NETWORK,
@@ -187,13 +211,19 @@ async fn main() {
         wallet.clone(),
         nonce,
     )
-    .await
-    .unwrap();
+    .await;
 
-    println!(
-        "Proof submitted and verified successfully on batch {}",
-        hex::encode(aligned_verification_data.batch_merkle_root)
-    );
+    match aligned_verification_data_result {
+        Ok(aligned_verification_data) => {
+            println!(
+                "Proof submitted and verified successfully on batch {}",
+                hex::encode(aligned_verification_data.batch_merkle_root)
+            );
+        },
+        Err(error) => {
+            println!("submit_and_wait_verification error: {}", error);
+        }
+    }
 
 }
 
