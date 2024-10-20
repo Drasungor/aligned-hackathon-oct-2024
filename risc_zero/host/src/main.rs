@@ -239,10 +239,12 @@ pub fn convert(data: &[u32; 8]) -> [u8; 32] {
     res
 }
 
-async fn claim_nft_with_verified_proof(
+async fn upload_steps_amount_with_verified_proof(
     aligned_verification_data: &AlignedVerificationData,
     signer: SignerMiddleware<Provider<Http>, LocalWallet>,
     verifier_contract_addr: &Address,
+    program_id_le: Vec<u8>,
+    public_input_bytes: Vec<u8>
 ) -> anyhow::Result<()> {
     let verifier_contract = BugVerificationContract::new(*verifier_contract_addr, signer.into());
 
@@ -259,6 +261,16 @@ async fn claim_nft_with_verified_proof(
     );
 
     let receipt = verifier_contract
+
+        // bytes32 proofCommitment,
+        // bytes32 pubInputCommitment,
+        // bytes32 programIdCommitment,
+        // bytes20 proofGeneratorAddr,
+        // bytes32 batchMerkleRoot,
+        // bytes memory merkleProof,
+        // uint256 verificationDataBatchIndex,
+        // bytes memory pubInputBytes
+
         .verify_batch_inclusion(
             aligned_verification_data
                 .verification_data_commitment
@@ -266,16 +278,33 @@ async fn claim_nft_with_verified_proof(
             aligned_verification_data
                 .verification_data_commitment
                 .pub_input_commitment,
-            aligned_verification_data
-                .verification_data_commitment
-                .proving_system_aux_data_commitment,
+            program_id_le.into(),
             aligned_verification_data
                 .verification_data_commitment
                 .proof_generator_addr,
             aligned_verification_data.batch_merkle_root,
             merkle_path,
-            index_in_batch
+            index_in_batch,
+            public_input_bytes
         )
+
+        // .verify_batch_inclusion(
+        //     aligned_verification_data
+        //         .verification_data_commitment
+        //         .proof_commitment,
+        //     aligned_verification_data
+        //         .verification_data_commitment
+        //         .pub_input_commitment,
+        //     aligned_verification_data
+        //         .verification_data_commitment
+        //         .proving_system_aux_data_commitment,
+        //     aligned_verification_data
+        //         .verification_data_commitment
+        //         .proof_generator_addr,
+        //     aligned_verification_data.batch_merkle_root,
+        //     merkle_path,
+        //     index_in_batch
+        // )
         .send()
         .await
         .map_err(|e| anyhow::anyhow!("Failed to send tx {}", e))?
