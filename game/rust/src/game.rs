@@ -26,10 +26,18 @@ impl GameContainer {
         Vector2i::new(bug_position.horizontal as i32, bug_position.vertical as i32)
     }
 
-    // #[func]
-    // fn get_blocked_tiles(&self) -> Vec<Vector2i> {
-        
-    // } TODO
+    #[func]
+    fn get_blocked_tiles(&self) -> Array<Vector2i> {
+        self.game.get_map().get_current_map_state().iter().enumerate().flat_map(|(vertical, line)| {
+            line.iter().enumerate().filter_map(move |(horizontal, blocked)| {
+                if *blocked {
+                    Some(Vector2i::new(horizontal as i32, vertical as i32))
+                } else {
+                    None
+                }
+            })
+        }).collect()
+    }
 
     #[func]
     pub fn change_state(&mut self, blocked_tile: Vector2i) -> Vector2i {
