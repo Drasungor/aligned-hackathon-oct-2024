@@ -254,10 +254,10 @@ async fn upload_steps_amount_with_verified_proof(
             .batch_inclusion_proof
             .merkle_path
             .as_slice()
-            .into_iter().flatten()
+            .into_iter().flatten().copied()
             // .flatten()
             // .to_vec(),
-            .collect(),
+            .collect::<Vec<u8>>(),
     );
 
     let receipt = verifier_contract
@@ -278,14 +278,14 @@ async fn upload_steps_amount_with_verified_proof(
             aligned_verification_data
                 .verification_data_commitment
                 .pub_input_commitment,
-            program_id_le.into(),
+            program_id_le.try_into().expect("Wrong length for serialized program id"),
             aligned_verification_data
                 .verification_data_commitment
                 .proof_generator_addr,
             aligned_verification_data.batch_merkle_root,
             merkle_path,
             index_in_batch,
-            public_input_bytes
+            public_input_bytes.into()
         )
 
         // .verify_batch_inclusion(
