@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://dco6hib6y7std"]
 
 [ext_resource type="Texture2D" uid="uid://dg1wlfdiweimf" path="res://assets/tiles/moth_tiles/tiles.png" id="1_nvlco"]
-[ext_resource type="Script" path="res://scenes/level_1/map.gd" id="2_6kyig"]
+[ext_resource type="Script" path="res://scenes/level/map.gd" id="2_6kyig"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u25oa"]
 texture = ExtResource("1_nvlco")

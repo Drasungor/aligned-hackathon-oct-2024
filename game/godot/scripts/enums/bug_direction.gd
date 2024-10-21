@@ -1,4 +1,4 @@
-enum MovingDirection {
+enum BugDirection {
 	TopLeft,
 	TopRight,
 	Left,

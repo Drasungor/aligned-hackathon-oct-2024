@@ -2,8 +2,7 @@ extends Node2D
 
 class_name BugCharacter
 
-const MovingDirectionScript = preload("res://scripts/moving_direction.gd")
-const MovingDirection = MovingDirectionScript.MovingDirection
+const BugDirection = preload("res://scripts/enums/bug_direction.gd").BugDirection
 
 @onready var bug_sprite: BugSprite = $BugSprite;
 
@@ -23,48 +22,24 @@ func _physics_process(delta: float) -> void:
 		bug_sprite.stop_animation();
 		is_moving = false;
 
-# TODO marcos: check this function
-func move(direction: MovingDirection) -> void:
-	if is_moving:
-		return;
-	
-	var direction_vector: Vector2;
-	var current_tile := GameContainer.get_bug_position();
+func move(direction: BugDirection) -> void:
+	is_moving = true
 
 	match direction:
-		MovingDirection.TopLeft:
-			if int(current_tile.y) % 2 == 0:
-				direction_vector = Vector2(-1, -1);
-			else:
-				direction_vector = Vector2(0, -1);
-			bug_sprite.play_top_left_animation();
-		MovingDirection.TopRight:
-			if int(current_tile.y) % 2 == 0:
-				direction_vector = Vector2(0, -1);
-			else:
-				direction_vector = Vector2(1, -1);
-			bug_sprite.play_bottom_right_animation();
-		MovingDirection.Left:
-			direction_vector = Vector2(-1, 0);
-			bug_sprite.play_left_animation();
-		MovingDirection.Right:
-			direction_vector = Vector2(1, 0);
-			bug_sprite.play_right_animation();
-		MovingDirection.BottomLeft:
-			if int(current_tile.y) % 2 == 0:
-				direction_vector = Vector2(-1, 1);
-			else:
-				direction_vector = Vector2(0, 1);
-			bug_sprite.play_bottom_left_animation();
-		MovingDirection.BottomRight:
-			if int(current_tile.y) % 2 == 0:
-				direction_vector = Vector2(0, 1);
-			else:
-				direction_vector = Vector2(1, 1);
-			bug_sprite.play_bottom_right_animation();
-	is_moving = true;
+		BugDirection.TopLeft:
+			bug_sprite.play_top_left_animation()
+		BugDirection.TopRight:
+			bug_sprite.play_top_right_animation()
+		BugDirection.Left:
+			bug_sprite.play_left_animation()
+		BugDirection.Right:
+			bug_sprite.play_right_animation()
+		BugDirection.BottomLeft:
+			bug_sprite.play_bottom_left_animation()
+		BugDirection.BottomRight:
+			bug_sprite.play_bottom_right_animation()
 
-func _on_bug_position(bug_position: Vector2) -> void:
+func _on_bug_movement(bug_position: Vector2, bug_direction: BugDirection) -> void:
 	# Initialization
 	if next_position == Vector2(-1, -1):
 		position = bug_position
@@ -72,4 +47,4 @@ func _on_bug_position(bug_position: Vector2) -> void:
 
 	next_position = bug_position;
 	if next_position != position:
-		is_moving = true
+		move(bug_direction)
