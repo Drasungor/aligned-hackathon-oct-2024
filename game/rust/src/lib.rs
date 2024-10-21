@@ -1,7 +1,6 @@
 use game::GameContainer;
 use godot::{classes::Engine, prelude::*};
 
-mod entities;
 mod game;
 
 struct MyExtension;
