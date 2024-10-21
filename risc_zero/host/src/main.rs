@@ -27,7 +27,7 @@ use ethers::prelude::*;
 use ethers::providers::{Http, Provider};
 use ethers::signers::{LocalWallet, Signer};
 use ethers::types::{Address, Bytes, H160, U256};
-
+use std::str::FromStr;
 
 use shared::position::Position;
 
@@ -35,7 +35,7 @@ const RPC_URL: &str = "https://ethereum-holesky-rpc.publicnode.com";
 const BATCHER_URL: &str = "wss://batcher.alignedlayer.com";
 // const NETWORK: Network = "holesky" as Network;
 const NETWORK: Network = Network::Holesky;
-const CONTRACT_ADDRESS: &str = "0xBD2388F7b7c99D3947e8e7e2EC89B96731E2b3a0";
+// const CONTRACT_ADDRESS: &str = "0xBD2388F7b7c99D3947e8e7e2EC89B96731E2b3a0";
 
 abigen!(BugVerificationContract, "bug_verification.json",);
 
@@ -62,6 +62,8 @@ struct Args {
 async fn main() {
 
     let args = Args::parse();
+
+    let contract_address: H160 = H160::from_str("0xBD2388F7b7c99D3947e8e7e2EC89B96731E2b3a0").expect("Error in verifier address conversion to H160");
 
 
     let keystore_password = rpassword::prompt_password("Enter keystore password: ")
@@ -102,7 +104,7 @@ async fn main() {
     .flatten()
     .collect();
 
-    println!("Program ID: 0x{}", hex::encode(program_id_le));
+    println!("Program ID: 0x{}", hex::encode(program_id_le.clone()));
 
     // An executor environment describes the configurations for the zkVM
     // including program inputs.
@@ -222,11 +224,25 @@ async fn main() {
                 "Proof submitted and verified successfully on batch {}",
                 hex::encode(aligned_verification_data.batch_merkle_root)
             );
+            
+            upload_steps_amount_with_verified_proof(
+                &aligned_verification_data,
+                signer,
+                &contract_address,
+                program_id_le,
+                receipt.journal.bytes
+            )
+            .await
+            .expect("Upload of steps amount failed");
+
+            println!("Steps amount uploaded successfully")
+
         },
         Err(error) => {
-            println!("submit_and_wait_verification error: {}", error);
+            panic!("submit_and_wait_verification error: {}", error);
         }
     }
+
 
 }
 
