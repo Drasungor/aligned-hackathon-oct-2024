@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmquvb5ejpl81"]
+[gd_scene load_steps=3 format=3 uid="uid://bmquvb5ejpl81"]
 
 [ext_resource type="Texture2D" uid="uid://cej7mw17bmlyn" path="res://assets/backgrounds/moth_backgrounds/background.png" id="1_4rhek"]
+[ext_resource type="PackedScene" uid="uid://dikpcv0p8vpnr" path="res://scenes/leaderboard/LeaderboardItem.tscn" id="2_speti"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,3 +20,86 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_4rhek")
 expand_mode = 2
+
+[node name="TitleText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -339.0
+offset_top = 60.0
+offset_right = 339.0
+offset_bottom = 301.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]LEADERBOARD[/center]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -156.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="LeaderboardItem" parent="VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="LeaderboardItem2" parent="VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 204.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+scroll_deadzone = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="LeaderboardItem" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+
+[node name="LeaderboardItem2" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+
+[node name="LeaderboardItem3" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+
+[node name="LeaderboardItem4" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+
+[node name="LeaderboardItem5" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+
+[node name="LeaderboardItem6" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+
+[node name="LeaderboardItem7" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+
+[node name="LeaderboardItem8" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+
+[node name="LeaderboardItem9" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
+
+[node name="LeaderboardItem10" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_speti")]
+layout_mode = 2
