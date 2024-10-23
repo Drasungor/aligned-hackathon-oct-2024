@@ -36,6 +36,8 @@ const BATCHER_URL: &str = "wss://batcher.alignedlayer.com";
 // const NETWORK: Network = "holesky" as Network;
 const NETWORK: Network = Network::Holesky;
 // const CONTRACT_ADDRESS: &str = "0xBD2388F7b7c99D3947e8e7e2EC89B96731E2b3a0";
+// const CONTRACT_ADDRESS: &str = "0x8a2f24186c4df435c2f332Dff3fCaD0113826974";
+
 
 abigen!(BugVerificationContract, "bug_verification.json",);
 
@@ -63,8 +65,9 @@ async fn main() {
 
     let args = Args::parse();
 
-    let contract_address: H160 = H160::from_str("0x87C8e0d29d7C64A334efFaF0933357C01eDAea25").expect("Error in verifier address conversion to H160");
-
+    // let contract_address: H160 = H160::from_str("0x87C8e0d29d7C64A334efFaF0933357C01eDAea25").expect("Error in verifier address conversion to H160");
+    let contract_address: H160 = H160::from_str("0x8a2f24186c4df435c2f332Dff3fCaD0113826974").expect("Error in verifier address conversion to H160");
+    
 
     let keystore_password = rpassword::prompt_password("Enter keystore password: ")
     .expect("Failed to read keystore password");
