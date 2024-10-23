@@ -91,12 +91,6 @@ contract TrapTheBugValidator {
     function updateRecordsList(
         uint32 stepsAmount
     ) private {
-        if (recordHolders.length < storedRecordsLimit) {
-            // If the record holders limit was not reached we add a new record holder                
-            recordHolders.push(RecordHolder(stepsAmount, msg.sender, updatesCounter));
-            updatesCounter++;
-            return;
-        }
         uint maxStepsRecordIndex = 0;
         for(uint i = 0; i < recordHolders.length; i++) {
             RecordHolder memory currentRecordHolder = recordHolders[i];
@@ -117,6 +111,14 @@ contract TrapTheBugValidator {
                 }
             }
         }
+
+        if (recordHolders.length < storedRecordsLimit) {
+            // If the record holders limit was not reached we add a new record holder                
+            recordHolders.push(RecordHolder(stepsAmount, msg.sender, updatesCounter));
+            updatesCounter++;
+            return;
+        }
+
         // If we get here, we iterated the record holders array and got the index of the
         // currently worst and latest record, which is not the same wallet as the caller
         RecordHolder memory worstRecordHolder = recordHolders[maxStepsRecordIndex];

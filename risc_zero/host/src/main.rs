@@ -66,8 +66,8 @@ async fn main() {
     let args = Args::parse();
 
     // let contract_address: H160 = H160::from_str("0x87C8e0d29d7C64A334efFaF0933357C01eDAea25").expect("Error in verifier address conversion to H160");
-    let contract_address: H160 = H160::from_str("0x8a2f24186c4df435c2f332Dff3fCaD0113826974").expect("Error in verifier address conversion to H160");
-    
+    // let contract_address: H160 = H160::from_str("0x8a2f24186c4df435c2f332Dff3fCaD0113826974").expect("Error in verifier address conversion to H160");
+    let contract_address: H160 = H160::from_str("0xe7220a7C016935F410F6Cda260125b87fc7cD908").expect("Error in verifier address conversion to H160");
 
     let keystore_password = rpassword::prompt_password("Enter keystore password: ")
     .expect("Failed to read keystore password");
@@ -129,7 +129,7 @@ async fn main() {
     input.push(Position{ horizontal: 3, vertical: 10 });
     input.push(Position{ horizontal: 4, vertical: 10 });
     input.push(Position{ horizontal: 5, vertical: 10 });
-    input.push(Position{ horizontal: 6, vertical: 10 });
+    // input.push(Position{ horizontal: 6, vertical: 10 });
     let env = ExecutorEnv::builder()
         .write(&input)
         .expect("Error while writing program input")
@@ -154,11 +154,11 @@ async fn main() {
     println!("Program output: {}", _output);
 
 
-    // The receipt was verified at the end of proving, but the below code is an
-    // example of how someone else could verify this receipt.
-    receipt
-        .verify(GAME_REPLAY_ID)
-        .expect("Error while verifying proof");
+    // // The receipt was verified at the end of proving, but the below code is an
+    // // example of how someone else could verify this receipt.
+    // receipt
+    //     .verify(GAME_REPLAY_ID)
+    //     .expect("Error while verifying proof");
 
 
     // Serialize proof into bincode (format used by sp1)
