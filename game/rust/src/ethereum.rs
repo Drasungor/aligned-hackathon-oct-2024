@@ -14,7 +14,7 @@ pub struct RecordHolder {
     updatesCounter: u32,
 }
 
-fn get_record_holders() -> Vec::<RecordHolder> {
+pub fn get_record_holders() -> Vec::<RecordHolder> {
 
     let rt = tokio::runtime::Runtime::new().expect("Error in tokio runtime generation");
     let provider = Provider::<Http>::try_from(RPC_URL).expect("Failed to connect to provider");
