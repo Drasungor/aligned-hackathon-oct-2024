@@ -9,3 +9,8 @@ crate-type = ["cdylib"]  # Compile this crate to a dynamic C library.
 [dependencies]
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
 shared = { path = "../../risc_zero/methods/guest/src/shared"}
+ethers = { tag = "v2.0.15-fix-reconnections", features = [
+    "ws",
+    "rustls",
+], git = "https://github.com/yetanotherco/ethers-rs.git" }
+tokio = { version = "1.0.0", features = ["rt", "rt-multi-thread", "macros"] }

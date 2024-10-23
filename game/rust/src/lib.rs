@@ -2,6 +2,7 @@ use game::GameContainer;
 use godot::{classes::Engine, prelude::*};
 
 mod game;
+mod ethereum;
 
 struct MyExtension;
 
