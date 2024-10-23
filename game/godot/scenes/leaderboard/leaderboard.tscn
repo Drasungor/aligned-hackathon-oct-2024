@@ -1,13 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmquvb5ejpl81"]
+[gd_scene load_steps=7 format=3 uid="uid://bmquvb5ejpl81"]
 
 [ext_resource type="Texture2D" uid="uid://cej7mw17bmlyn" path="res://assets/backgrounds/moth_backgrounds/background.png" id="1_4rhek"]
 [ext_resource type="PackedScene" uid="uid://dikpcv0p8vpnr" path="res://scenes/leaderboard/LeaderboardItem.tscn" id="2_speti"]
 [ext_resource type="PackedScene" uid="uid://cjeux0jrqerjj" path="res://scenes/leaderboard/LeaderboardHeader.tscn" id="2_xcndv"]
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_l1t02"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fh1tx"]
+bg_color = Color(1, 0.996078, 0.788235, 0.439216)
 
-[sub_resource type="Theme" id="Theme_mx6ma"]
-VScrollBar/styles/scroll = SubResource("StyleBoxLine_l1t02")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gtrkg"]
+bg_color = Color(1, 0.996078, 0.788235, 0.439216)
+border_width_left = 17
+border_color = Color(0.694179, 0.914015, 0.827543, 1)
+
+[sub_resource type="Theme" id="Theme_i5v4k"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_fh1tx")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_gtrkg")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -60,7 +67,7 @@ offset_top = 244.0
 offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_mx6ma")
+theme = SubResource("Theme_i5v4k")
 horizontal_scroll_mode = 0
 scroll_deadzone = 10
 
