@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dikpcv0p8vpnr"]
+[gd_scene load_steps=5 format=3 uid="uid://dikpcv0p8vpnr"]
 
 [ext_resource type="Texture2D" uid="uid://c33i2p04f7377" path="res://assets/leaderboard/nickname_item.png" id="1_7veus"]
+[ext_resource type="Script" path="res://scenes/leaderboard/leaderboard_item.gd" id="1_q5t7d"]
 [ext_resource type="Texture2D" uid="uid://b77ilrimpkq4r" path="res://assets/leaderboard/item.png" id="1_y0h04"]
 [ext_resource type="Texture2D" uid="uid://vpwvcqd6tk8y" path="res://assets/leaderboard/steps_item.png" id="3_4qmfr"]
 
@@ -15,6 +16,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+script = ExtResource("1_q5t7d")
 
 [node name="NicknameSection" type="TextureRect" parent="."]
 modulate = Color(1, 0.996078, 0.788235, 1)
