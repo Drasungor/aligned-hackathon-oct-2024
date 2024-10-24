@@ -4,6 +4,8 @@ class_name BugCharacter
 
 const BugDirection = preload("res://scripts/enums/bug_direction.gd").BugDirection
 
+signal stop_bug_movement()
+
 @onready var bug_sprite: BugSprite = $BugSprite;
 
 var is_moving := false;
@@ -21,6 +23,7 @@ func _physics_process(delta: float) -> void:
 		position = next_position;
 		bug_sprite.stop_animation();
 		is_moving = false;
+		stop_bug_movement.emit()
 
 func move(direction: BugDirection) -> void:
 	is_moving = true
