@@ -1,5 +1,10 @@
 use godot::prelude::*;
-use shared::{game::{Game, MovementResult}, position::Position};
+use std::collections::HashMap;
+use shared::{
+    game::{Game, MovementResult},
+    position::Position,
+};
+use crate::ethereum;
 
 #[derive(GodotClass)]
 #[class(base=Object)]
@@ -49,5 +54,21 @@ impl GameContainer {
             MovementResult::NewPosition(Position { horizontal, vertical }) 
                 => Vector2i::new(horizontal as i32, vertical as i32),
         }
+    }
+
+    #[func]
+    pub fn get_leaderboad(&self) -> Array<Dictionary> {
+        let records = ethereum::get_record_holders();
+
+        let mut leaderboard = Array::new();
+
+        for record in records {
+            let mut dict = Dictionary::new();
+            dict.set("steps_amount", record.stepsAmount);
+            dict.set("record_holder", record.recordHolder);
+            dict.set("updates_counter", record.updatesCounter);
+        }
+
+        leaderboard
     }
 }
