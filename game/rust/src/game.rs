@@ -67,6 +67,7 @@ impl GameContainer {
             dict.set("steps_amount", record.stepsAmount);
             dict.set("record_holder", record.recordHolder);
             dict.set("updates_counter", record.updatesCounter);
+            leaderboard.push(dict);
         }
 
         leaderboard
