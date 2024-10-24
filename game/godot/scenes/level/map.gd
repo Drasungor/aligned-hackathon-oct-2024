@@ -11,6 +11,7 @@ const BLOCKED_TILE_TYPE := Vector2i(5, 0)
 var hover_tile_pos := NO_HOVERED_TILE
 var hover_tile_type: Vector2i
 var hover_tile_type_bk := Vector2i(-1, -1)
+var is_bug_moving := false
 
 var bug_tile: Vector2i
 
@@ -43,10 +44,11 @@ func _physics_process(_delta: float) -> void:
 		hover_tile_pos = NO_HOVERED_TILE
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
+	if !is_bug_moving and event is InputEventMouseButton and event.is_pressed():
 		var tile_pos := local_to_map(get_local_mouse_position())
 		var cell := get_cell_tile_data(tile_pos)
 		if cell && (get_cell_atlas_coords(tile_pos) != BLOCKED_TILE_TYPE):
+			is_bug_moving = true
 			var new_bug_tile := GameContainer.change_state(tile_pos)
 			_set_tile_blocked(tile_pos)
 			hover_tile_pos = NO_HOVERED_TILE
@@ -76,6 +78,9 @@ func _set_tile_type(tile_pos: Vector2i, tile_set_id: int, atlas_coord: Vector2i)
 
 func _tile_position_to_global(tile_pos: Vector2i) -> Vector2:
 	return to_global(map_to_local(tile_pos))
+
+func _on_stop_bug_movement() -> void:
+	is_bug_moving = false
 
 func _get_bug_direction(destination_bug_tile: Vector2i) -> BugDirection:
 	print(destination_bug_tile - bug_tile)
