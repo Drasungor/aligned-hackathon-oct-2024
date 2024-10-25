@@ -34,7 +34,6 @@ func move(direction: BugDirection) -> void:
 		BugDirection.TopRight:
 			bug_sprite.play_top_right_animation()
 		BugDirection.Left:
-			print("bug_sprite.play_left_animation()")
 			bug_sprite.play_left_animation()
 		BugDirection.Right:
 			bug_sprite.play_right_animation()
