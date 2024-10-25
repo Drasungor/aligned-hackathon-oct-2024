@@ -12,6 +12,7 @@ func stop_animation() -> void:
 
 func play_top_left_animation() -> void:
 	play(WALKING_UP);
+	flip_h = false;
 
 func play_top_right_animation() -> void:
 	play(WALKING_UP);
@@ -19,6 +20,7 @@ func play_top_right_animation() -> void:
 
 func play_left_animation() -> void:
 	play(WALKING_SIDEWAYS);
+	flip_h = false;
 
 func play_right_animation() -> void:
 	play(WALKING_SIDEWAYS);
@@ -26,6 +28,7 @@ func play_right_animation() -> void:
 
 func play_bottom_left_animation() -> void:
 	play(WALKING_DOWN);
+	flip_h = false;
 
 func play_bottom_right_animation() -> void:
 	play(WALKING_DOWN);

@@ -90,44 +90,59 @@ func _get_bug_direction(destination_bug_tile: Vector2i) -> BugDirection:
 	print(destination_bug_tile)
 
 	if bug_tile.y % 2 != 0:
-		print('hola')
+		print('odd')
 		match destination_bug_tile - bug_tile:
 			Vector2i(0, 1):
 				#return BugDirection.BottomRight
+				print("BugDirection.BottomLeft")
 				return BugDirection.BottomLeft
 			#Vector2i(-1, 1):
 			Vector2i(1, 1):
 				#return BugDirection.BottomLeft
+				print("BugDirection.BottomRight")
 				return BugDirection.BottomRight
 			#Vector2i(-1, -1):
 			Vector2i(0, -1):
+				print("BugDirection.TopLeft")
 				return BugDirection.TopLeft
 			Vector2i(1, -1):
+				print("BugDirection.TopRight")
 				return BugDirection.TopRight
 			Vector2i(1, 0):
+				print("BugDirection.Right")
 				return BugDirection.Right
 			Vector2i(-1, 0):
+				print("BugDirection.Left")
 				return BugDirection.Left
 			_:
+				print("Something went wrong")
 				return BugDirection.BottomRight # Avoid breaking the game
 	else:
+		print('even')
 		match destination_bug_tile - bug_tile:
 			#Vector2i(1, 1):
 			Vector2i(0, 1):
+				print("BugDirection.BottomRight")
 				return BugDirection.BottomRight
 			#Vector2i(1, -1):
 			Vector2i(0, -1):
+				print("BugDirection.TopRight")
 				return BugDirection.TopRight
 			#Vector2i(0, 1):
 			Vector2i(-1, 1):
+				print("BugDirection.BottomLeft")
 				return BugDirection.BottomLeft
 			Vector2i(-1, -1):
+				print("BugDirection.TopLeft")
 				return BugDirection.TopLeft
 			#Vector2i(1, 0):
 			Vector2i(-1, 0):
+				print("BugDirection.Left")
 				return BugDirection.Left
 			#Vector2i(-1, 0):
 			Vector2i(1, 0):
+				print("BugDirection.Right")
 				return BugDirection.Right
 			_:
+				print("Something went wrong")
 				return BugDirection.BottomRight # Avoid breaking the game
