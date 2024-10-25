@@ -83,17 +83,27 @@ func _on_stop_bug_movement() -> void:
 	is_bug_moving = false
 
 func _get_bug_direction(destination_bug_tile: Vector2i) -> BugDirection:
-	print(destination_bug_tile - bug_tile)
+	#print(destination_bug_tile - bug_tile)
+	print("bug_tile")
+	print(bug_tile)
+	print("destination_bug_tile")
+	print(destination_bug_tile)
 
 	if bug_tile.y % 2 != 0:
 		print('hola')
 		match destination_bug_tile - bug_tile:
 			Vector2i(0, 1):
-				return BugDirection.BottomRight
-			Vector2i(-1, 1):
+				#return BugDirection.BottomRight
 				return BugDirection.BottomLeft
-			Vector2i(-1, -1):
+			#Vector2i(-1, 1):
+			Vector2i(1, 1):
+				#return BugDirection.BottomLeft
+				return BugDirection.BottomRight
+			#Vector2i(-1, -1):
+			Vector2i(0, -1):
 				return BugDirection.TopLeft
+			Vector2i(1, -1):
+				return BugDirection.TopRight
 			Vector2i(1, 0):
 				return BugDirection.Right
 			Vector2i(-1, 0):
@@ -102,17 +112,22 @@ func _get_bug_direction(destination_bug_tile: Vector2i) -> BugDirection:
 				return BugDirection.BottomRight # Avoid breaking the game
 	else:
 		match destination_bug_tile - bug_tile:
-			Vector2i(1, 1):
-				return BugDirection.BottomRight
-			Vector2i(1, -1):
-				return BugDirection.TopRight
+			#Vector2i(1, 1):
 			Vector2i(0, 1):
+				return BugDirection.BottomRight
+			#Vector2i(1, -1):
+			Vector2i(0, -1):
+				return BugDirection.TopRight
+			#Vector2i(0, 1):
+			Vector2i(-1, 1):
 				return BugDirection.BottomLeft
 			Vector2i(-1, -1):
 				return BugDirection.TopLeft
-			Vector2i(1, 0):
-				return BugDirection.Left
+			#Vector2i(1, 0):
 			Vector2i(-1, 0):
+				return BugDirection.Left
+			#Vector2i(-1, 0):
+			Vector2i(1, 0):
 				return BugDirection.Right
 			_:
 				return BugDirection.BottomRight # Avoid breaking the game
