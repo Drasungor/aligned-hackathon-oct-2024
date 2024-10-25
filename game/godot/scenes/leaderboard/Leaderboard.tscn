@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmquvb5ejpl81"]
+[gd_scene load_steps=7 format=3 uid="uid://bmquvb5ejpl81"]
 
 [ext_resource type="Texture2D" uid="uid://cej7mw17bmlyn" path="res://assets/backgrounds/moth_backgrounds/background.png" id="1_2y6lh"]
 [ext_resource type="Script" path="res://scenes/leaderboard/leaderboard.gd" id="1_5i0pw"]
 [ext_resource type="PackedScene" uid="uid://cjeux0jrqerjj" path="res://scenes/leaderboard/LeaderboardHeader.tscn" id="2_nnvac"]
-[ext_resource type="PackedScene" uid="uid://dikpcv0p8vpnr" path="res://scenes/leaderboard/LeaderboardItem.tscn" id="3_u1ck8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fh1tx"]
 bg_color = Color(1, 0.996078, 0.788235, 0.439216)
@@ -78,53 +77,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 alignment = 1
-
-[node name="ScrollContainer2" type="ScrollContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 244.0
-offset_bottom = -18.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_i5v4k")
-horizontal_scroll_mode = 0
-scroll_deadzone = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="LeaderboardItem" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
-
-[node name="LeaderboardItem2" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
-
-[node name="LeaderboardItem3" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
-
-[node name="LeaderboardItem4" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
-
-[node name="LeaderboardItem5" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
-
-[node name="LeaderboardItem6" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
-
-[node name="LeaderboardItem7" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
-
-[node name="LeaderboardItem8" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
-
-[node name="LeaderboardItem9" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
-
-[node name="LeaderboardItem10" parent="ScrollContainer2/VBoxContainer" instance=ExtResource("3_u1ck8")]
-layout_mode = 2
