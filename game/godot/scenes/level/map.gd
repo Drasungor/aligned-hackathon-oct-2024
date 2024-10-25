@@ -17,6 +17,8 @@ var bug_tile: Vector2i
 
 func _ready() -> void:
 	var initial_bug_tile := GameContainer.get_bug_position()
+	print("GameContainer.get_leaderboad()")
+	print(GameContainer.get_leaderboad())
 	bug_movement.emit(
 		_tile_position_to_global(initial_bug_tile),
 		BugDirection.BottomRight
