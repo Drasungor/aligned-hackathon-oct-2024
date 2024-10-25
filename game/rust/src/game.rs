@@ -62,7 +62,8 @@ impl GameContainer {
     }
 
     #[func]
-    pub fn get_leaderboad(&self) -> Array<Dictionary> {
+    // pub fn get_leaderboad(&self) -> Array<Dictionary> {
+    pub fn get_leaderboad() -> Array<Dictionary> {
         let records = ethereum::get_record_holders();
 
         let mut leaderboard = Array::new();
@@ -73,7 +74,7 @@ impl GameContainer {
             dict.set("record_holder", record.recordHolder);
             dict.set("updates_counter", record.updatesCounter);
             leaderboard.push(dict);
-        }
+        } 
 
         leaderboard
     }
