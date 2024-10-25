@@ -25,8 +25,9 @@ pub fn get_record_holders() -> Vec::<RecordHolder> {
         let provider_arc = Arc::new(provider);
 
         // The address of the deployed contract on the Ethereum network
-        let contract_address: Address = "0xe7220a7C016935F410F6Cda260125b87fc7cD908".parse().expect("Error in address parsing");
-
+        // let contract_address: Address = "0xe7220a7C016935F410F6Cda260125b87fc7cD908".parse().expect("Error in address parsing");
+        let contract_address: Address = "0x15758C745B349E581fa8f167819ff16eCaF60fcA".parse().expect("Error in address parsing");
+        
         // Instantiate the contract instance with the provider (no wallet needed)
         let contract = BugVerificationContract::new(contract_address, provider_arc);
 

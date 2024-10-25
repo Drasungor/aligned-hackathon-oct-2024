@@ -67,8 +67,9 @@ async fn main() {
 
     // let contract_address: H160 = H160::from_str("0x87C8e0d29d7C64A334efFaF0933357C01eDAea25").expect("Error in verifier address conversion to H160");
     // let contract_address: H160 = H160::from_str("0x8a2f24186c4df435c2f332Dff3fCaD0113826974").expect("Error in verifier address conversion to H160");
-    let contract_address: H160 = H160::from_str("0xe7220a7C016935F410F6Cda260125b87fc7cD908").expect("Error in verifier address conversion to H160");
-
+    // let contract_address: H160 = H160::from_str("0xe7220a7C016935F410F6Cda260125b87fc7cD908").expect("Error in verifier address conversion to H160");
+    let contract_address: H160 = H160::from_str("0x15758C745B349E581fa8f167819ff16eCaF60fcA").expect("Error in verifier address conversion to H160");
+    
     let keystore_password = rpassword::prompt_password("Enter keystore password: ")
     .expect("Failed to read keystore password");
 
@@ -129,7 +130,14 @@ async fn main() {
     input.push(Position{ horizontal: 3, vertical: 10 });
     input.push(Position{ horizontal: 4, vertical: 10 });
     input.push(Position{ horizontal: 5, vertical: 10 });
-    // input.push(Position{ horizontal: 6, vertical: 10 });
+    input.push(Position{ horizontal: 6, vertical: 10 });
+
+    // input.push(Position{ horizontal: 1, vertical: 0 });
+    // input.push(Position{ horizontal: 2, vertical: 0 });
+    // input.push(Position{ horizontal: 3, vertical: 0 });
+    // input.push(Position{ horizontal: 4, vertical: 0 });
+    // input.push(Position{ horizontal: 5, vertical: 0 });
+    // input.push(Position{ horizontal: 6, vertical: 0 });
     let env = ExecutorEnv::builder()
         .write(&input)
         .expect("Error while writing program input")

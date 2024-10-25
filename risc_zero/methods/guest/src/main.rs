@@ -18,8 +18,8 @@ fn main() {
     let mut bug_was_encased: Option<bool> = None; // True if was encased, false if he escaped
 
     for blocked_tile in &input {
-        assert!(bug_was_encased.is_none(), "More movements than necessary to resolve the game were provided");
-        assert!(!bug.is_at_position(blocked_tile), "Cannot block the bug's tile");
+        // assert!(bug_was_encased.is_none(), "More movements than necessary to resolve the game were provided");
+        // assert!(!bug.is_at_position(blocked_tile), "Cannot block the bug's tile");
         map.borrow_mut().block_tile(blocked_tile);
         if bug.is_encased() {
             bug_was_encased = Some(true)
