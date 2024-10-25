@@ -35,6 +35,60 @@
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "proofCommitment",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "pubInputCommitment",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "programIdCommitment",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes20",
+				"name": "proofGeneratorAddr",
+				"type": "bytes20"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "batchMerkleRoot",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes",
+				"name": "merkleProof",
+				"type": "bytes"
+			},
+			{
+				"internalType": "uint256",
+				"name": "verificationDataBatchIndex",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "pubInputBytes",
+				"type": "bytes"
+			}
+		],
+		"name": "verifyBatchInclusion",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "alignedServiceManager",
 		"outputs": [
@@ -145,60 +199,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bytes32",
-				"name": "proofCommitment",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "pubInputCommitment",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "programIdCommitment",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes20",
-				"name": "proofGeneratorAddr",
-				"type": "bytes20"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "batchMerkleRoot",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes",
-				"name": "merkleProof",
-				"type": "bytes"
-			},
-			{
-				"internalType": "uint256",
-				"name": "verificationDataBatchIndex",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bytes",
-				"name": "pubInputBytes",
-				"type": "bytes"
-			}
-		],
-		"name": "verifyBatchInclusion",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]
