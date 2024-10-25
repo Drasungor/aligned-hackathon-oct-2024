@@ -14,9 +14,22 @@ var hover_tile_type_bk := Vector2i(-1, -1)
 var is_bug_moving := false
 
 var bug_tile: Vector2i
+var file_dialog: FileDialog  # Add a variable for the FileDialog node
+
+
 
 func _ready() -> void:
 	var initial_bug_tile := GameContainer.get_bug_position()
+	file_dialog = FileDialog.new()
+	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR  # Set to open directories only
+	#file_dialog.connect("file_selected", self, "_on_directory_selected")
+	file_dialog.connect("dir_selected", Callable(self, "_on_directory_selected"))
+	add_child(file_dialog)
+	GameContainer.serialize_blocked_tiles("")
+	
+	open_directory_selector()
+	
 	bug_movement.emit(
 		_tile_position_to_global(initial_bug_tile),
 		BugDirection.BottomRight
@@ -66,6 +79,16 @@ func _reset_tile_hover(tile_pos: Vector2i) -> void:
 	if hover_tile_pos == NO_HOVERED_TILE:
 		return
 	_set_tile_type(tile_pos, 0, hover_tile_type_bk)
+
+func open_directory_selector() -> void:
+	file_dialog.set_size(Vector2(600, 400))
+	file_dialog.popup_centered()
+
+func _on_directory_selected(path: String) -> void:
+	var absolute_path: String = ProjectSettings.globalize_path(path)
+	print("Selected directory relative path: ", path)
+	print("Selected directory absolute path: ", absolute_path)
+
 
 func _set_tile_blocked(tile_pos: Vector2i) -> void:
 	_set_tile_type(tile_pos, 0, BLOCKED_TILE_TYPE)
