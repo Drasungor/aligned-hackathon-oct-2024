@@ -4,21 +4,34 @@ extends Node2D
 @onready var level_scene := preload("res://scenes/level/level.tscn");
 
 var current_scene: Node = null;
+@onready var back_to_menu_button: Button = $BackToMenuButton;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	show_menu();
+	back_to_menu_button.pressed.connect(self._on_back_to_menu_pressed);
 
 
 func show_menu() -> void:
 	if current_scene:
-		current_scene.queue_free()
+		current_scene.queue_free();
 	current_scene = menu_scene.instantiate();
-	add_child(current_scene)
+	add_child(current_scene);
 	
-	var start_button: Button = current_scene.get_node("Buttons/StartButton")  # Declara el tipo de start_button
-	start_button.pressed.connect(self._on_start_pressed)
+	var start_button: Button = current_scene.get_node("Buttons/StartButton");
+	start_button.pressed.connect(self._on_start_pressed);
+
+
+func show_level() -> void:
+	if current_scene:
+		current_scene.queue_free();
+	current_scene = level_scene.instantiate();
+	add_child(current_scene);
+
+
+func _on_back_to_menu_pressed() -> void:
+	show_menu();
 
 
 func _on_start_pressed() -> void:
-	print("level");
+	show_level();

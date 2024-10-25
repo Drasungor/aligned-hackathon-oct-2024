@@ -16,3 +16,16 @@ stream = ExtResource("3_pl02j")
 volume_db = -20.0
 pitch_scale = 0.9
 script = ExtResource("4_kqcpn")
+
+[node name="BackToMenuButton" type="Button" parent="."]
+offset_left = 5172.0
+offset_top = 325.0
+offset_right = 5513.0
+offset_bottom = 475.0
+theme_override_font_sizes/font_size = 80
+text = "Back
+"
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(2872, 1616)
+zoom = Vector2(0.223, 0.223)
