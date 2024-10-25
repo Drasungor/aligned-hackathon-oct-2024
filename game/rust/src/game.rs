@@ -35,8 +35,9 @@ impl GameContainer {
     #[func]
     fn serialize_blocked_tiles(&self, storage_path: GString) {
         // self.blocked_tiles
-        let path = env::current_dir().expect("Get current directory failed");
-        godot_print!("The current directory is {}", path.display());
+        // let path = env::current_dir().expect("Get current directory failed");
+        // godot_print!("The current directory is {}", path.display());
+        godot_print!("The directory received by rust is {}", storage_path);
     }
 
     #[func]
