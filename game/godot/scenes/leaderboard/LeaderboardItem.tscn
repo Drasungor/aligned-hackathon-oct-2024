@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://dikpcv0p8vpnr"]
+[gd_scene load_steps=4 format=3 uid="uid://dikpcv0p8vpnr"]
 
-[ext_resource type="Texture2D" uid="uid://c33i2p04f7377" path="res://assets/leaderboard/nickname_item.png" id="1_7veus"]
 [ext_resource type="Script" path="res://scenes/leaderboard/leaderboard_item.gd" id="1_q5t7d"]
 [ext_resource type="Texture2D" uid="uid://b77ilrimpkq4r" path="res://assets/leaderboard/item.png" id="1_y0h04"]
 [ext_resource type="Texture2D" uid="uid://vpwvcqd6tk8y" path="res://assets/leaderboard/steps_item.png" id="3_4qmfr"]
@@ -18,39 +17,28 @@ size_flags_vertical = 3
 alignment = 1
 script = ExtResource("1_q5t7d")
 
-[node name="NicknameSection" type="TextureRect" parent="."]
+[node name="RankSection" type="TextureRect" parent="."]
 modulate = Color(1, 0.996078, 0.788235, 1)
 texture_filter = 2
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("1_7veus")
+texture = ExtResource("3_4qmfr")
 
-[node name="MarginContainer" type="MarginContainer" parent="NicknameSection"]
-layout_mode = 0
-offset_right = 331.0
-offset_bottom = 55.0
-theme_override_constants/margin_left = 17
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = -5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="NicknameSection/MarginContainer"]
-layout_mode = 2
-
-[node name="RankText" type="RichTextLabel" parent="NicknameSection/MarginContainer/HBoxContainer"]
+[node name="RankText" type="RichTextLabel" parent="RankSection"]
 modulate = Color(0.156863, 0.482353, 0.568627, 1)
-custom_minimum_size = Vector2(70, 0)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = -14.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
-text = "#20"
-
-[node name="NicknameText" type="RichTextLabel" parent="NicknameSection/MarginContainer/HBoxContainer"]
-modulate = Color(0.156863, 0.482353, 0.568627, 1)
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 25
-bbcode_enabled = true
-text = "ElBichoAlineado"
+text = "9999"
 
 [node name="WalletSection" type="TextureRect" parent="."]
 modulate = Color(1, 0.996078, 0.788235, 1)
@@ -81,6 +69,27 @@ size_flags_vertical = 4
 texture = ExtResource("3_4qmfr")
 
 [node name="StepsText" type="RichTextLabel" parent="StepsSection"]
+modulate = Color(0.156863, 0.482353, 0.568627, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]9999[/center]"
+
+[node name="UpdatesSection" type="TextureRect" parent="."]
+modulate = Color(1, 0.996078, 0.788235, 1)
+texture_filter = 2
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_4qmfr")
+
+[node name="UpdatesText" type="RichTextLabel" parent="UpdatesSection"]
 modulate = Color(0.156863, 0.482353, 0.568627, 1)
 layout_mode = 1
 anchors_preset = 15
