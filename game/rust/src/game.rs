@@ -1,5 +1,5 @@
 use godot::prelude::*;
-use std::collections::HashMap;
+use std::{collections::HashMap, env};
 use shared::{
     game::{Game, MovementResult},
     position::Position,
@@ -34,7 +34,9 @@ impl GameContainer {
 
     #[func]
     fn serialize_blocked_tiles(&self, storage_path: GString) {
-        self.blocked_tiles
+        // self.blocked_tiles
+        let path = env::current_dir().expect("Get current directory failed");
+        godot_print!("The current directory is {}", path.display());
     }
 
     #[func]
