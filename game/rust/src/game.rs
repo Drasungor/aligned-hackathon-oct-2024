@@ -11,6 +11,7 @@ use crate::ethereum;
 pub struct GameContainer {
     game: Game,
     base: Base<Object>,
+    blocked_tiles: Vec<Position>,
 }
 
 #[godot_api]
@@ -18,7 +19,8 @@ impl IObject for GameContainer {
     fn init(base: Base<Object>) -> Self {
         Self {
             game: Game::new(),
-            base
+            base,
+            blocked_tiles: Vec::new(),
         }
     }
 }
@@ -28,6 +30,11 @@ impl GameContainer {
     #[func]
     fn reset(&mut self) {
         self.game = Game::new();
+    }
+
+    #[func]
+    fn serialize_blocked_tiles(&self, storage_path: GString) {
+        self.blocked_tiles
     }
 
     #[func]
@@ -51,10 +58,12 @@ impl GameContainer {
 
     #[func]
     pub fn change_state(&mut self, blocked_tile: Vector2i) -> Vector2i {
-        match self.game.change_state(Position {
+        let blocked_tile_position = Position {
             horizontal: blocked_tile.x as usize,
             vertical: blocked_tile.y as usize,
-        }) {
+        };
+        self.blocked_tiles.push(blocked_tile_position.clone());
+        match self.game.change_state(blocked_tile_position) {
             MovementResult::GameEnded(ended) => panic!("Game ended: {}", ended),
             MovementResult::NewPosition(Position { horizontal, vertical }) 
                 => Vector2i::new(horizontal as i32, vertical as i32),
