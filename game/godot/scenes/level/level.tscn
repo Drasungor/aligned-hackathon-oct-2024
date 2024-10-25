@@ -1,14 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce4a12nt8awwy"]
+[gd_scene load_steps=4 format=3 uid="uid://ce4a12nt8awwy"]
 
 [ext_resource type="PackedScene" uid="uid://gl5rskkpddsy" path="res://scenes/level/background.tscn" id="1_j5f3n"]
 [ext_resource type="PackedScene" uid="uid://dco6hib6y7std" path="res://scenes/level/map.tscn" id="2_giefr"]
 [ext_resource type="PackedScene" uid="uid://bcmrkoki6csq5" path="res://scenes/bug/bug.tscn" id="5_sht0e"]
-[ext_resource type="AudioStream" uid="uid://efyammfc2sfm" path="res://sound/music/Elysium Lost [8 Bit Universe Original Music for Sleep and Study] - 8 Bit Universe.ogg" id="150_wcnld"]
-[ext_resource type="Script" path="res://scenes/level/audio_stream_player.gd" id="151_7cf6v"]
 
 [node name="Level1" type="Node2D"]
 
 [node name="Background" parent="." instance=ExtResource("1_j5f3n")]
+visible = false
 position = Vector2(2880, 1624)
 
 [node name="Map" parent="." instance=ExtResource("2_giefr")]
@@ -17,12 +16,6 @@ position = Vector2(1200, 272)
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(2872, 1616)
 zoom = Vector2(0.223, 0.223)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("150_wcnld")
-volume_db = -20.0
-pitch_scale = 0.9
-script = ExtResource("151_7cf6v")
 
 [node name="Bug" parent="." instance=ExtResource("5_sht0e")]
 position = Vector2(1344, 436)

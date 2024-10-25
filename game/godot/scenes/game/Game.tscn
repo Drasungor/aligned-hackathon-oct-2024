@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dn3tnbx4i8x3s"]
+
+[ext_resource type="PackedScene" uid="uid://gl5rskkpddsy" path="res://scenes/level/background.tscn" id="1_q3uud"]
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_sesb0"]
+[ext_resource type="AudioStream" uid="uid://efyammfc2sfm" path="res://sound/music/Elysium Lost [8 Bit Universe Original Music for Sleep and Study] - 8 Bit Universe.ogg" id="3_pl02j"]
+[ext_resource type="Script" path="res://scenes/level/audio_stream_player.gd" id="4_kqcpn"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_sesb0")
+
+[node name="Background" parent="." instance=ExtResource("1_q3uud")]
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pl02j")
+volume_db = -20.0
+pitch_scale = 0.9
+script = ExtResource("4_kqcpn")
