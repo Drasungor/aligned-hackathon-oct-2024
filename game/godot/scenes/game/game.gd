@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var menu_scene := preload("res://scenes/menu/menu.tscn");
 @onready var level_scene := preload("res://scenes/level/level.tscn");
+@onready var leaderboard_scene := preload("res://scenes/leaderboard/Leaderboard.tscn");
 
 var current_scene: Node = null;
 @onready var back_to_menu_button: Button = $BackToMenuButton;
@@ -20,6 +21,9 @@ func show_menu() -> void:
 	
 	var start_button: Button = current_scene.get_node("Buttons/StartButton");
 	start_button.pressed.connect(self._on_start_pressed);
+	
+	var leaderboard_button: Button = current_scene.get_node("Buttons/LeaderboardButton");
+	leaderboard_button.pressed.connect(self._on_leaderboard_pressed);
 
 
 func show_level() -> void:
@@ -29,9 +33,20 @@ func show_level() -> void:
 	add_child(current_scene);
 
 
+func show_leaderboard() -> void:
+	if current_scene:
+		current_scene.queue_free();
+	current_scene = leaderboard_scene.instantiate();
+	add_child(current_scene);
+
+
 func _on_back_to_menu_pressed() -> void:
 	show_menu();
 
 
 func _on_start_pressed() -> void:
 	show_level();
+
+
+func _on_leaderboard_pressed() -> void:
+	show_leaderboard();
