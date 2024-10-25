@@ -9,9 +9,9 @@ const RPC_URL: &str = "https://ethereum-holesky-rpc.publicnode.com";
 
 #[derive(Debug)]
 pub struct RecordHolder {
-    stepsAmount: u32,
-    recordHolder: String,
-    updatesCounter: u32,
+    pub stepsAmount: u32,
+    pub recordHolder: String,
+    pub updatesCounter: u32,
 }
 
 pub fn get_record_holders() -> Vec::<RecordHolder> {
