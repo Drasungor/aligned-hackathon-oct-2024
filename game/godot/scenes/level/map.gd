@@ -56,10 +56,15 @@ func _physics_process(_delta: float) -> void:
 		hover_tile_pos = NO_HOVERED_TILE
 
 func _input(event: InputEvent) -> void:
-	if !is_bug_moving and event is InputEventMouseButton and event.is_pressed():
+	#if !is_bug_moving and event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton and event.is_pressed():
 		var tile_pos := local_to_map(get_local_mouse_position())
+		if is_bug_moving:
+			return
 		var cell := get_cell_tile_data(tile_pos)
-		if cell && (get_cell_atlas_coords(tile_pos) != BLOCKED_TILE_TYPE):
+		#var initial_bug_tile := GameContainer.get_bug_position()
+		var is_bug_position:= GameContainer.get_bug_position() == tile_pos
+		if cell && (get_cell_atlas_coords(tile_pos) != BLOCKED_TILE_TYPE) && !is_bug_position:
 			is_bug_moving = true
 			#var new_bug_tile := GameContainer.change_state(tile_pos)
 			print("Blocked tile:")
@@ -79,7 +84,7 @@ func _input(event: InputEvent) -> void:
 				bug_movement.emit(
 					_tile_position_to_global(new_bug_tile),
 					_get_bug_direction(new_bug_tile)
-				) # TODO handle game ending as possible response
+				)
 				bug_tile = new_bug_tile
 			else:
 				print("unexpected response type")
@@ -107,8 +112,6 @@ func open_directory_selector() -> void:
 
 func _on_directory_selected(path: String) -> void:
 	var absolute_path: String = ProjectSettings.globalize_path(path)
-	print("Selected directory relative path: ", path)
-	print("Selected directory absolute path: ", absolute_path)
 	GameContainer.serialize_blocked_tiles(absolute_path)
 
 
