@@ -34,6 +34,9 @@ func show_menu() -> void:
 	
 	var leaderboard_button: Button = current_scene.get_node("Buttons/LeaderboardButton");
 	leaderboard_button.pressed.connect(self._on_leaderboard_pressed);
+	
+	var quit_button : Button = current_scene.get_node("Buttons/QuitButton");
+	quit_button.pressed.connect(self._on_quit_pressed);
 
 
 func show_level() -> void:
@@ -44,7 +47,6 @@ func show_level() -> void:
 		current_scene.queue_free();
 	GameContainer.reset();
 	current_scene = level_scene.instantiate();
-	#add_child(current_scene);
 	
 	var map := current_scene.get_node("Map");
 	var bug := current_scene.get_node("Bug");
@@ -80,6 +82,10 @@ func _on_start_pressed() -> void:
 
 func _on_leaderboard_pressed() -> void:
 	show_leaderboard();
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
 
 
 func _on_end_game_menu_reset_pressed() -> void:

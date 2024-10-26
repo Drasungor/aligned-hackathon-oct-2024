@@ -31,3 +31,8 @@ text = "Start"
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
 text = "Leaderboard"
+
+[node name="QuitButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Quit"
