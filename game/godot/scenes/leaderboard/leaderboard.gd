@@ -4,7 +4,7 @@ class_name Leaderboard
 
 @onready var leaderboard_item_scene := preload("res://scenes/leaderboard/LeaderboardItem.tscn")
 
-@onready var leaderboard_list := $ScrollContainer/VBoxContainer
+@onready var leaderboard_list := $VBoxContainer/ScrollContainer/VBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
