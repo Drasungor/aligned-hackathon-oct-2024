@@ -112,7 +112,7 @@ async fn main() {
         .build()
         .expect("Error while building executor environment");
 
-    prtintln!("Starting proof generation. This will take a while...");
+    println!("Starting proof generation. This will take a while...");
 
     // Obtain the default prover.
     let prover = default_prover();
