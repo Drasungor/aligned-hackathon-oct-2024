@@ -24,6 +24,7 @@ impl Map {
         let mut lines: Vec<Vec<bool>> = vec![];
         let line_length = 11;
 
+        // We define a default leve, this should be replaced in a future version
         lines.push(Map::build_tiles_line(line_length, vec![0]));
         lines.push(Map::build_tiles_line(line_length, vec![4]));
         lines.push(Map::build_tiles_line(line_length, vec![3]));
@@ -39,10 +40,9 @@ impl Map {
         Map { line_length, lines: Rc::new(RefCell::new(lines)) }
     }
 
+    // Marks a tile as blocked, fails if the position is invalid or the tile is already blocked
     pub fn block_tile(&mut self, position: &Position)  -> Result<(), GameError>{
         let mut lines_ref = self.lines.borrow_mut();
-        // assert!((position.horizontal < self.line_length) && (position.vertical < lines_ref.len()), "Out of bounds position");
-        // assert!((!lines_ref[position.vertical][position.horizontal]), "Position already blocked");
         if !((position.horizontal < self.line_length) && (position.vertical < lines_ref.len())) {
             return Err(GameError::PositionOutOfBounds);
         }
@@ -57,11 +57,13 @@ impl Map {
         self.lines.borrow()
     }
 
+    // Indicates if the tile is placed in the border of the map
     pub fn is_limit(&self, position: &Position) -> bool {
         (position.vertical == 0) || (position.vertical == (self.lines.borrow().len() - 1)) ||
         (position.horizontal == 0) || (position.horizontal == (self.line_length - 1))
     }
 
+    // Returns a vector of the tiles adjacent to the received position that are not marked as blocked
     pub fn get_neighbors(&self, position: &Position) -> Vec<Position> {
         let vertical_min: usize;
         let vertical_max: usize;
@@ -83,6 +85,8 @@ impl Map {
 
         let line_offset = ((position.vertical % 2) as isize) - 1;
 
+        // Due to the hexagonal shape of the tiles, the indexes of neighbors varies with the even-ness
+        // of the vertical index
         for i in vertical_min..(vertical_max + 1) {
             for j in 0..2 {
                 let current_horizontal: isize;

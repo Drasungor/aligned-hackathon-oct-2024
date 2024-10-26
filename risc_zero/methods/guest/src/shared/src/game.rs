@@ -22,6 +22,7 @@ pub enum GameError {
     TileAlreadyBlocked,
 }
 
+// Game session orchestrator, controls the map and the bug
 impl Game {
     pub fn new() -> Game {
         let map = Rc::new(RefCell::new(Map::new()));
@@ -38,18 +39,8 @@ impl Game {
         self.bug.get_position()
     }
 
-    // pub fn change_state(&mut self, blocked_tile: Position) -> MovementResult {
-    //     assert!(!self.bug.is_at_position(&blocked_tile), "Cannot block the bug's tile");
-    //     self.map.borrow_mut().block_tile(&blocked_tile);
-    //     if self.bug.is_encased() {
-    //         return MovementResult::GameEnded(true);
-    //     } else if self.bug.is_at_limit() {
-    //         return MovementResult::GameEnded(false);
-    //     } else {
-    //         return MovementResult::NewPosition(self.bug.move_tile());
-    //     }
-    // }
-
+    // Executes a game loop, returns whether the game has ended (win or lose) or the bug has moved,
+    // and his new position in the map
     pub fn change_state(&mut self, blocked_tile: Position) -> Result<MovementResult, GameError> {
         if self.bug.is_at_position(&blocked_tile) {
             return Err(GameError::BlockedBugTile)
