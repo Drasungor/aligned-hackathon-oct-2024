@@ -62,7 +62,6 @@ func _input(event: InputEvent) -> void:
 		if is_bug_moving:
 			return
 		var cell := get_cell_tile_data(tile_pos)
-		#var initial_bug_tile := GameContainer.get_bug_position()
 		var is_bug_position:= GameContainer.get_bug_position() == tile_pos
 		if cell && (get_cell_atlas_coords(tile_pos) != BLOCKED_TILE_TYPE) && !is_bug_position:
 			is_bug_moving = true
