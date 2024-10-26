@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CatchTheBug!"
-run/main_scene="res://scenes/level/level.tscn"
+run/main_scene="res://scenes/game/Game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
 [debug]
