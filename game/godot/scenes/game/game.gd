@@ -24,7 +24,7 @@ func show_menu() -> void:
 	if current_scene:
 		current_scene.queue_free();
 	current_scene = menu_scene.instantiate();
-	add_child(current_scene);
+	$CanvasLayer/CenterContainer.add_child(current_scene);
 	
 	var start_button: Button = current_scene.get_node("Buttons/StartButton");
 	start_button.pressed.connect(self._on_start_pressed);
