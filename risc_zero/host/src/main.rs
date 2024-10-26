@@ -55,7 +55,7 @@ struct Args {
 async fn main() {
     let args = Args::parse();
     // let contract_address: H160 = H160::from_str("0x15758C745B349E581fa8f167819ff16eCaF60fcA").expect("Error in verifier address conversion to H160");
-    let contract_address: H160 = H160::from_str("0x15758C745B349E581fa8f167819ff16eCaF60fcA").expect("Error in verifier address conversion to H160");
+    let contract_address: H160 = H160::from_str("0x3Ec1C9ab885b1a145AC21BD60a5AC63212B83243").expect("Error in verifier address conversion to H160");
     
     let keystore_password = rpassword::prompt_password("Enter keystore password: ")
     .expect("Failed to read keystore password");
