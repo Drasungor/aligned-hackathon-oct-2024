@@ -22,34 +22,21 @@ script = ExtResource("4_kqcpn")
 position = Vector2(2872, 1616)
 zoom = Vector2(0.223, 0.223)
 
-[node name="ScenesCanvaLayer" type="CanvasLayer" parent="."]
+[node name="UICanvaLayer" type="CanvasLayer" parent="."]
 
-[node name="CenterContainer" type="CenterContainer" parent="ScenesCanvaLayer"]
+[node name="CenterContainer" type="CenterContainer" parent="UICanvaLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackToMenuCanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="BackToMenuButton" type="Button" parent="BackToMenuCanvasLayer"]
-offset_left = 1146.0
-offset_top = 61.0
-offset_right = 1238.0
-offset_bottom = 111.0
-theme_override_font_sizes/font_size = 30
-text = "Back
-"
-
-[node name="EndGameMenuCanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="CenterContainer" type="CenterContainer" parent="EndGameMenuCanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="EndGameMenu" parent="EndGameMenuCanvasLayer/CenterContainer" instance=ExtResource("5_3d00a")]
+[node name="EndGameMenu" parent="UICanvaLayer/CenterContainer" instance=ExtResource("5_3d00a")]
 layout_mode = 2
+
+[node name="BackToMenuButton" type="Button" parent="UICanvaLayer"]
+offset_left = 1152.0
+offset_top = 69.0
+offset_right = 1232.0
+offset_bottom = 106.0
+text = "Back"
