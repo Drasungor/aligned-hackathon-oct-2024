@@ -27,8 +27,8 @@ func _ready() -> void:
 	file_dialog.connect("dir_selected", Callable(self, "_on_directory_selected"))
 	add_child(file_dialog)
 	#open_directory_selector()
-	print("GameContainer.get_leaderboad()")
-	print(GameContainer.get_leaderboad())
+	#print("GameContainer.get_leaderboad()")
+	#print(GameContainer.get_leaderboad())
 	bug_movement.emit(
 		_tile_position_to_global(initial_bug_tile),
 		BugDirection.BottomRight
