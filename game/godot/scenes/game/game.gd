@@ -36,7 +36,7 @@ func show_level() -> void:
 func show_leaderboard() -> void:
 	if current_scene:
 		current_scene.queue_free();
-	current_scene = leaderboard_scene.instantiate();
+	current_scene = leaderboard_scene
 	$Control/CenterContainer.add_child(current_scene);
 
 
