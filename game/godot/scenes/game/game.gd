@@ -4,6 +4,8 @@ extends Node2D
 @onready var level_scene := preload("res://scenes/level/level.tscn");
 @onready var leaderboard_scene := preload("res://scenes/leaderboard/Leaderboard.tscn");
 
+@onready var scenes_canva_layer := $ScenesCanvaLayer/CenterContainer;
+
 @onready var end_game_menu := $EndGameMenuCanvasLayer/CenterContainer/EndGameMenu;
 @onready var end_game_menu_canvas := $EndGameMenuCanvasLayer;
 @onready var end_game_menu_reset_button := $EndGameMenuCanvasLayer/CenterContainer/EndGameMenu/VBoxContainer/ResetGameButton;
@@ -25,7 +27,7 @@ func show_menu() -> void:
 	if current_scene:
 		current_scene.queue_free();
 	current_scene = menu_scene.instantiate();
-	$CanvasLayer/CenterContainer.add_child(current_scene);
+	scenes_canva_layer.add_child(current_scene);
 	
 	var start_button: Button = current_scene.get_node("Buttons/StartButton");
 	start_button.pressed.connect(self._on_start_pressed);
@@ -50,7 +52,7 @@ func show_leaderboard() -> void:
 	if current_scene:
 		current_scene.queue_free();
 	current_scene = leaderboard_scene.instantiate();
-	$CanvasLayer.add_child(current_scene);
+	scenes_canva_layer.add_child(current_scene);
 
 
 func reset_game() -> void:

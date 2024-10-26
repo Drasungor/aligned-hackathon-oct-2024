@@ -22,9 +22,9 @@ script = ExtResource("4_kqcpn")
 position = Vector2(2872, 1616)
 zoom = Vector2(0.223, 0.223)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ScenesCanvaLayer" type="CanvasLayer" parent="."]
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+[node name="CenterContainer" type="CenterContainer" parent="ScenesCanvaLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
