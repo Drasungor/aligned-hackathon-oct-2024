@@ -14,9 +14,19 @@ var hover_tile_type_bk := Vector2i(-1, -1)
 var is_bug_moving := false
 
 var bug_tile: Vector2i
+var file_dialog: FileDialog  # Add a variable for the FileDialog node
+
+
 
 func _ready() -> void:
 	var initial_bug_tile := GameContainer.get_bug_position()
+	file_dialog = FileDialog.new()
+	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR  # Set to open directories only
+	#file_dialog.connect("file_selected", self, "_on_directory_selected")
+	file_dialog.connect("dir_selected", Callable(self, "_on_directory_selected"))
+	add_child(file_dialog)
+	#open_directory_selector()
 	print("GameContainer.get_leaderboad()")
 	print(GameContainer.get_leaderboad())
 	bug_movement.emit(
@@ -51,14 +61,36 @@ func _input(event: InputEvent) -> void:
 		var cell := get_cell_tile_data(tile_pos)
 		if cell && (get_cell_atlas_coords(tile_pos) != BLOCKED_TILE_TYPE):
 			is_bug_moving = true
-			var new_bug_tile := GameContainer.change_state(tile_pos)
+			#var new_bug_tile := GameContainer.change_state(tile_pos)
+			print("Blocked tile:")
+			print(tile_pos)
+			var state_change_variant: Variant = GameContainer.change_state(tile_pos)
+			#if state_change_variant.get_type() == Variant.Type.TYPE_BOOL:
+			if typeof(state_change_variant) == Variant.Type.TYPE_BOOL:
+				print("game ended")
+				if state_change_variant:
+					open_directory_selector()
+			#elif state_change_variant.get_type() == Variant.Type.TYPE_VECTOR2I:
+			elif typeof(state_change_variant) == Variant.Type.TYPE_VECTOR2I:
+				print("game updated")
+				#var new_bug_tile: Vector2i = state_change_variant.get_vector2i()
+				var new_bug_tile: Vector2i = state_change_variant
+				print(new_bug_tile)
+				bug_movement.emit(
+					_tile_position_to_global(new_bug_tile),
+					_get_bug_direction(new_bug_tile)
+				) # TODO handle game ending as possible response
+				bug_tile = new_bug_tile
+			else:
+				print("unexpected response type")
 			_set_tile_blocked(tile_pos)
 			hover_tile_pos = NO_HOVERED_TILE
-			bug_movement.emit(
-				_tile_position_to_global(new_bug_tile),
-				_get_bug_direction(new_bug_tile)
-			) # TODO handle game ending as possible response
-			bug_tile = new_bug_tile
+			#bug_movement.emit(
+				#_tile_position_to_global(new_bug_tile),
+				#_get_bug_direction(new_bug_tile)
+			#) # TODO handle game ending as possible response
+			#bug_tile = new_bug_tile
+			
 
 func _set_tile_hover(tile_pos: Vector2i) -> void:
 	if get_cell_tile_data(tile_pos) != null and hover_tile_pos != tile_pos:
@@ -68,6 +100,17 @@ func _reset_tile_hover(tile_pos: Vector2i) -> void:
 	if hover_tile_pos == NO_HOVERED_TILE:
 		return
 	_set_tile_type(tile_pos, 0, hover_tile_type_bk)
+
+func open_directory_selector() -> void:
+	file_dialog.set_size(Vector2(600, 400))
+	file_dialog.popup_centered()
+
+func _on_directory_selected(path: String) -> void:
+	var absolute_path: String = ProjectSettings.globalize_path(path)
+	print("Selected directory relative path: ", path)
+	print("Selected directory absolute path: ", absolute_path)
+	GameContainer.serialize_blocked_tiles(absolute_path)
+
 
 func _set_tile_blocked(tile_pos: Vector2i) -> void:
 	_set_tile_type(tile_pos, 0, BLOCKED_TILE_TYPE)
@@ -86,10 +129,10 @@ func _on_stop_bug_movement() -> void:
 
 func _get_bug_direction(destination_bug_tile: Vector2i) -> BugDirection:
 	#print(destination_bug_tile - bug_tile)
-	print("bug_tile")
-	print(bug_tile)
-	print("destination_bug_tile")
-	print(destination_bug_tile)
+	#print("bug_tile")
+	#print(bug_tile)
+	#print("destination_bug_tile")
+	#print(destination_bug_tile)
 
 	if bug_tile.y % 2 != 0:
 		match destination_bug_tile - bug_tile:
@@ -108,7 +151,7 @@ func _get_bug_direction(destination_bug_tile: Vector2i) -> BugDirection:
 			_:
 				return BugDirection.BottomRight # Avoid breaking the game
 	else:
-		print('even')
+		#print('even')
 		match destination_bug_tile - bug_tile:
 			Vector2i(0, 1):
 				return BugDirection.BottomRight

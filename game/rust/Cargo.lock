@@ -2460,6 +2460,7 @@ version = "0.1.0"
 dependencies = [
  "ethers",
  "godot",
+ "serde_json",
  "shared",
  "tokio",
 ]
