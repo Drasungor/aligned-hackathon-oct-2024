@@ -6,7 +6,6 @@ class_name Leaderboard
 
 @onready var leaderboard_list := $VBoxContainer/ScrollContainer/VBoxContainer
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_data()
 
@@ -53,16 +52,3 @@ func compare_records(a: Dictionary, b: Dictionary) -> bool:
 		elif a["updates_counter"] < b["updates_counter"]:
 			return true
 	return true
-
-
-#func compare_records(a: Dictionary, b: Dictionary) -> int:
-	#if a["steps_amount"] > b["steps_amount"]:
-		#return -1
-	#elif a["steps_amount"] < b["steps_amount"]:
-		#return 1
-	#else:
-		#if a["updates_counter"] > b["updates_counter"]:
-			#return -1
-		#elif a["updates_counter"] < b["updates_counter"]:
-			#return 1
-	#return 0

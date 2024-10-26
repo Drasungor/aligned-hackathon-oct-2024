@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn3tnbx4i8x3s"]
+[gd_scene load_steps=6 format=3 uid="uid://dn3tnbx4i8x3s"]
 
 [ext_resource type="PackedScene" uid="uid://gl5rskkpddsy" path="res://scenes/level/background.tscn" id="1_q3uud"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_sesb0"]
 [ext_resource type="AudioStream" uid="uid://efyammfc2sfm" path="res://sound/music/Elysium Lost [8 Bit Universe Original Music for Sleep and Study] - 8 Bit Universe.ogg" id="3_pl02j"]
 [ext_resource type="Script" path="res://scenes/level/audio_stream_player.gd" id="4_kqcpn"]
+[ext_resource type="PackedScene" uid="uid://celhjys6jl6y5" path="res://scenes/end_game_menu/EndGameMenu.tscn" id="5_3d00a"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_sesb0")
@@ -33,3 +34,11 @@ offset_bottom = 111.0
 theme_override_font_sizes/font_size = 30
 text = "Back
 "
+
+[node name="EndGameMenuCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EndGameMenu" parent="EndGameMenuCanvasLayer" instance=ExtResource("5_3d00a")]
+offset_left = 569.0
+offset_top = 310.0
+offset_right = 569.0
+offset_bottom = 310.0

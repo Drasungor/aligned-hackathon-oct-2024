@@ -3,6 +3,7 @@ extends TileMapLayer
 const BugDirection = preload("res://scripts/enums/bug_direction.gd").BugDirection
 
 signal bug_movement(position: Vector2, direction: BugDirection)
+signal game_ended(player_won: bool);
 
 const NO_HOVERED_TILE := Vector2i(-1, -1)
 const HOVER_TILE_TYPE := Vector2i(4, 0)
@@ -72,8 +73,10 @@ func _input(event: InputEvent) -> void:
 			#if state_change_variant.get_type() == Variant.Type.TYPE_BOOL:
 			if typeof(state_change_variant) == Variant.Type.TYPE_BOOL:
 				print("game ended")
-				if state_change_variant:
-					open_directory_selector()
+				game_ended.emit(state_change_variant);
+				#if state_change_variant:
+					#game_ended.emit(state_change_variant);
+					#open_directory_selector()
 			#elif state_change_variant.get_type() == Variant.Type.TYPE_VECTOR2I:
 			elif typeof(state_change_variant) == Variant.Type.TYPE_VECTOR2I:
 				print("game updated")
