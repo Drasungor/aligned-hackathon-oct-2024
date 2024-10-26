@@ -1,5 +1,6 @@
 extends Control
 
+@onready var result_text := $VBoxContainer/ResultText
 @onready var reset_game_button := $VBoxContainer/ResetGameButton;
 @onready var save_inputs_button := $VBoxContainer/SaveInputsButton;
 
@@ -36,3 +37,13 @@ func _on_directory_selected(path: String) -> void:
 func open_directory_selector() -> void:
 	file_dialog.set_size(Vector2(600, 400))
 	file_dialog.popup_centered()
+
+
+func display_game_result(result: bool) -> void:
+	var result_word: String;
+	if result:
+		result_word = "won";
+	else:
+		result_word = "lost";
+	result_text.text = "[center][b]" + "You " + result_word + "[/b][/center]" ;
+	save_inputs_button.visible = result;

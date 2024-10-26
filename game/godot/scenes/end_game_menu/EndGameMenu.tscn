@@ -15,6 +15,14 @@ script = ExtResource("1_kecy4")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+alignment = 1
+
+[node name="ResultText" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 60)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "gddddg"
 
 [node name="ResetGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2

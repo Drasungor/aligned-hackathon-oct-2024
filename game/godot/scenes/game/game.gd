@@ -4,7 +4,7 @@ extends Node2D
 @onready var level_scene := preload("res://scenes/level/level.tscn");
 @onready var leaderboard_scene := preload("res://scenes/leaderboard/Leaderboard.tscn");
 
-@onready var end_game_menu := $EndGameMenuCanvasLayer;
+@onready var end_game_menu := $EndGameMenuCanvasLayer/EndGameMenu;
 @onready var end_game_menu_reset_button := $EndGameMenuCanvasLayer/EndGameMenu/VBoxContainer/ResetGameButton;
 
 @onready var back_to_menu_button: Button = $CanvasLayer2/BackToMenuButton;
@@ -74,5 +74,6 @@ func _on_end_game_menu_reset_pressed() -> void:
 
 
 func _on_level_game_ended(player_won: bool) -> void:
-	end_game_menu.get_node("EndGameMenu/VBoxContainer/SaveInputsButton").visible = player_won;
+	#end_game_menu.get_node("EndGameMenu/VBoxContainer/SaveInputsButton").visible = player_won;
+	end_game_menu.display_game_result(player_won);
 	end_game_menu.visible = true;
