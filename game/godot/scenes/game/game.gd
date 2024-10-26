@@ -10,11 +10,10 @@ extends Node2D
 @onready var end_game_menu_canvas := $EndGameMenuCanvasLayer;
 @onready var end_game_menu_reset_button := $EndGameMenuCanvasLayer/CenterContainer/EndGameMenu/VBoxContainer/ResetGameButton;
 
-@onready var back_to_menu_button: Button = $BackToMenuCanvasLayer/BackToMenuButton;
+@onready var back_to_menu_button := $BackToMenuCanvasLayer/BackToMenuButton;
 
 var current_scene: Node = null;
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	end_game_menu_canvas.visible = false;
 	show_menu();
@@ -77,6 +76,5 @@ func _on_end_game_menu_reset_pressed() -> void:
 
 
 func _on_level_game_ended(player_won: bool) -> void:
-	#end_game_menu.get_node("EndGameMenu/VBoxContainer/SaveInputsButton").visible = player_won;
 	end_game_menu.display_game_result(player_won);
 	end_game_menu_canvas.visible = true;
