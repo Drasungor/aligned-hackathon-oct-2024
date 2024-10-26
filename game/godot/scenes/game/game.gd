@@ -37,7 +37,7 @@ func show_leaderboard() -> void:
 	if current_scene:
 		current_scene.queue_free();
 	current_scene = leaderboard_scene.instantiate();
-	add_child(current_scene);
+	$Control/CenterContainer.add_child(current_scene);
 
 
 func _on_back_to_menu_pressed() -> void:

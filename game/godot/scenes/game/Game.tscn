@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn3tnbx4i8x3s"]
+[gd_scene load_steps=6 format=3 uid="uid://dn3tnbx4i8x3s"]
 
 [ext_resource type="PackedScene" uid="uid://gl5rskkpddsy" path="res://scenes/level/background.tscn" id="1_q3uud"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_sesb0"]
 [ext_resource type="AudioStream" uid="uid://efyammfc2sfm" path="res://sound/music/Elysium Lost [8 Bit Universe Original Music for Sleep and Study] - 8 Bit Universe.ogg" id="3_pl02j"]
 [ext_resource type="Script" path="res://scenes/level/audio_stream_player.gd" id="4_kqcpn"]
+[ext_resource type="PackedScene" uid="uid://bmquvb5ejpl81" path="res://scenes/leaderboard/Leaderboard.tscn" id="5_5wjyv"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_sesb0")
@@ -29,3 +30,20 @@ offset_bottom = 475.0
 theme_override_font_sizes/font_size = 80
 text = "Back
 "
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 5754.0
+offset_bottom = 3188.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Leaderboard" parent="Control/CenterContainer" instance=ExtResource("5_5wjyv")]
+layout_mode = 2
