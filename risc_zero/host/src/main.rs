@@ -28,16 +28,16 @@ use ethers::providers::{Http, Provider};
 use ethers::signers::{LocalWallet, Signer};
 use ethers::types::{Address, Bytes, H160, U256};
 use std::str::FromStr;
+use serde::{Deserialize, Serialize};
+use serde_json::Result;
+use std::fs::File;
+use std::io::Read;
 
 use shared::position::Position;
 
 const RPC_URL: &str = "https://ethereum-holesky-rpc.publicnode.com";
 const BATCHER_URL: &str = "wss://batcher.alignedlayer.com";
-// const NETWORK: Network = "holesky" as Network;
 const NETWORK: Network = Network::Holesky;
-// const CONTRACT_ADDRESS: &str = "0xBD2388F7b7c99D3947e8e7e2EC89B96731E2b3a0";
-// const CONTRACT_ADDRESS: &str = "0x8a2f24186c4df435c2f332Dff3fCaD0113826974";
-
 
 abigen!(BugVerificationContract, "bug_verification.json",);
 
@@ -46,13 +46,9 @@ abigen!(BugVerificationContract, "bug_verification.json",);
 struct Args {
     #[arg(short, long)]
     keystore_path: String,
-    // rpc_url: String,
-    // #[arg(short, long, default_value = "wss://batcher.alignedlayer.com")]
-    // batcher_url: String,
-    // #[arg(short, long, default_value = "holesky")]
-    // network: Network,
-    // #[arg(short, long)]
-    // verifier_contract_address: H160,
+    
+    #[arg(short, long)]
+    inputs_path: String,
 }
 
 #[tokio::main]
@@ -105,27 +101,18 @@ async fn main() {
 
     println!("Program ID: 0x{}", hex::encode(program_id_le.clone()));
 
-    // For example:
-    // let input: u32 = 15 * u32::pow(2, 27) + 1;
-    let mut input: Vec<Position> = Vec::new();
-    input.push(Position{ horizontal: 0, vertical: 10 });
-    input.push(Position{ horizontal: 2, vertical: 10 });
-    input.push(Position{ horizontal: 3, vertical: 10 });
-    input.push(Position{ horizontal: 4, vertical: 10 });
-    input.push(Position{ horizontal: 5, vertical: 10 });
-    input.push(Position{ horizontal: 6, vertical: 10 });
+    let mut user_inputs_file = File::open(args.inputs_path).expect("Error while opening user inputs file");
+    let mut file_contents = String::new();
+    user_inputs_file.read_to_string(&mut file_contents).expect("Error while loading user inputs file");
+    let user_input: Vec<Position> = serde_json::from_str(&file_contents).expect("Error while deserializing user inputs file");
 
-    // input.push(Position{ horizontal: 1, vertical: 0 });
-    // input.push(Position{ horizontal: 2, vertical: 0 });
-    // input.push(Position{ horizontal: 3, vertical: 0 });
-    // input.push(Position{ horizontal: 4, vertical: 0 });
-    // input.push(Position{ horizontal: 5, vertical: 0 });
-    // input.push(Position{ horizontal: 6, vertical: 0 });
     let env = ExecutorEnv::builder()
-        .write(&input)
+        .write(&user_input)
         .expect("Error while writing program input")
         .build()
         .expect("Error while building executor environment");
+
+    prtintln!("Starting proof generation. This will take a while...");
 
     // Obtain the default prover.
     let prover = default_prover();

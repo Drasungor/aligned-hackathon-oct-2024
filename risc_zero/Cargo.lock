@@ -2000,6 +2000,7 @@ dependencies = [
  "risc0-zkvm",
  "rpassword",
  "serde",
+ "serde_json",
  "shared",
  "tokio",
  "tracing-subscriber 0.3.18",
