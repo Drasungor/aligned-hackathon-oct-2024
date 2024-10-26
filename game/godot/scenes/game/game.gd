@@ -10,7 +10,7 @@ extends Node2D
 @onready var end_game_menu_canvas := $EndGameMenuCanvasLayer;
 @onready var end_game_menu_reset_button := $EndGameMenuCanvasLayer/CenterContainer/EndGameMenu/VBoxContainer/ResetGameButton;
 
-@onready var back_to_menu_button: Button = $CanvasLayer2/BackToMenuButton;
+@onready var back_to_menu_button: Button = $BackToMenuCanvasLayer/BackToMenuButton;
 
 var current_scene: Node = null;
 
