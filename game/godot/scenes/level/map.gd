@@ -26,7 +26,6 @@ func _ready() -> void:
 	#file_dialog.connect("file_selected", self, "_on_directory_selected")
 	file_dialog.connect("dir_selected", Callable(self, "_on_directory_selected"))
 	add_child(file_dialog)
-	GameContainer.serialize_blocked_tiles("")
 	
 	open_directory_selector()
 	
@@ -88,6 +87,7 @@ func _on_directory_selected(path: String) -> void:
 	var absolute_path: String = ProjectSettings.globalize_path(path)
 	print("Selected directory relative path: ", path)
 	print("Selected directory absolute path: ", absolute_path)
+	GameContainer.serialize_blocked_tiles(absolute_path)
 
 
 func _set_tile_blocked(tile_pos: Vector2i) -> void:
