@@ -74,4 +74,5 @@ func _on_end_game_menu_reset_pressed() -> void:
 
 
 func _on_level_game_ended(player_won: bool) -> void:
+	end_game_menu.get_node("EndGameMenu/VBoxContainer/SaveInputsButton").visible = player_won;
 	end_game_menu.visible = true;
