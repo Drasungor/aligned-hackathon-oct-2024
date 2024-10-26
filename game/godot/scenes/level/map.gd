@@ -68,7 +68,8 @@ func _input(event: InputEvent) -> void:
 			#if state_change_variant.get_type() == Variant.Type.TYPE_BOOL:
 			if typeof(state_change_variant) == Variant.Type.TYPE_BOOL:
 				print("game ended")
-				open_directory_selector()
+				if state_change_variant:
+					open_directory_selector()
 			#elif state_change_variant.get_type() == Variant.Type.TYPE_VECTOR2I:
 			elif typeof(state_change_variant) == Variant.Type.TYPE_VECTOR2I:
 				print("game updated")
