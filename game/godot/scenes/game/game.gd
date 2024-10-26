@@ -44,9 +44,15 @@ func show_level() -> void:
 		current_scene.queue_free();
 	GameContainer.reset();
 	current_scene = level_scene.instantiate();
-	add_child(current_scene);
+	#add_child(current_scene);
 	
-	current_scene.get_node("Map").game_ended.connect(self._on_level_game_ended);
+	var map := current_scene.get_node("Map");
+	var bug := current_scene.get_node("Bug");
+	map.game_ended.connect(self._on_level_game_ended);
+	map.bug_movement.connect(bug._on_bug_movement);
+	bug.stop_bug_movement.connect(map._on_stop_bug_movement);
+	
+	add_child(current_scene);
 
 
 func show_leaderboard() -> void:

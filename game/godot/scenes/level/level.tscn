@@ -19,6 +19,3 @@ zoom = Vector2(0.223, 0.223)
 
 [node name="Bug" parent="." instance=ExtResource("5_sht0e")]
 position = Vector2(1344, 436)
-
-[connection signal="bug_movement" from="Map" to="Bug" method="_on_bug_movement"]
-[connection signal="stop_bug_movement" from="Bug" to="Map" method="_on_stop_bug_movement"]
