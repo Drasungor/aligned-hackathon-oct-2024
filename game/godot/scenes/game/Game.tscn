@@ -44,8 +44,12 @@ text = "Back
 
 [node name="EndGameMenuCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="EndGameMenu" parent="EndGameMenuCanvasLayer" instance=ExtResource("5_3d00a")]
-offset_left = 569.0
-offset_top = 310.0
-offset_right = 569.0
-offset_bottom = 310.0
+[node name="CenterContainer" type="CenterContainer" parent="EndGameMenuCanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EndGameMenu" parent="EndGameMenuCanvasLayer/CenterContainer" instance=ExtResource("5_3d00a")]
+layout_mode = 2
