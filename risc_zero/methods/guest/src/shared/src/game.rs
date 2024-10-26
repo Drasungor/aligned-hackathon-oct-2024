@@ -51,7 +51,7 @@ impl Game {
     // }
 
     pub fn change_state(&mut self, blocked_tile: Position) -> Result<MovementResult, GameError> {
-        if (self.bug.is_at_position(&blocked_tile)) {
+        if self.bug.is_at_position(&blocked_tile) {
             return Err(GameError::BlockedBugTile)
         }
         self.map.borrow_mut().block_tile(&blocked_tile)?;
