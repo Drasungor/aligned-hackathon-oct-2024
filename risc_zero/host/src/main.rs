@@ -53,12 +53,8 @@ struct Args {
 
 #[tokio::main]
 async fn main() {
-
     let args = Args::parse();
-
-    // let contract_address: H160 = H160::from_str("0x87C8e0d29d7C64A334efFaF0933357C01eDAea25").expect("Error in verifier address conversion to H160");
-    // let contract_address: H160 = H160::from_str("0x8a2f24186c4df435c2f332Dff3fCaD0113826974").expect("Error in verifier address conversion to H160");
-    // let contract_address: H160 = H160::from_str("0xe7220a7C016935F410F6Cda260125b87fc7cD908").expect("Error in verifier address conversion to H160");
+    // let contract_address: H160 = H160::from_str("0x15758C745B349E581fa8f167819ff16eCaF60fcA").expect("Error in verifier address conversion to H160");
     let contract_address: H160 = H160::from_str("0x15758C745B349E581fa8f167819ff16eCaF60fcA").expect("Error in verifier address conversion to H160");
     
     let keystore_password = rpassword::prompt_password("Enter keystore password: ")
@@ -126,7 +122,6 @@ async fn main() {
     // extract the receipt.
     let receipt = prove_info.receipt;
 
-    // For example:
     let _output: u32 = receipt.journal.decode().expect("Error while decoding program execution output");
 
     println!("Proof succesfully generated, verifier program input: {}", _output);
