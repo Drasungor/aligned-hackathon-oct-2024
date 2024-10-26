@@ -7,6 +7,10 @@ use shared::{
 use serde_json::to_writer;
 use crate::ethereum;
 
+// This is the file where we define the GameContainer class, which is a wrapper of our game class
+// and exposes it's methods for Godot usage, it calls Game's methods and translates it's outputs to
+// data types understandable by godot
+
 #[derive(GodotClass)]
 #[class(base=Object)]
 pub struct GameContainer {
@@ -64,29 +68,24 @@ impl GameContainer {
     }
 
     #[func]
-    // pub fn change_state(&mut self, blocked_tile: Vector2i) -> Vector2i {
     pub fn change_state(&mut self, blocked_tile: Vector2i) -> Variant {
         let blocked_tile_position = Position {
             horizontal: blocked_tile.x as usize,
             vertical: blocked_tile.y as usize,
         };
         self.blocked_tiles.push(blocked_tile_position.clone());
-        match self.game.change_state(blocked_tile_position) {
-            // MovementResult::GameEnded(ended) => panic!("Game ended: {}", ended),
+        let change_state_result = self.game.change_state(blocked_tile_position).expect("Error while changing game state");
+        match change_state_result {
             MovementResult::GameEnded(ended) => Variant::from(ended),
             MovementResult::NewPosition(Position { horizontal, vertical }) 
-                // => Vector2i::new(horizontal as i32, vertical as i32),
                 => Variant::from(Vector2i::new(horizontal as i32, vertical as i32)),
         }
     }
 
     #[func]
     pub fn get_leaderboad(&self) -> Array<Dictionary> {
-    // pub fn get_leaderboad() -> Array<Dictionary> {
         let records = ethereum::get_record_holders();
-
         let mut leaderboard = Array::new();
-
         for record in records {
             let mut dict = Dictionary::new();
             dict.set("steps_amount", record.stepsAmount);
@@ -94,7 +93,6 @@ impl GameContainer {
             dict.set("updates_counter", record.updatesCounter);
             leaderboard.push(dict);
         } 
-
         leaderboard
     }
 }
