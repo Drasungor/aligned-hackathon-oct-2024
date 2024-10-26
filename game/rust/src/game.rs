@@ -1,9 +1,10 @@
 use godot::prelude::*;
-use std::{collections::HashMap, env};
+use std::{collections::HashMap, env, fs::File, path::Path};
 use shared::{
     game::{Game, MovementResult},
     position::Position,
 };
+use serde_json::to_writer;
 use crate::ethereum;
 
 #[derive(GodotClass)]
@@ -20,7 +21,7 @@ impl IObject for GameContainer {
         Self {
             game: Game::new(),
             base,
-            blocked_tiles: Vec::new(),
+            blocked_tiles: Vec::new(), 
         }
     }
 }
@@ -30,14 +31,17 @@ impl GameContainer {
     #[func]
     fn reset(&mut self) {
         self.game = Game::new();
+        self.blocked_tiles = Vec::new();
     }
 
     #[func]
     fn serialize_blocked_tiles(&self, storage_path: GString) {
-        // self.blocked_tiles
-        // let path = env::current_dir().expect("Get current directory failed");
-        // godot_print!("The current directory is {}", path.display());
-        godot_print!("The directory received by rust is {}", storage_path);
+        let directory_path = storage_path.to_string();
+        let chosen_directory_path = Path::new(&directory_path);
+        let os_string = chosen_directory_path.join("player_inputs.json").as_os_str().to_os_string();
+        let file_path_string = os_string.to_str().expect("Error while building inputs file path");
+        let file = File::create(file_path_string).expect("Error in player inputs file creation");
+        to_writer(file, &self.blocked_tiles).expect("Error while writing player inputs file");
     }
 
     #[func]
