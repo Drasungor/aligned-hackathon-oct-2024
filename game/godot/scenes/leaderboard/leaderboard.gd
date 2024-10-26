@@ -13,11 +13,10 @@ func _ready() -> void:
 func add_item(
 	rank: String,
 	wallet: String,
-	steps: String,
-	updates: String
+	steps: String
 ) -> void:
 	var leaderboard_item: LeaderboardItem = leaderboard_item_scene.instantiate()
-	leaderboard_item.set_data(rank, wallet, steps, updates);
+	leaderboard_item.set_data(rank, wallet, steps);
 	leaderboard_list.add_child(leaderboard_item);
 
 
@@ -27,8 +26,7 @@ func add_data() -> void:
 		add_item(
 			"#%d" % (i + 1),
 			records[i]["record_holder"],
-			str(records[i]["steps_amount"]),
-			str(records[i]["updates_counter"])
+			str(records[i]["steps_amount"])
 		)
 
 

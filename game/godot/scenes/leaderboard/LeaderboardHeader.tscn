@@ -83,26 +83,3 @@ theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 25
 bbcode_enabled = true
 text = "[center][b]Steps[/b][/center]"
-
-[node name="UpdatesSection" type="TextureRect" parent="."]
-modulate = Color(1, 0.996078, 0.788235, 1)
-self_modulate = Color(1, 1, 1, 0)
-texture_filter = 2
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_m3u8p")
-
-[node name="UpdatesText" type="RichTextLabel" parent="UpdatesSection"]
-modulate = Color(0.156863, 0.482353, 0.568627, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 25
-theme_override_font_sizes/bold_font_size = 25
-bbcode_enabled = true
-text = "[center][b]Updates[/b][/center]"
