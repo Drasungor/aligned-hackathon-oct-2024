@@ -5,7 +5,7 @@ extends Node2D
 @onready var leaderboard_scene := preload("res://scenes/leaderboard/Leaderboard.tscn");
 
 var current_scene: Node = null;
-@onready var back_to_menu_button: Button = $BackToMenuButton;
+@onready var back_to_menu_button: Button = $CanvasLayer2/BackToMenuButton;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

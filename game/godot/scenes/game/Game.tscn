@@ -21,13 +21,15 @@ script = ExtResource("4_kqcpn")
 position = Vector2(2872, 1616)
 zoom = Vector2(0.223, 0.223)
 
-[node name="BackToMenuButton" type="Button" parent="."]
-offset_left = 5172.0
-offset_top = 325.0
-offset_right = 5513.0
-offset_bottom = 475.0
-theme_override_font_sizes/font_size = 80
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="BackToMenuButton" type="Button" parent="CanvasLayer2"]
+offset_left = 1146.0
+offset_top = 61.0
+offset_right = 1238.0
+offset_bottom = 111.0
+theme_override_font_sizes/font_size = 30
 text = "Back
 "
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
