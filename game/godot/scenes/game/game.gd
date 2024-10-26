@@ -22,6 +22,8 @@ func _ready() -> void:
 
 func show_menu() -> void:
 	end_game_menu.visible = false;
+	back_to_menu_button.visible = false;
+	
 	if current_scene:
 		current_scene.queue_free();
 	current_scene = menu_scene.instantiate();
@@ -36,6 +38,8 @@ func show_menu() -> void:
 
 func show_level() -> void:
 	end_game_menu.visible = false;
+	back_to_menu_button.visible = true;
+	
 	if current_scene:
 		current_scene.queue_free();
 	GameContainer.reset();
@@ -47,6 +51,8 @@ func show_level() -> void:
 
 func show_leaderboard() -> void:
 	end_game_menu.visible = false;
+	back_to_menu_button.visible = true;
+	
 	if current_scene:
 		current_scene.queue_free();
 	current_scene = leaderboard_scene.instantiate();
