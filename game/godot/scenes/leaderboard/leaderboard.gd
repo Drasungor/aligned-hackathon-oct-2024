@@ -35,20 +35,34 @@ func add_data() -> void:
 
 func get_data() -> Array:
 	var records: Array = GameContainer.get_leaderboad();
-	
+	print(records)
 	var callable: Callable = Callable(self, "compare_records")
 	records.sort_custom(callable);
+	print(records)
 	return records;
 
 
-func compare_records(a: Dictionary, b: Dictionary) -> int:
+func compare_records(a: Dictionary, b: Dictionary) -> bool:
 	if a["steps_amount"] > b["steps_amount"]:
-		return -1
+		return false
 	elif a["steps_amount"] < b["steps_amount"]:
-		return 1
+		return true
 	else:
 		if a["updates_counter"] > b["updates_counter"]:
-			return -1
+			return false
 		elif a["updates_counter"] < b["updates_counter"]:
-			return 1
-	return 0
+			return true
+	return true
+
+
+#func compare_records(a: Dictionary, b: Dictionary) -> int:
+	#if a["steps_amount"] > b["steps_amount"]:
+		#return -1
+	#elif a["steps_amount"] < b["steps_amount"]:
+		#return 1
+	#else:
+		#if a["updates_counter"] > b["updates_counter"]:
+			#return -1
+		#elif a["updates_counter"] < b["updates_counter"]:
+			#return 1
+	#return 0
