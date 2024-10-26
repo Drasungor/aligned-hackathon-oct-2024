@@ -27,7 +27,7 @@ func _ready() -> void:
 	file_dialog.connect("dir_selected", Callable(self, "_on_directory_selected"))
 	add_child(file_dialog)
 	
-	open_directory_selector()
+	#open_directory_selector()
 	
 	bug_movement.emit(
 		_tile_position_to_global(initial_bug_tile),
@@ -69,6 +69,8 @@ func _input(event: InputEvent) -> void:
 				_get_bug_direction(new_bug_tile)
 			) # TODO handle game ending as possible response
 			bug_tile = new_bug_tile
+			open_directory_selector()
+			
 
 func _set_tile_hover(tile_pos: Vector2i) -> void:
 	if get_cell_tile_data(tile_pos) != null and hover_tile_pos != tile_pos:
