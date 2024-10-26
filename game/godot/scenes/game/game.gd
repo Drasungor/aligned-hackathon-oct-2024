@@ -4,27 +4,29 @@ extends Node2D
 @onready var level_scene := preload("res://scenes/level/level.tscn");
 @onready var leaderboard_scene := preload("res://scenes/leaderboard/Leaderboard.tscn");
 
-@onready var end_game_menu := $EndGameMenuCanvasLayer/EndGameMenu;
-@onready var end_game_menu_reset_button := $EndGameMenuCanvasLayer/EndGameMenu/VBoxContainer/ResetGameButton;
+@onready var scenes_canva_layer := $ScenesCanvaLayer/CenterContainer;
 
-@onready var back_to_menu_button: Button = $CanvasLayer2/BackToMenuButton;
+@onready var end_game_menu := $EndGameMenuCanvasLayer/CenterContainer/EndGameMenu;
+@onready var end_game_menu_canvas := $EndGameMenuCanvasLayer;
+@onready var end_game_menu_reset_button := $EndGameMenuCanvasLayer/CenterContainer/EndGameMenu/VBoxContainer/ResetGameButton;
+
+@onready var back_to_menu_button := $BackToMenuCanvasLayer/BackToMenuButton;
 
 var current_scene: Node = null;
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	end_game_menu.visible = false;
+	end_game_menu_canvas.visible = false;
 	show_menu();
 	back_to_menu_button.pressed.connect(self._on_back_to_menu_pressed);
 	end_game_menu_reset_button.pressed.connect(self._on_end_game_menu_reset_pressed);
 
 
 func show_menu() -> void:
-	end_game_menu.visible = false;
+	end_game_menu_canvas.visible = false;
 	if current_scene:
 		current_scene.queue_free();
 	current_scene = menu_scene.instantiate();
-	add_child(current_scene);
+	scenes_canva_layer.add_child(current_scene);
 	
 	var start_button: Button = current_scene.get_node("Buttons/StartButton");
 	start_button.pressed.connect(self._on_start_pressed);
@@ -34,7 +36,7 @@ func show_menu() -> void:
 
 
 func show_level() -> void:
-	end_game_menu.visible = false;
+	end_game_menu_canvas.visible = false;
 	if current_scene:
 		current_scene.queue_free();
 	GameContainer.reset();
@@ -45,11 +47,11 @@ func show_level() -> void:
 
 
 func show_leaderboard() -> void:
-	end_game_menu.visible = false;
+	end_game_menu_canvas.visible = false;
 	if current_scene:
 		current_scene.queue_free();
 	current_scene = leaderboard_scene.instantiate();
-	$CanvasLayer.add_child(current_scene);
+	scenes_canva_layer.add_child(current_scene);
 
 
 func reset_game() -> void:
@@ -74,6 +76,5 @@ func _on_end_game_menu_reset_pressed() -> void:
 
 
 func _on_level_game_ended(player_won: bool) -> void:
-	#end_game_menu.get_node("EndGameMenu/VBoxContainer/SaveInputsButton").visible = player_won;
 	end_game_menu.display_game_result(player_won);
-	end_game_menu.visible = true;
+	end_game_menu_canvas.visible = true;
