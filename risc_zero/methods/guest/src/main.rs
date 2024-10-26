@@ -18,8 +18,8 @@ fn main() {
     let mut bug_was_encased: Option<bool> = None; // True if was encased, false if he escaped
 
     for blocked_tile in &input {
-        // assert!(bug_was_encased.is_none(), "More movements than necessary to resolve the game were provided");
-        // assert!(!bug.is_at_position(blocked_tile), "Cannot block the bug's tile");
+        assert!(bug_was_encased.is_none(), "More movements than necessary to resolve the game were provided");
+        assert!(!bug.is_at_position(blocked_tile), "Cannot block the bug's tile");
         map.borrow_mut().block_tile(blocked_tile);
         if bug.is_encased() {
             bug_was_encased = Some(true)
@@ -29,11 +29,11 @@ fn main() {
             bug.move_tile();
         }
     }
-    // if let Some(game_result) = bug_was_encased {
-    //     assert!(game_result, "The bug was not encased after completing all movements");
-    // } else {
-    //     panic!("The game did not come to a resolution after all movements were applied");
-    // }
+    if let Some(game_result) = bug_was_encased {
+        assert!(game_result, "The bug was not encased after completing all movements");
+    } else {
+        panic!("The game did not come to a resolution after all movements were applied");
+    }
 
     let steps_amount: u32 = input.len().try_into().expect("Error in conversion for steps array length from usize to u32");
 

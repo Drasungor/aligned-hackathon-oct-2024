@@ -1,6 +1,7 @@
 use std::cell::{Ref, RefCell};
 use std::rc::Rc;
 
+use crate::game::GameError;
 use crate::position::Position;
 
 pub struct Map {
@@ -38,11 +39,18 @@ impl Map {
         Map { line_length, lines: Rc::new(RefCell::new(lines)) }
     }
 
-    pub fn block_tile(&mut self, position: &Position) {
+    pub fn block_tile(&mut self, position: &Position)  -> Result<(), GameError>{
         let mut lines_ref = self.lines.borrow_mut();
-        assert!((position.horizontal < self.line_length) && (position.vertical < lines_ref.len()), "Out of bounds position");
-        assert!((!lines_ref[position.vertical][position.horizontal]), "Position already blocked");
+        // assert!((position.horizontal < self.line_length) && (position.vertical < lines_ref.len()), "Out of bounds position");
+        // assert!((!lines_ref[position.vertical][position.horizontal]), "Position already blocked");
+        if !((position.horizontal < self.line_length) && (position.vertical < lines_ref.len())) {
+            return Err(GameError::PositionOutOfBounds);
+        }
+        if !((!lines_ref[position.vertical][position.horizontal])) {
+            return Err(GameError::TileAlreadyBlocked);
+        }
         lines_ref[position.vertical][position.horizontal] = true;
+        Ok(())
     }
 
     pub fn get_current_map_state(&self) -> Ref<'_, Vec<Vec<bool>>> {

@@ -71,7 +71,9 @@ impl GameContainer {
             vertical: blocked_tile.y as usize,
         };
         self.blocked_tiles.push(blocked_tile_position.clone());
-        match self.game.change_state(blocked_tile_position) {
+        let change_state_result = self.game.change_state(blocked_tile_position).expect("Error while changing game state");
+        // match self.game.change_state(blocked_tile_position) {
+        match change_state_result {
             // MovementResult::GameEnded(ended) => panic!("Game ended: {}", ended),
             MovementResult::GameEnded(ended) => Variant::from(ended),
             MovementResult::NewPosition(Position { horizontal, vertical }) 
