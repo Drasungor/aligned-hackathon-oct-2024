@@ -31,19 +31,6 @@ theme_override_font_sizes/font_size = 80
 text = "Back
 "
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 5754.0
-offset_bottom = 3188.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CenterContainer" type="CenterContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Leaderboard" parent="Control/CenterContainer" instance=ExtResource("5_5wjyv")]
-layout_mode = 2
+[node name="Leaderboard" parent="CanvasLayer" instance=ExtResource("5_5wjyv")]
