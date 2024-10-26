@@ -31,7 +31,7 @@ impl Game {
         self.bug.get_position()
     }
 
-    pub fn change_state(&mut self, blocked_tile: Position) -> MovementResult { // TODO marcos: define custome errors
+    pub fn change_state(&mut self, blocked_tile: Position) -> MovementResult {
         assert!(!self.bug.is_at_position(&blocked_tile), "Cannot block the bug's tile");
         self.map.borrow_mut().block_tile(&blocked_tile);
         if self.bug.is_encased() {

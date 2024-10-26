@@ -38,6 +38,5 @@ fn main() {
     let steps_amount: u32 = input.len().try_into().expect("Error in conversion for steps array length from usize to u32");
 
     // write public output to the journal
-    // env::commit(&steps_amount.to_be_bytes());
     env::commit(&steps_amount);
 }
