@@ -147,7 +147,27 @@ aligned. After choosing our answer, the proof generationg will start.
 
 This will take a while, and the amount of time it takes will depend on the amount of steps you took to 
 trap the bug and your hardware capabilities, but in general you should expect this to take around 20 
-minutes.
+minutes. After the proof generation finishes we can see the proof's public input (which is the amount of 
+steps the player took to win the game), and the user will be asked for confirmation for verification in 
+aligned
+
+![Upload to aligned](/imgs/upload_to_aligned_prompt.png)
+
+Once aligned reports a successful proof verification, our program will call the verification smart contract, 
+which queries the aligned contract for inclusion verification, alongside some verifications for validation of 
+commited public inputs and image id. If this is successful, the contract proceeds to check if the received 
+steps amount deserves to replace a current record, and finishes the transaction's execution.
+
+![Upload to aligned](/imgs/aligned_verification.png)
+
+After the smart contract finishes it's execution, if we have uploaded a record, worthy score, we can 
+check it out in the leaderboard, which queries the public variables of our smart contract. Note that 
+the record list has a limit of 10 members, so the first 10 people to upload a score will get theirs 
+stored. Also, the order in which the record was uploaded is taken into account, so if two players 
+have the same score, the one who got it first will have a better position in the record holders storage. 
+Here we can see how the leaderboard looks like after our uploaded result:
+
+
 
 ## Team members
 
