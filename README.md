@@ -195,3 +195,12 @@ for users to prove the completion in n steps of a level designed by another play
 - Allowing more players in the record holders lists.
 - Addition of map shapes: more shapes other than a rectangle could be added, maybe even maps with free style.
 - Addition of tile types: different types of map tiles with different abilities could be added.
+- Possible improvements in bug movement logic: right now the bug uses dijkstra each turn to look for the 
+current best path, which pumps up the proof generation time, we could try some modifications to check if 
+we can get a shorter proof generation while not heavily affecting the logic of the bug's movement.
+
+## Development issues
+
+- The project started with 3 members, which distributed the tasks of assets creation, game engine logic and 
+proof generation and verification logic. Due to Lack of time, one of the members left the team, which made 
+the rest of us reorganize our tasks and take responsibilities outside of our expertise.
