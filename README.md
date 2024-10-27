@@ -30,6 +30,14 @@ will update the list of record holders if necessary. The least amount of tiles u
 
 The following sections explain how to install the programs necessary to run the game in linux.
 
+### Docker
+
+Since built images for programs depend on the underlying architecture of the computed that generates them,
+the same proof will get different program ids for the same program. Because of this, a deterministic build 
+must be made, and docker helps us by providing an architecture that will be the same in every machine that 
+runs it. If you do not have docker installed, you can follow the instructions in [this link](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04). Make sure that 
+you have not installed docker using snap, since the determininstic build will fail if you do so.
+
 ### Risc0
 
 This program uses [Risc0](https://risczero.com/) for proof generation, to install it you must execute the 
@@ -49,19 +57,19 @@ you can load the project, compile it and run it yourself. To do this, you must d
 [Godot game engine](https://godotengine.org/download/linux/)
 
 
-![image](/imgs/godot_page.png)
+![Godot's page](/imgs/godot_page.png)
 
 
 This will download a zip file
 
 
-![image](/imgs/downloaded_godot.png)
+![Downloaded godot file](/imgs/downloaded_godot.png)
 
 
 Which will look like this when extracted
 
 
-![image](/imgs/extracted_godot.png)
+![Extracted godot zip](/imgs/extracted_godot.png)
 
 
 To start running godot, you can double click the file or run `./Godot_v4.3-stable_linux.x86_64` in the 
@@ -90,23 +98,56 @@ these steps:
 - Run the Godot program executed downloaded previously and import the file at 
 `aligned-hackathon-oct-2024/game/godot/project.godot`
 
-![image](/imgs/run_godot.png)
+![Running godot exec](/imgs/run_godot.png)
 
-![image](/imgs/import_project.png)
+![Importing godot project](/imgs/import_project.png)
 
-![image](/imgs/choose_godot_project.png)
+![Choosing the game's godot project](/imgs/choose_godot_project.png)
 
-![image](/imgs/import_and_edit.png)
+![Opening the imported project](/imgs/import_and_edit.png)
 
 - Click run
 
-![image](/imgs/run_the_game.png)
+![Starting the game's execution](/imgs/run_the_game.png)
 
 ## Program usage
 
+After running the game, press the start button. This will take you to the following screen
 
+![Game start](/imgs/game_start.png)
 
+Our objective is to completely trap the bug, preventing him from moving to another tile. If he reaches 
+the limits of the map, the player loses. The player plays this game so that he can get his best result 
+into the game's leaderboard, which is stored in a smart contract in ethereum. Since it does not make 
+sense to upload a failure, we do not provide that option. Here we can see an example of a player victory
 
+![Game start](/imgs/game_won.png)
+
+When the player wins, he is gets the option to serialize in a file the list of tiles he chose to block, in 
+the order that he blocked them. In the image provided, we can see the button hightlighted. When pressed, the 
+user will choose a path where to store the serialized inputs, with the following pop up getting revealed
+
+![Game start](/imgs/inputs_serialization_path.png)
+
+After choosing a folder, the program will write into it the file `player_input.json`, which contains the 
+mentioned serialization of player inpus.
+
+Until this point, we have not interacted with ethereum, aligned, or any proof generation program. However, 
+now that we have the inputs serialization, we can start the process of proof and verification. We should 
+open a console in the path `aligned-hackathon-oct-2024/risc_zero` and run the command 
+
+```
+cargo run -- --keystore-path <PATH_TO_WALLET_FOUNDRY_KEYSTORE> --inputs-path <PATH_TO_USER_INPUTS_FILE>
+```
+
+Then, the user will be prompted for his keystore file password and asked if he wants to add some ethers in 
+aligned. After choosing our answer, the proof generationg will start.
+
+![Proof generation start](/imgs/proof_generation_start.png)
+
+This will take a while, and the amount of time it takes will depend on the amount of steps you took to 
+trap the bug and your hardware capabilities, but in general you should expect this to take around 20 
+minutes.
 
 ## Team members
 
