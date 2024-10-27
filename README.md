@@ -28,6 +28,8 @@ will update the list of record holders if necessary. The least amount of tiles u
 
 ## Installation
 
+### Risc0
+
 This program uses [Risc0](https://risczero.com/) for proof generation, to install it you must execute the 
 following commands:
 
@@ -38,11 +40,34 @@ curl -L https://risczero.com/install | bash
 rzup install cargo-risczero v1.0.1
 ```
 
+### Godot
+
+We provide in our releases an executable file to easily run the game on linux. However, if you do not trust us,
+you can load the project, compile it and run it yourself. To do this, you must download the 
+[Godot game engine](https://godotengine.org/download/linux/)
+
+## Execution
+
+### Executable
+
+If you decide to use the executable provided in the release files, then it should suffice with the command
+
+```
+./CatchTheBug!.x86_64
 ```
 
-COMPLETAR SECCION CON INSTALACION DE GODOT
+in the directory that has both the `CatchTheBug!.x86_64` and `librust_project.so` files. If the execution is
+forbidden, running the command `chmod +x ./CatchTheBug!.x86_64` might help.
 
-```
+### Godot project
+
+If you want to make sure you are running the code contained in the repository then you must follow 
+these steps:
+
+- Go to `aligned-hackathon-oct-2024/game/rust` and run `cargo build`
+- Run the Godot program executed downloaded previously and import the file at 
+`aligned-hackathon-oct-2024/game/godot/project.godot`
+- Click run
 
 ## Team members
 

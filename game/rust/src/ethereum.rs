@@ -23,7 +23,7 @@ pub fn get_record_holders() -> Vec::<RecordHolder> {
     // Block on the async call inside the runtime
     rt.block_on(async {
         let provider_arc = Arc::new(provider);
-        let contract_address: Address = "0x15758C745B349E581fa8f167819ff16eCaF60fcA".parse().expect("Error in address parsing");
+        let contract_address: Address = "0x3Ec1C9ab885b1a145AC21BD60a5AC63212B83243".parse().expect("Error in address parsing");
         let contract = BugVerificationContract::new(contract_address, provider_arc);
         let record_holders_amount: u32 = contract.get_record_holders_length().call().await.expect("Error getting array length").as_u32();
         let mut record_holders = Vec::<RecordHolder>::new();
