@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dycq7emivwhfa"]
+
+[ext_resource type="Texture2D" uid="uid://cg1tttgxms6pn" path="res://assets/ui/ui_scaled.png" id="1_51jwp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcxek"]
+atlas = ExtResource("1_51jwp")
+region = Rect2(567, 23, 65, 65)
+
+[node name="Control" type="TextureButton"]
+texture_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_xcxek")
+texture_pressed = SubResource("AtlasTexture_xcxek")
+texture_hover = SubResource("AtlasTexture_xcxek")

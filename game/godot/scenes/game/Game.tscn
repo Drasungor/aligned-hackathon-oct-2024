@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dn3tnbx4i8x3s"]
+[gd_scene load_steps=7 format=3 uid="uid://dn3tnbx4i8x3s"]
 
 [ext_resource type="PackedScene" uid="uid://gl5rskkpddsy" path="res://scenes/level/background.tscn" id="1_q3uud"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_sesb0"]
 [ext_resource type="AudioStream" uid="uid://efyammfc2sfm" path="res://sound/music/Elysium Lost [8 Bit Universe Original Music for Sleep and Study] - 8 Bit Universe.ogg" id="3_pl02j"]
 [ext_resource type="Script" path="res://scenes/level/audio_stream_player.gd" id="4_kqcpn"]
 [ext_resource type="PackedScene" uid="uid://celhjys6jl6y5" path="res://scenes/end_game_menu/EndGameMenu.tscn" id="5_3d00a"]
+[ext_resource type="PackedScene" uid="uid://dycq7emivwhfa" path="res://scenes/ui/back_button.tscn" id="6_hp31x"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_sesb0")
@@ -34,9 +35,13 @@ grow_vertical = 2
 [node name="EndGameMenu" parent="UICanvaLayer/CenterContainer" instance=ExtResource("5_3d00a")]
 layout_mode = 2
 
-[node name="BackToMenuButton" type="Button" parent="UICanvaLayer"]
-offset_left = 1152.0
-offset_top = 69.0
-offset_right = 1232.0
-offset_bottom = 106.0
-text = "Back"
+[node name="BackToMenuButton" parent="UICanvaLayer" instance=ExtResource("6_hp31x")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -122.0
+offset_top = 57.0
+offset_right = -57.0
+offset_bottom = 122.0
+grow_horizontal = 0
+grow_vertical = 1
