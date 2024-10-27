@@ -85,6 +85,7 @@ bbcode_enabled = true
 text = "[center][b]Steps[/b][/center]"
 
 [node name="UpdatesSection" type="TextureRect" parent="."]
+visible = false
 modulate = Color(1, 0.996078, 0.788235, 1)
 self_modulate = Color(1, 1, 1, 0)
 texture_filter = 2

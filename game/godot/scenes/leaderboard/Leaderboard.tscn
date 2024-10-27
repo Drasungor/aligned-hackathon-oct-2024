@@ -41,17 +41,32 @@ theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[center]LEADERBOARD[/center]"
 
-[node name="LeaderboardHeader" parent="VBoxContainer" instance=ExtResource("2_nnvac")]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="LeaderboardHeader" parent="VBoxContainer/MarginContainer" instance=ExtResource("2_nnvac")]
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 theme = SubResource("Theme_i5v4k")
 horizontal_scroll_mode = 0
 scroll_deadzone = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12

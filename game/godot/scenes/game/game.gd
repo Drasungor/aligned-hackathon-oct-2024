@@ -7,7 +7,7 @@ extends Node2D
 @onready var scenes_canva_layer := $UICanvaLayer/CenterContainer;
 
 @onready var end_game_menu := $UICanvaLayer/CenterContainer/EndGameMenu;
-@onready var end_game_menu_reset_button := $UICanvaLayer/CenterContainer/EndGameMenu/VBoxContainer/ResetGameButton;
+@onready var end_game_menu_reset_button := $UICanvaLayer/CenterContainer/EndGameMenu/Modal/VBoxContainer/ResetGameButton;
 
 @onready var back_to_menu_button := $UICanvaLayer/BackToMenuButton;
 
@@ -29,13 +29,13 @@ func show_menu() -> void:
 	current_scene = menu_scene.instantiate();
 	scenes_canva_layer.add_child(current_scene);
 	
-	var start_button: Button = current_scene.get_node("Buttons/StartButton");
+	var start_button := current_scene.get_node("HBoxContainer/VBoxContainer/Buttons/StartButton");
 	start_button.pressed.connect(self._on_start_pressed);
 	
-	var leaderboard_button: Button = current_scene.get_node("Buttons/LeaderboardButton");
+	var leaderboard_button := current_scene.get_node("HBoxContainer/VBoxContainer/Buttons/LeaderboardButton");
 	leaderboard_button.pressed.connect(self._on_leaderboard_pressed);
 	
-	var quit_button : Button = current_scene.get_node("Buttons/QuitButton");
+	var quit_button := current_scene.get_node("HBoxContainer/VBoxContainer/Buttons/QuitButton");
 	quit_button.pressed.connect(self._on_quit_pressed);
 
 
