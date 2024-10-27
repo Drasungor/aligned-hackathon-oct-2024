@@ -141,7 +141,8 @@ cargo run -- --keystore-path <PATH_TO_WALLET_FOUNDRY_KEYSTORE> --inputs-path <PA
 ```
 
 Then, the user will be prompted for his keystore file password and asked if he wants to add some ethers in 
-aligned. After choosing our answer, the proof generationg will start.
+aligned (as a requirement of the hackathon, we are using the Holesky network). After choosing our answer, 
+the proof generationg will start.
 
 ![Proof generation start](/imgs/proof_generation_start.png)
 
