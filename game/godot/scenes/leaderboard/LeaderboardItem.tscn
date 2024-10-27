@@ -89,6 +89,7 @@ bbcode_enabled = true
 text = "9999"
 
 [node name="UpdatesSection" type="TextureRect" parent="."]
+visible = false
 modulate = Color(1, 0.996078, 0.788235, 1)
 texture_filter = 2
 layout_mode = 2
