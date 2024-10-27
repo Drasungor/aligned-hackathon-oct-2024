@@ -28,6 +28,8 @@ will update the list of record holders if necessary. The least amount of tiles u
 
 ## Installation
 
+The following sections explain how to install the programs necessary to run the game in linux.
+
 ### Risc0
 
 This program uses [Risc0](https://risczero.com/) for proof generation, to install it you must execute the 
@@ -45,6 +47,26 @@ rzup install cargo-risczero v1.0.1
 We provide in our releases an executable file to easily run the game on linux. However, if you do not trust us,
 you can load the project, compile it and run it yourself. To do this, you must download the 
 [Godot game engine](https://godotengine.org/download/linux/)
+
+
+![image](/imgs/godot_page.png)
+
+
+This will download a zip file
+
+
+![image](/imgs/downloaded_godot.png)
+
+
+Which will look like this when extracted
+
+
+![image](/imgs/extracted_godot.png)
+
+
+To start running godot, you can double click the file or run `./Godot_v4.3-stable_linux.x86_64` in the 
+directory where the file is stored (take into account that depending on when you are following these
+instructions, the program's version might have changed, and therefore also the file's name).
 
 ## Execution
 
@@ -79,6 +101,11 @@ these steps:
 - Click run
 
 ![image](/imgs/run_the_game.png)
+
+## Program usage
+
+
+
 
 
 ## Team members
