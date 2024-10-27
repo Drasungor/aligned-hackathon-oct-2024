@@ -53,11 +53,11 @@ you can load the project, compile it and run it yourself. To do this, you must d
 If you decide to use the executable provided in the release files, then it should suffice with the command
 
 ```
-./CatchTheBug!.x86_64
+./'CatchTheBug!.x86_64'
 ```
 
 in the directory that has both the `CatchTheBug!.x86_64` and `librust_project.so` files. If the execution is
-forbidden, running the command `chmod +x ./CatchTheBug!.x86_64` might help.
+forbidden, running the command `chmod +x ./'CatchTheBug!.x86_64'` might help.
 
 ### Godot project
 
@@ -67,7 +67,19 @@ these steps:
 - Go to `aligned-hackathon-oct-2024/game/rust` and run `cargo build`
 - Run the Godot program executed downloaded previously and import the file at 
 `aligned-hackathon-oct-2024/game/godot/project.godot`
+
+![image](/imgs/run_godot.png)
+
+![image](/imgs/import_project.png)
+
+![image](/imgs/choose_godot_project.png)
+
+![image](/imgs/import_and_edit.png)
+
 - Click run
+
+![image](/imgs/run_the_game.png)
+
 
 ## Team members
 
