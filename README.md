@@ -158,7 +158,7 @@ which queries the aligned contract for inclusion verification, alongside some ve
 commited public inputs and image id. If this is successful, the contract proceeds to check if the received 
 steps amount deserves to replace a current record, and finishes the transaction's execution.
 
-![Upload to aligned](/imgs/aligned_verification.png)
+![aligned success](/imgs/aligned_verification.png)
 
 After the smart contract finishes it's execution, if we have uploaded a record, worthy score, we can 
 check it out in the leaderboard, which queries the public variables of our smart contract. Note that 
@@ -167,6 +167,11 @@ stored. Also, the order in which the record was uploaded is taken into account, 
 have the same score, the one who got it first will have a better position in the record holders storage. 
 Here we can see how the leaderboard looks like after our uploaded result:
 
+![Leaderboard](/imgs/leaderboard.png)
+
+An example of a more populated leaderboard would look like this
+
+![Populated leaderboard](/imgs/populated_leaderboard.png)
 
 
 ## Team members
