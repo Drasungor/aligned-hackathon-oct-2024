@@ -28,6 +28,8 @@ will update the list of record holders if necessary. The least amount of tiles u
 
 ## Installation
 
+The following sections explain how to install the programs necessary to run the game in linux.
+
 ### Risc0
 
 This program uses [Risc0](https://risczero.com/) for proof generation, to install it you must execute the 
@@ -99,6 +101,11 @@ these steps:
 - Click run
 
 ![image](/imgs/run_the_game.png)
+
+## Program usage
+
+
+
 
 
 ## Team members
