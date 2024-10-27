@@ -1,18 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dycq7emivwhfa"]
+[gd_scene load_steps=4 format=3 uid="uid://dycq7emivwhfa"]
 
-[ext_resource type="Texture2D" uid="uid://cg1tttgxms6pn" path="res://assets/ui/ui_scaled.png" id="1_51jwp"]
+[ext_resource type="Texture2D" uid="uid://cju4oye81snwd" path="res://assets/ui/ui_scaled.png" id="1_51jwp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xcxek"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmmlk"]
 atlas = ExtResource("1_51jwp")
-region = Rect2(567, 23, 65, 65)
+region = Rect2(568, 24, 63, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1wft"]
+atlas = ExtResource("1_51jwp")
+region = Rect2(567, 87, 64, 64)
 
 [node name="Control" type="TextureButton"]
 texture_filter = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = SubResource("AtlasTexture_xcxek")
-texture_pressed = SubResource("AtlasTexture_xcxek")
-texture_hover = SubResource("AtlasTexture_xcxek")
+offset_right = 63.0
+offset_bottom = 63.0
+texture_normal = SubResource("AtlasTexture_tmmlk")
+texture_pressed = SubResource("AtlasTexture_tmmlk")
+texture_hover = SubResource("AtlasTexture_p1wft")

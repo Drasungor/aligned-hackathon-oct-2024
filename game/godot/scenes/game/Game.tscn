@@ -38,10 +38,9 @@ layout_mode = 2
 [node name="BackToMenuButton" parent="UICanvaLayer" instance=ExtResource("6_hp31x")]
 anchors_preset = 1
 anchor_left = 1.0
-anchor_bottom = 0.0
+anchor_right = 1.0
 offset_left = -122.0
 offset_top = 57.0
 offset_right = -57.0
 offset_bottom = 122.0
 grow_horizontal = 0
-grow_vertical = 1
