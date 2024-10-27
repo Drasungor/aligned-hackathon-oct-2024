@@ -1,8 +1,8 @@
 extends Control
 
-@onready var result_text := $VBoxContainer/ResultText
-@onready var reset_game_button := $VBoxContainer/ResetGameButton;
-@onready var save_inputs_button := $VBoxContainer/SaveInputsButton;
+@onready var result_text := $Modal/VBoxContainer/ResultText
+@onready var reset_game_button := $Modal/VBoxContainer/ResetGameButton;
+@onready var save_inputs_button := $Modal/VBoxContainer/SaveInputsButton;
 
 var file_dialog: FileDialog
 
@@ -12,6 +12,9 @@ func _ready() -> void:
 	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR  # Set to open directories only
 	file_dialog.connect("dir_selected", Callable(self, "_on_directory_selected"))
 	add_child(file_dialog)
+	
+	reset_game_button.set_text("Restart");
+	save_inputs_button.set_text("Save inputs")
 	
 	connect_buttons();
 

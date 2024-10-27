@@ -30,7 +30,7 @@ texture_hover = SubResource("AtlasTexture_6cja7")
 script = ExtResource("2_c5u0u")
 
 [node name="Text" type="RichTextLabel" parent="."]
-modulate = Color(0.236378, 0.512381, 0.490614, 1)
+modulate = Color(0.0703441, 0.400092, 0.380545, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

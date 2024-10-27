@@ -7,7 +7,7 @@ extends Node2D
 @onready var scenes_canva_layer := $UICanvaLayer/CenterContainer;
 
 @onready var end_game_menu := $UICanvaLayer/CenterContainer/EndGameMenu;
-@onready var end_game_menu_reset_button := $UICanvaLayer/CenterContainer/EndGameMenu/VBoxContainer/ResetGameButton;
+@onready var end_game_menu_reset_button := $UICanvaLayer/CenterContainer/EndGameMenu/Modal/VBoxContainer/ResetGameButton;
 
 @onready var back_to_menu_button := $UICanvaLayer/BackToMenuButton;
 
