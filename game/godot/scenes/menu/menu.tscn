@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://wrcbn2fgdind"]
+[gd_scene load_steps=5 format=3 uid="uid://wrcbn2fgdind"]
+
+[ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_r776q"]
+[ext_resource type="PackedScene" uid="uid://0gm063t0xtc7" path="res://scenes/ui/button.tscn" id="1_rl8wm"]
+[ext_resource type="PackedScene" uid="uid://jagk2kdrh1cc" path="res://scenes/menu/menu_bug.tscn" id="2_iwqh4"]
+[ext_resource type="Texture2D" uid="uid://gp5y2x4tyrl2" path="res://assets/ui/title_scaled_50.png" id="3_7f8js"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -7,32 +12,58 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_r776q")
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -252.0
-offset_top = -120.0
-offset_right = 252.0
-offset_bottom = 120.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 70
+alignment = 1
 
-[node name="StartButton" type="Button" parent="Buttons"]
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(400, 500)
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Start"
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="LeaderboardButton" type="Button" parent="Buttons"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Leaderboard"
+[node name="MenuBug" parent="HBoxContainer/Panel" instance=ExtResource("2_iwqh4")]
+position = Vector2(190, 230)
 
-[node name="QuitButton" type="Button" parent="Buttons"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Quit"
+alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(465, 375)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TitleScaled50" type="Sprite2D" parent="HBoxContainer/VBoxContainer/Control"]
+texture_filter = 2
+position = Vector2(240, 180)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_7f8js")
+
+[node name="Buttons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StartButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("1_rl8wm")]
+layout_mode = 2
+stretch_mode = 3
+
+[node name="LeaderboardButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("1_rl8wm")]
+layout_mode = 2
+stretch_mode = 3
+
+[node name="QuitButton" parent="HBoxContainer/VBoxContainer/Buttons" instance=ExtResource("1_rl8wm")]
+layout_mode = 2
+stretch_mode = 3

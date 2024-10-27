@@ -1,28 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://dikpcv0p8vpnr"]
+[gd_scene load_steps=6 format=3 uid="uid://dikpcv0p8vpnr"]
 
 [ext_resource type="Script" path="res://scenes/leaderboard/leaderboard_item.gd" id="1_q5t7d"]
-[ext_resource type="Texture2D" uid="uid://b77ilrimpkq4r" path="res://assets/leaderboard/item.png" id="1_y0h04"]
+[ext_resource type="Texture2D" uid="uid://bggheq86utjdr" path="res://assets/ui/ui.png" id="2_lcgxr"]
 [ext_resource type="Texture2D" uid="uid://vpwvcqd6tk8y" path="res://assets/leaderboard/steps_item.png" id="3_4qmfr"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng5h5"]
+atlas = ExtResource("2_lcgxr")
+region = Rect2(1, 834, 128, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wimts"]
+atlas = ExtResource("2_lcgxr")
+region = Rect2(1, 762, 738, 71)
+
 [node name="LeaderboardItem" type="HBoxContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -68.0
-offset_bottom = -660.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 1250.0
+offset_bottom = 71.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("1_q5t7d")
+metadata/_edit_group_ = true
 
 [node name="RankSection" type="TextureRect" parent="."]
 modulate = Color(1, 0.996078, 0.788235, 1)
 texture_filter = 2
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("3_4qmfr")
+texture = SubResource("AtlasTexture_ng5h5")
 
 [node name="RankText" type="RichTextLabel" parent="RankSection"]
 modulate = Color(0.156863, 0.482353, 0.568627, 1)
@@ -45,7 +49,7 @@ modulate = Color(1, 0.996078, 0.788235, 1)
 texture_filter = 2
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("1_y0h04")
+texture = SubResource("AtlasTexture_wimts")
 
 [node name="WalletText" type="RichTextLabel" parent="WalletSection"]
 modulate = Color(0.156863, 0.482353, 0.568627, 1)
@@ -66,7 +70,7 @@ modulate = Color(1, 0.996078, 0.788235, 1)
 texture_filter = 2
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("3_4qmfr")
+texture = SubResource("AtlasTexture_ng5h5")
 
 [node name="StepsText" type="RichTextLabel" parent="StepsSection"]
 modulate = Color(0.156863, 0.482353, 0.568627, 1)
@@ -74,15 +78,18 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 15.0
 offset_top = 10.0
+offset_right = -14.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
-text = "[center]9999[/center]"
+text = "9999"
 
 [node name="UpdatesSection" type="TextureRect" parent="."]
+visible = false
 modulate = Color(1, 0.996078, 0.788235, 1)
 texture_filter = 2
 layout_mode = 2

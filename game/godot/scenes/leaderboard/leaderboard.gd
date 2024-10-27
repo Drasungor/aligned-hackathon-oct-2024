@@ -4,7 +4,7 @@ class_name Leaderboard
 
 @onready var leaderboard_item_scene := preload("res://scenes/leaderboard/LeaderboardItem.tscn")
 
-@onready var leaderboard_list := $VBoxContainer/ScrollContainer/VBoxContainer
+@onready var leaderboard_list := $VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer
 
 func _ready() -> void:
 	add_data()
@@ -30,6 +30,7 @@ func add_data() -> void:
 			str(records[i]["steps_amount"]),
 			str(records[i]["updates_counter"])
 		)
+
 
 
 func get_data() -> Array:
