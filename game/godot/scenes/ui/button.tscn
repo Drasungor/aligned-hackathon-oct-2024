@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://0gm063t0xtc7"]
+
+[ext_resource type="Texture2D" uid="uid://cg1tttgxms6pn" path="res://assets/ui/ui_scaled.png" id="1_rgscg"]
+[ext_resource type="Script" path="res://scenes/ui/button.gd" id="2_c5u0u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brql4"]
+atlas = ExtResource("1_rgscg")
+region = Rect2(0, 7, 189, 79)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sa4h"]
+atlas = ExtResource("1_rgscg")
+region = Rect2(378, 7, 189, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cja7"]
+atlas = ExtResource("1_rgscg")
+region = Rect2(189, 7, 189, 79)
+
+[node name="Button" type="TextureButton"]
+texture_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1091.0
+offset_bottom = -641.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_brql4")
+texture_pressed = SubResource("AtlasTexture_3sa4h")
+texture_hover = SubResource("AtlasTexture_6cja7")
+script = ExtResource("2_c5u0u")
+
+[node name="Text" type="RichTextLabel" parent="."]
+modulate = Color(0.236378, 0.512381, 0.490614, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "[center][b]Text[/b][/center]"

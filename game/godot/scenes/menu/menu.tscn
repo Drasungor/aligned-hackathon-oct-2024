@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://wrcbn2fgdind"]
+[gd_scene load_steps=3 format=3 uid="uid://wrcbn2fgdind"]
+
+[ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_r776q"]
+[ext_resource type="PackedScene" uid="uid://0gm063t0xtc7" path="res://scenes/ui/button.tscn" id="1_rl8wm"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -7,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_r776q")
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -15,24 +19,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -252.0
-offset_top = -120.0
-offset_right = 252.0
-offset_bottom = 120.0
+offset_left = -188.5
+offset_top = -241.0
+offset_right = 188.5
+offset_bottom = 241.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[node name="StartButton" type="Button" parent="Buttons"]
+[node name="StartButton" parent="Buttons" instance=ExtResource("1_rl8wm")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Start"
+stretch_mode = 3
 
-[node name="LeaderboardButton" type="Button" parent="Buttons"]
+[node name="LeaderboardButton" parent="Buttons" instance=ExtResource("1_rl8wm")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Leaderboard"
+stretch_mode = 3
 
-[node name="QuitButton" type="Button" parent="Buttons"]
+[node name="QuitButton" parent="Buttons" instance=ExtResource("1_rl8wm")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Quit"
+stretch_mode = 3
