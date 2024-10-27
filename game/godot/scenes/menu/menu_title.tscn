@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bydw7m86onkht"]
 
-[ext_resource type="Texture2D" uid="uid://djs66cx1tma4h" path="res://assets/ui/title_scaled_25.png" id="1_ljxfc"]
+[ext_resource type="Texture2D" uid="uid://gp5y2x4tyrl2" path="res://assets/ui/title_scaled_50.png" id="1_hwwtj"]
 
 [node name="MenuTitle" type="Sprite2D"]
 texture_filter = 2
-texture = ExtResource("1_ljxfc")
+texture = ExtResource("1_hwwtj")
