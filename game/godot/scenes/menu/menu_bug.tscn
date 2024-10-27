@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://jagk2kdrh1cc"]
+
+[ext_resource type="Texture2D" uid="uid://c5gmmitpbp20y" path="res://assets/bug/moth_sprites/bug_win_scaled_50.png" id="2_w0eor"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scem3"]
+atlas = ExtResource("2_w0eor")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mtiw"]
+atlas = ExtResource("2_w0eor")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_skdie"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scem3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mtiw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MenuBug" type="AnimatedSprite2D"]
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_skdie")
+frame_progress = 0.348408
+speed_scale = 1.5

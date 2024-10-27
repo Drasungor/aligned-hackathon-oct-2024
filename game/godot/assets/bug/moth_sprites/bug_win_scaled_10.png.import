@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsuhhewdhlxpx"
-path="res://.godot/imported/title.png-534804d7bf6a63fbbb0c46e68d8e4660.ctex"
+uid="uid://dnmmpemiwm65m"
+path="res://.godot/imported/bug_win_scaled_10.png-9e7affafe9c7cea31cf3d13c11f5b324.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/title.png"
-dest_files=["res://.godot/imported/title.png-534804d7bf6a63fbbb0c46e68d8e4660.ctex"]
+source_file="res://assets/bug/moth_sprites/bug_win_scaled_10.png"
+dest_files=["res://.godot/imported/bug_win_scaled_10.png-9e7affafe9c7cea31cf3d13c11f5b324.ctex"]
 
 [params]
 
