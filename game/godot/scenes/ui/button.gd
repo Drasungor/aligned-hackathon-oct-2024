@@ -4,7 +4,6 @@ extends TextureButton
 
 var OFFSET := 7;
 
-
 func _ready() -> void:
 	button_down.connect(_on_button_down);
 	button_up.connect(_on_button_up);
