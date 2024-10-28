@@ -2,7 +2,6 @@ extends HBoxContainer
 
 class_name LeaderboardItem
 
-
 func set_data(
 	rank: String,
 	wallet: String,

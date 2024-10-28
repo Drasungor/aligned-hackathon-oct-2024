@@ -35,7 +35,6 @@ func add_data() -> void:
 		)
 
 
-
 func get_data() -> Array:
 	var records: Array = GameContainer.get_leaderboad();
 	print(records)
