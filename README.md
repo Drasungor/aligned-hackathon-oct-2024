@@ -23,8 +23,33 @@ will then proceed to recreate the session with the provided inputs (this is poss
 of the trapped bug, exposing the steps until the bug was trapped (the number of blocked tiles) as the public 
 input. After the proof generation, it is sent to aligned for verification and, after confirmation, the program's 
 smart contract will be called, which will check that the program is correctly verified and, if done properly 
-will update the list of record holders if necessary. The least amount of tiles used to trap the bug, the better.
+will update the list of record holders if necessary. The less amount of tiles used to trap the bug, the better.
 
+## Code structure
+
+### Smart contract
+
+Our smart contract receives the data necessary for corroboration of proof verification inclusion in aligned, 
+and if that is successul it updates the record holders list. The deployed contract code can be found in 
+`contract/verifier_v2.sol`.
+
+### Shared
+
+Here goes the code for both the proof generation and game backend. Since the code for proof generation must 
+be in rust, we decided to create this library to evade the duplication of logic. It can be found in 
+`risc_zero/methods/guest/src/shared`
+
+### Game's code
+
+The files for the godot project and not shared rust code go into the `game` folder. In the path 
+`game/godot` we store all the files related to the godot program, and `game/rust` the files that 
+create the interface for usage of rust functions in godot.
+
+### Risc zero
+
+Here goes the code used to trigger the proof generation, and the code itself that will get proven. In the 
+main of the host folder we execute the proof generation (with an execution defined by the the contents of 
+the methods folder), interaction with user wallets, with aligned, and with ethereum.
 
 ## Installation
 
@@ -177,6 +202,15 @@ An example of a more populated leaderboard would look like this
 Take into account that for the final deployment of out project we will start with an empty leaderboard.
 
 ## Team members
+
+- Drasungor
+
+Software engineering student, finishing his final project about a computing power donation system 
+that makes use of Risc0 for execution integrity check.
+
+- nravesz
+
+Software engineer, working in the game development industry.
 
 ```
 
