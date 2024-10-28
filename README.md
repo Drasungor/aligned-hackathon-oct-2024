@@ -221,11 +221,14 @@ fewer uploaded records used for testing.
 
 Software engineering student, finishing his final project about a computing power donation system 
 that makes use of Risc0 for execution integrity check. Working in backend web development, but interested 
-mainly in complex algorithms.
+mainly in complex algorithms. In charge of the proof generation and verification, and part of the godot
+development.
 
 - nravesz
 
-Software engineer, working in the game development industry. Hobby artist.
+Software engineer, working in the game development industry. Hobby artist. In charge of assets creation 
+(Aligned themed) and part of godot development.
+
 
 ## Possible improvements
 
