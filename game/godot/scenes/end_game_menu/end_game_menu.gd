@@ -1,3 +1,11 @@
+# Menu displayed at the end of the game.
+# If the player wins, they see two buttons:
+# - One to restart the game
+# - One to save the moves made during the game that can be
+#   used as input for the proof generator.
+# If the player loses, they see one button:
+# - Restart the game
+
 extends Control
 
 @onready var result_text := $Modal/VBoxContainer/ResultText

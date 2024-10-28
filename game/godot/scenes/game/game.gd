@@ -1,3 +1,6 @@
+# Scene responsible for instantiating other scenes
+# as needed and connecting the signals between them
+
 extends Node2D
 
 @onready var menu_scene := preload("res://scenes/menu/menu.tscn");

@@ -1,3 +1,6 @@
+# Scene that manages user interactions with the map and
+# keeps it updated. It also accesses the Rust code.
+
 extends TileMapLayer
 
 const BugDirection = preload("res://scripts/enums/bug_direction.gd").BugDirection
