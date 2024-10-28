@@ -105,7 +105,7 @@ instructions, the program's version might have changed, and therefore also the f
 
 ### Executable
 
-If you decide to use the executable provided in the release files, then it should suffice with the command
+If you decide to use the executable provided in the 1.0.1 release files, then it should suffice with the command
 
 ```
 ./'CatchTheBug!.x86_64'
@@ -199,7 +199,8 @@ An example of a more populated leaderboard would look like this
 
 ![Populated leaderboard](/imgs/populated_leaderboard.png)
 
-Take into account that for the final deployment of out project we will start with an empty leaderboard.
+Take into account that for the final deployment we will not have this leaderboard, but a new one with 
+fewer uploaded records used for testing.
 
 ## Team members
 
