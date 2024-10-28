@@ -243,6 +243,7 @@ for users to prove the completion in n steps of a level designed by another play
 - Possible improvements in bug movement logic: right now the bug uses dijkstra each turn to look for the 
 current best path, which pumps up the proof generation time, we could try some modifications to check if 
 we can get a shorter proof generation while not heavily affecting the logic of the bug's movement.
+- Addition of steps counter in godot client.
 
 ## Development issues
 
