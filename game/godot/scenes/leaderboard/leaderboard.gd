@@ -1,3 +1,6 @@
+# Leaderboard for the players' score. It does a call to
+# Ethereum to get the records
+
 extends Control
 
 class_name Leaderboard
