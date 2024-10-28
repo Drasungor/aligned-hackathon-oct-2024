@@ -174,6 +174,7 @@ An example of a more populated leaderboard would look like this
 
 ![Populated leaderboard](/imgs/populated_leaderboard.png)
 
+Take into account that for the final deployment of out project we will start with an empty leaderboard.
 
 ## Team members
 
@@ -204,3 +205,26 @@ we can get a shorter proof generation while not heavily affecting the logic of t
 - The project started with 3 members, which distributed the tasks of assets creation, game engine logic and 
 proof generation and verification logic. Due to Lack of time, one of the members left the team, which made 
 the rest of us reorganize our tasks and take responsibilities outside of our expertise.
+- Unexpected error with risczero's deterministic build caused by snap installation of docker instead of 
+the usual.
+- Doubts about good coding practices regarding zkp: 
+
+```
+Should we redeploy our smart contract if we change our program's implementation due to bug fixing, 
+new features or dependencies updates?
+
+Any modification in the proven code will cause a modification in the program's id. We could set a public 
+contract function callable only by an owner to update the program id we compare the uploaded proof's to, 
+but that would allow our users to be cheated by the owner, who could update the id for his own benefit, 
+therefore reducing the trust in the contract.
+```
+
+```
+Should we aim to reduce more the execution time of proof generation?
+
+Our program's proof generation time is arount 20 minutes, depending on the use cases, this could be pretty 
+good, or horrendous. However, the case could be that the user generally finds that execution time pretty tame, 
+and using resources for intensive optimization could then be considered a waste of time. This should be 
+answered as proof generation and verification on ethereum gains more track.
+```
+
