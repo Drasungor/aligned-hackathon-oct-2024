@@ -68,6 +68,17 @@ The following sections explain how to install the programs necessary to run the 
 The keystores we use for proof verification in ethereum are generated using Foundry. You can install it 
 by following the instructions [here](https://getfoundry.sh/).
 
+If you do not have a keystore, you can create one followind these commands:
+
+```
+cast wallet new-mnemonic --words 12
+
+cast wallet import <KEYSTORE_NAME> --mnemonic "<YOUR_MNEMONIC_WORDS>" --keystore-dir <STORAGE_PATH>
+
+
+```
+
+
 ### Docker
 
 Since built images for programs depend on the underlying architecture of the computed that generates them,
