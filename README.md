@@ -13,6 +13,12 @@ in a file. The user can then run the proving and verifying script, which receive
 recreates the gaming session for proof generation. After the proof is generated, it is sent to Aligned for 
  verification and the smart contract for updating the records is called. 
 
+## Demos
+
+- Short demo, showcasing basic usage of the application: https://www.youtube.com/watch?v=sPCqBKYrbK0&ab_channel=NicoleRaveszani
+
+- Longer demo, showcasing not only the app usage, but also explaining how to build the godot project (which is also explained in this file) and implementation details: https://www.youtube.com/watch?v=kRcmfELIPzQ&ab_channel=NicoleRaveszani.
+
 ## Proof generation and verification
 
 As previously mentioned, the interaction of the user with our program is not proven itself. When the player 
@@ -23,7 +29,9 @@ will then proceed to recreate the session with the provided inputs (this is poss
 of the trapped bug, exposing the steps until the bug was trapped (the number of blocked tiles) as the public 
 input. After the proof generation, it is sent to aligned for verification and, after confirmation, the program's 
 smart contract will be called, which will check that the program is correctly verified and, if done properly 
-will update the list of record holders if necessary. The less amount of tiles used to trap the bug, the better.
+will update the list of record holders if necessary. The less amount of tiles used to trap the bug, the better. 
+This way, the user has proven that he knows how to win the game in n steps, without showing the choice and order of the tiles he has blocked to get to that score, and persisted this in ethereum in a way that is 
+cheaper (and more private) than running the entire logic in the blockchain.
 
 ## Code structure
 
@@ -54,6 +62,11 @@ the methods folder), interaction with user wallets, with aligned, and with ether
 ## Installation
 
 The following sections explain how to install the programs necessary to run the game in linux.
+
+### Foundry
+
+The keystores we use for proof verification in ethereum are generated using Foundry. You can install it 
+by following the instructions [here](https://getfoundry.sh/).
 
 ### Docker
 
@@ -207,19 +220,12 @@ fewer uploaded records used for testing.
 - Drasungor
 
 Software engineering student, finishing his final project about a computing power donation system 
-that makes use of Risc0 for execution integrity check.
+that makes use of Risc0 for execution integrity check. Working in backend web development, but interested 
+mainly in complex algorithms.
 
 - nravesz
 
-Software engineer, working in the game development industry.
-
-```
-
-COMPLETAR SECCION CON DATA DE CADA UNO
-
-BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR A README.md that describes the project and rationale, provides backgrounds/biographies of team members, and notes on challenges you faced when building the project.
-
-```
+Software engineer, working in the game development industry. Hobby artist.
 
 ## Possible improvements
 
