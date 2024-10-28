@@ -25,6 +25,7 @@ func _physics_process(delta: float) -> void:
 		is_moving = false;
 		stop_bug_movement.emit()
 
+
 func move(direction: BugDirection) -> void:
 	is_moving = true
 
@@ -41,6 +42,7 @@ func move(direction: BugDirection) -> void:
 			bug_sprite.play_bottom_left_animation()
 		BugDirection.BottomRight:
 			bug_sprite.play_bottom_right_animation()
+
 
 func _on_bug_movement(bug_position: Vector2, bug_direction: BugDirection) -> void:
 	# Initialization
